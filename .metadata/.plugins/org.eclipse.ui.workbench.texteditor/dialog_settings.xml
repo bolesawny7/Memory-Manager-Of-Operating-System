@@ -6,12 +6,13 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="" key="selection"/>
+		<item value="command" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="Command"/>
 			<item value="-1"/>
 			<item value="ptr_allocations[8]"/>
 			<item value="ptr_allocations[12]"/>
@@ -19,7 +20,6 @@
 			<item value="&quot;);"/>
 			<item value="panic(&quot;"/>
 			<item value="Writing (Modified) "/>
-			<item value="802010"/>
 		</list>
 		<list key="replacehistory">
 			<item value="cprintf(&quot;\n"/>
@@ -33,9 +33,9 @@
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item value="257" key="DIALOG_WIDTH"/>
-		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
-		<item value="381" key="DIALOG_HEIGHT"/>
+		<item value="305" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="444" key="DIALOG_HEIGHT"/>
 		<item value="939" key="DIALOG_X_ORIGIN"/>
 		<item value="305" key="DIALOG_Y_ORIGIN"/>
 	</section>
