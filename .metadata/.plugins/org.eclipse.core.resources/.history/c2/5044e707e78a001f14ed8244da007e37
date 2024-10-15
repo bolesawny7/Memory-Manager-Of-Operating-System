@@ -78,7 +78,7 @@ int command_run(int , char **);
 int command_kill(int , char **);
 int command_ft(int , char **);
 
-//samoo 3alekoooooo
+
 //Array of commands. (initialized)
 struct Command commands[] =
 {
@@ -325,7 +325,7 @@ int command_ap(int number_of_arguments, char **arguments)
 	//TODO: LAB5 Example: fill this function. corresponding command name is "ap"
 	//Comment the following line
 	//panic("Function is not implemented yet!");
-
+	
 	uint32 va = strtol(arguments[1], NULL, 16);
 	struct Frame_Info* ptr_frame_info;
 	int ret = allocate_frame(&ptr_frame_info) ;
@@ -340,7 +340,7 @@ int command_fp(int number_of_arguments, char **arguments)
 	//TODO: LAB5 Example: fill this function. corresponding command name is "fp"
 	//Comment the following line
 	//panic("Function is not implemented yet!");
-
+	
 	uint32 va = strtol(arguments[1], NULL, 16);
 	// Un-map the page at this address
 	unmap_frame(ptr_page_directory, (void*)va);
