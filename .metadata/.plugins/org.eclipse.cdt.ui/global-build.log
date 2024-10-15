@@ -1,0 +1,59 @@
+19:47:51 **** Clean-only build of configuration Default for project FOS_Labs_Template ****
+make -j4 clean 
+rm -rf obj
+10:43:20 **** Build of configuration Default for project FOS_Labs_Template ****
+make -j12 all 
++ as kern/entry.S
++ cc kern/init.c
++ cc kern/console.c
++ cc kern/command_prompt.c
++ cc kern/helpers.c
++ cc kern/memory_manager.c
++ cc kern/user_environment.c
++ cc kern/kclock.c
++ cc kern/printf.c
++ cc kern/trap.c
++ as kern/trapentry.S
++ cc kern/syscall.c
++ cc kern/kdebug.c
++ cc lib/printfmt.c
++ cc lib/readline.c
++ cc lib/string.c
++ cc[USER] lib/console.c
++ cc[USER] lib/libmain.c
++ cc[USER] lib/exit.c
++ cc[USER] lib/panic.c
++ cc[USER] lib/printf.c
++ cc[USER] lib/printfmt.c
++ cc[USER] lib/readline.c
++ cc[USER] lib/string.c
++ cc[USER] lib/malloc.c
++ cc[USER] lib/syscall.c
++ cc[USER] user/fos_alloc.c
++ as [USER] lib/entry.S
++ cc[USER] user/fos_input.c
++ cc[USER] user/game.c
++ cc[USER] user/fos_helloWorld.c
++ cc[USER] user/fos_add.c
++ as boot/boot.S
++ cc -Os boot/main.c
++ ar obj/lib/libfos.a
++ ld -m elf_i386 boot/boot
+i386-elf-ar: creating obj/lib/libfos.a
++ ld -m elf_i386 obj/user/fos_alloc
++ ld -m elf_i386 obj/user/fos_input
++ ld -m elf_i386 obj/user/game
++ ld -m elf_i386 obj/user/fos_helloWorld
++ ld -m elf_i386 obj/user/fos_add
+boot block is 402 bytes (max 510)
++ ld obj/kern/kernel
++ mk obj/kern/bochs.img
+10:43:34 **** Incremental Build of configuration Default for project FOS_Labs_Template ****
+make -j12 all 
+make: Nothing to be done for 'all'.
+10:43:42 **** Incremental Build of configuration Default for project FOS_Labs_Template ****
+make -j12 all 
+make: Nothing to be done for 'all'.
+10:45:41 **** Incremental Build of configuration Default for project FOS_Labs_Template ****
+make -j12 all 
+make: Nothing to be done for 'all'.
