@@ -1,0 +1,119 @@
+18:37:36 **** Incremental Build of configuration Default for project FOS_PROJECT_2024_TEMPLATE ****
+make -j12 all 
++ ld -m elf_i386 obj/user/tst_placement_1
++ ld -m elf_i386 obj/user/fos_alloc
++ ld -m elf_i386 obj/user/tst_air
++ ld -m elf_i386 obj/user/tst_syscalls_2_slave1
++ ld -m elf_i386 obj/user/fos_input
++ ld -m elf_i386 obj/user/arrayOperations_stats
++ ld -m elf_i386 obj/user/tst_syscalls_2_slave3
++ ld -m elf_i386 obj/user/tst_first_fit_3
++ ld -m elf_i386 obj/user/tst_invalid_access_slave4
++ ld -m elf_i386 obj/user/tst_air_clerk
++ ld -m elf_i386 obj/user/concurrent_start
++ ld -m elf_i386 obj/user/tst_first_fit_2
++ ld -m elf_i386 obj/user/tst_invalid_access_slave3
++ ld -m elf_i386 obj/user/tst_semaphore_1master
++ ld -m elf_i386 obj/user/quicksort_leakage
++ ld -m elf_i386 obj/user/tst_free_1
++ ld -m elf_i386 obj/user/MidTermEx_ProcessA
++ ld -m elf_i386 obj/user/fos_factorial
++ ld -m elf_i386 obj/user/tst_sharing_5_slave
++ ld -m elf_i386 obj/user/arrayOperations_quicksort
++ ld -m elf_i386 obj/user/tst_sharing_3
++ ld -m elf_i386 obj/user/fos_fibonacci
++ ld -m elf_i386 obj/user/tst_semaphore_2slave
++ ld -m elf_i386 obj/user/tst_invalid_access_slave2
++ ld -m elf_i386 obj/user/arrayOperations_Master
++ ld -m elf_i386 obj/user/tst_sharing_1
++ ld -m elf_i386 obj/user/tst_free_1_slave1
++ ld -m elf_i386 obj/user/tst_syscalls_1
++ ld -m elf_i386 obj/user/fos_static_data_section
++ ld -m elf_i386 obj/user/tst_invalid_access_slave1
++ ld -m elf_i386 obj/user/tst_placement_3
++ ld -m elf_i386 obj/user/tst_sharing_5_slaveB2
++ ld -m elf_i386 obj/user/MidTermEx_Master
++ ld -m elf_i386 obj/user/fos_data_on_stack
++ ld -m elf_i386 obj/user/game
++ ld -m elf_i386 obj/user/tst_sharing_2slave2
++ ld -m elf_i386 obj/user/fos_helloWorld
++ ld -m elf_i386 obj/user/mergesort_noleakage
++ ld -m elf_i386 obj/user/tst_semaphore_1slave
++ ld -m elf_i386 obj/user/tst_free_3
++ ld -m elf_i386 obj/user/tst_semaphore_2master
++ ld -m elf_i386 obj/user/tst_first_fit_1
++ ld -m elf_i386 obj/user/tst_malloc_1
++ ld -m elf_i386 obj/user/fib_memomize
++ ld -m elf_i386 obj/user/quicksort_noleakage
++ ld -m elf_i386 obj/user/fos_add
++ ld -m elf_i386 obj/user/MidTermEx_ProcessB
++ ld -m elf_i386 obj/user/tst_free_2
++ ld -m elf_i386 obj/user/tst_sharing_4
++ ld -m elf_i386 obj/user/tst_invalid_access
++ ld -m elf_i386 obj/user/arrayOperations_mergesort
++ ld -m elf_i386 obj/user/tst_placement
++ ld -m elf_i386 obj/user/fib_loop
++ ld -m elf_i386 obj/user/tst_sharing_2slave1
++ ld -m elf_i386 obj/user/tst_syscalls_2_slave2
++ ld -m elf_i386 obj/user/tst_air_customer
++ ld -m elf_i386 obj/user/mergesort_leakage
++ ld -m elf_i386 obj/user/tst_malloc_3
++ ld -m elf_i386 obj/user/dummy_process
++ ld -m elf_i386 obj/user/tst_syscalls_2
++ ld -m elf_i386 obj/user/tst_malloc_2
++ ld -m elf_i386 obj/user/matrix_operations
++ ld -m elf_i386 obj/user/tst_sharing_5_master
++ ld -m elf_i386 obj/user/tst_sharing_5_slaveB1
++ ld -m elf_i386 obj/user/tst_sharing_2master
++ ld -m elf_i386 obj/user/tst_placement_2
++ ld -m elf_i386 obj/user/tst_free_1_slave2
++ ld -m elf_i386 obj/user/quicksort_semaphore
++ cc -Os boot/main.c
++ ld -m elf_i386 boot/boot
++ ld -m elf_i386 obj/kern/kernel
+boot block is 402 bytes (max 510)
++ mk obj/kern/bochs.img
+touch -m inc/memlayout.h
+touch -m inc/environment_definitions.h
+touch -m inc/semaphore.h
+touch -m kern/cons/console.c
+touch -m kern/cons/printf.c
+touch -m kern/cmd/command_prompt.c
+touch -m kern/cmd/commands.c
+touch -m kern/disk/pagefile_manager.c
+touch -m kern/cpu/context_switch.S
+touch -m kern/cpu/kclock.c
+touch -m kern/cpu/sched_helpers.c
+touch -m kern/cpu/sched.c
+touch -m kern/cpu/picirq.c
+touch -m kern/cpu/cpu.c
+touch -m kern/mem/boot_memory_manager.c
+touch -m kern/mem/memory_manager.c
+touch -m kern/mem/shared_memory_manager.c
+touch -m kern/mem/kheap.c
+touch -m kern/mem/paging_helpers.c
+touch -m kern/mem/working_set_manager.c
+touch -m kern/mem/chunk_operations.c
+touch -m kern/proc/user_environment.c
+touch -m kern/proc/priority_manager.c
+touch -m kern/proc/user_programs.c
+touch -m kern/trap/trap.c
+touch -m kern/trap/trapentry.S
+touch -m kern/trap/syscall.c
+touch -m kern/trap/kdebug.c
+touch -m kern/trap/fault_handler.c
+touch -m kern/conc/spinlock.c
+touch -m kern/conc/sleeplock.c
+touch -m kern/conc/channel.c
+touch -m kern/conc/ksemaphore.c
+touch -m kern/tests/tst_handler.c
+touch -m kern/tests/test_dynamic_allocator.c
+touch -m kern/tests/test_working_set.c
+touch -m kern/tests/test_priority.c
+touch -m kern/tests/test_kheap.c
+touch -m kern/tests/test_commands.c
+touch -m kern/tests/test_scheduler.c
+touch -m kern/tests/utilities.c
+
+18:37:44 Build Finished (took 7s.967ms)
+
