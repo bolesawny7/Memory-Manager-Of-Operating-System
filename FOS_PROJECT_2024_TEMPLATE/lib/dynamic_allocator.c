@@ -169,6 +169,22 @@ void free_block(void *va)
 	//COMMENT THE FOLLOWING LINE BEFORE START CODING
 	panic("free_block is not implemented yet");
 	//Your Code is Here...
+	uint32* vrtl_adrs = (uint32 *) va;
+	if(is_free_block(vrtl_adrs) || vrtl_adrs == NULL){
+		printf("Please specify an address..");
+		return;
+	}
+	// Get block size and remove the MetaData from it.
+	uint32 blk_size = get_block_size(va) - 2*sizeof(int);
+	printf("Block Size: %d", blk_size);
+	if(blk_size != 0){
+		void *next_ptr = va;
+		va++;
+		void *prev_ptr = va;
+		va -= 2;
+	}
+	// Make the LSBs of each the header & the footer equal 0
+
 }
 
 //=========================================
