@@ -316,6 +316,23 @@ void sys_allocate_user_mem(uint32 virtual_address, uint32 size)
 {
 	//TODO: [PROJECT'24.MS1 - #03] [2] SYSTEM CALLS - Params Validation
 
+	   	if ((uint32) virtual_address>= USER_TOP || (uint32)virtual_address % PAGE_SIZE != 0||(uint32)virtual_address<0||(uint32)virtual_address==NULL)
+	    	{
+	    		env_exit();
+
+	    	}
+	    	if(size<=0)
+	    	{
+	    		env_exit();
+	    	}
+
+	    	int x =(uint32)virtual_address + size;
+	    	if(x>= USER_TOP)
+	    	{
+	    		env_exit();
+	    	}
+
+
 	allocate_user_mem(cur_env, virtual_address, size);
 	return;
 }
@@ -323,10 +340,30 @@ void sys_allocate_user_mem(uint32 virtual_address, uint32 size)
 void sys_allocate_chunk(uint32 virtual_address, uint32 size, uint32 perms)
 {
 	//TODO: [PROJECT'24.MS1 - #03] [2] SYSTEM CALLS - Params Validation
+		   	if ((uint32) virtual_address>= USER_TOP || (uint32)virtual_address % PAGE_SIZE != 0||(uint32)virtual_address<=0)
+		    	{
+		    		env_exit();
+
+		    	}
+		    	if(size<=0)
+		    	{
+		    		env_exit();
+		    	}
+
+		    	int x =(uint32)virtual_address + size;
+		    	if(x>= USER_TOP)
+		    	{
+		    		env_exit();
+		    	}
+		    	if ((perms& (~PERM_AVAILABLE & ~PERM_WRITEABLE)) != (PERM_USER))
+		    	{
+		    		env_exit();
+		    	}
 
 	allocate_chunk(cur_env->env_page_directory, virtual_address, size, perms);
 	return;
 }
+
 
 //2014
 void sys_move_user_mem(uint32 src_virtual_address, uint32 dst_virtual_address, uint32 size)
@@ -506,7 +543,18 @@ uint32 syscall(uint32 syscallno, uint32 a1, uint32 a2, uint32 a3, uint32 a4, uin
 	switch(syscallno)
 	{
 	//TODO: [PROJECT'24.MS1 - #02] [2] SYSTEM CALLS - Add suitable code here
-
+	case SYS_sbrk:
+			sys_sbrk((int)a1);
+			return NULL;
+			break;
+	case SYS_free_user_mem:
+			sys_free_user_mem((uint32)a1, (uint32)a2);
+			return 0;
+			break;
+	case SYS_allocate_user_mem:
+			sys_allocate_user_mem((uint32)a1, (uint32)a2);
+			return 0;
+			break;
 	//======================================================================
 	case SYS_cputs:
 		sys_cputs((const char*)a1,a2,(uint8)a3);
