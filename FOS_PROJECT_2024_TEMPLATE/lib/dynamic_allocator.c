@@ -160,32 +160,101 @@ void *alloc_block_BF(uint32 size)
 
 }
 
+
 //===================================================
 // [5] FREE BLOCK WITH COALESCING:
 //===================================================
+
+// Finished adding the free block to the list.
+// Tasks to do:
+//  1) Insure that merging is done correctly.
+//  2) test the implemented work so far with init dynamic allocator.
+
 void free_block(void *va)
 {
 	//TODO: [PROJECT'24.MS1 - #07] [3] DYNAMIC ALLOCATOR - free_block
 	//COMMENT THE FOLLOWING LINE BEFORE START CODING
 	panic("free_block is not implemented yet");
 	//Your Code is Here...
-	uint32* vrtl_adrs = (uint32 *) va;
-	if(is_free_block(vrtl_adrs) || vrtl_adrs == NULL){
-		printf("Please specify an address..");
+
+//	int initAllocatedSpace = 3*Kilo;
+//	initialize_dynamic_allocator(KERNEL_HEAP_START, initAllocatedSpace);
+//
+//	uint32 allocSizes[numOfAllocs] = {4*Kilo, 1*Kilo, 2*Kilo, 7*Kilo};
+//	//4 4 1 1 1 1 2 2 2 2 2 7
+//	uint32 allocCountPerSize[numOfAllocs] = {2, 4, 5, 1};
+//
+//	int totalSizes = 0;
+//	for (int i = 0; i < numOfAllocs; ++i)
+//	{
+//		totalSizes += allocSizes[i] * allocCountPerSize[i] ;
+//	}
+//	int remainSize = initAllocatedSpace - totalSizes - 2*sizeof(int); //exclude size of "DA Begin & End" blocks
+
+	if (va == NULL) {
+	        printf("Please specify a valid address.\n");
+	        return;
+	}
+
+	struct BlockElement* block = (struct BlockElement*)va;
+
+	// Check if the block is already free
+	if (is_free_block(va)) {
+		printf("The block at address %p is already free.\n", va);
 		return;
 	}
-	// Get block size and remove the MetaData from it.
-	uint32 blk_size = get_block_size(va) - 2*sizeof(int);
-	printf("Block Size: %d", blk_size);
-	if(blk_size != 0){
-		void *next_ptr = va;
-		va++;
-		void *prev_ptr = va;
-		va -= 2;
-	}
-	// Make the LSBs of each the header & the footer equal 0
 
+	// Free the block
+	uint32* curBlkMetaData = (uint32*)((uint32*)block - 1);
+	*curBlkMetaData &= ~0x1;
+
+	// Add the freed block to the freeBlocksList
+	if(freeBlocksList == NULL){
+		LIST_INSERT_HEAD(&freeBlocksList, block);
+		return;
+	}
+
+	struct BlockElement* firstBlock = LIST_FIRST(&freeBlocksList);
+	struct BlockElement* lastBlock = LIST_LAST(&freeBlocksList);
+
+	if((va - sizeof(int)) < firstBlock){
+		LIST_INSERT_HEAD(&freeBlocksList, block);
+		return;
+	}
+
+	if((va - sizeof(int)) > lastBlock){
+		LIST_INSERT_TAIL(&freeBlocksList, block);
+		return;
+	}
+	// Track previous and next blocks in the free blocks list for merging.
+	struct BlockElement* currentFreeBlock = LIST_FIRST(&freeBlocksList);
+	struct BlockElement* previousFreeBlock = NULL;
+	struct BlockElement* nextFreeBlock = NULL;
+
+	while (currentFreeBlock != NULL) {
+		if (currentFreeBlock == (struct BlockElement*)(va - sizeof(int))) {
+			if (previousFreeBlock != NULL) {
+				printf("Previous Block address: %p\n", previousFreeBlock);
+				LIST_INSERT_AFTER(&freeBlocksList, previousFreeBlock, block);
+			} else {
+				printf("There is no previous block (current block is the first element).\n");
+			}
+
+			nextFreeBlock = LIST_NEXT(currentFreeBlock);
+			if (nextFreeBlock != NULL) {
+				printf("Next Block address: %p\n", nextFreeBlock);
+
+			} else {
+				printf("There is no next block (current block is the last element).\n");
+			}
+
+			break;
+		}
+		previousFreeBlock = currentFreeBlock;
+		currentFreeBlock = LIST_NEXT(currentFreeBlock);
+	}
 }
+
 
 //=========================================
 // [6] REALLOCATE BLOCK BY FIRST FIT:
