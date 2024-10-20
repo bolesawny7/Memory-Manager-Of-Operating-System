@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="ASCII"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_YmEv8I6hEe-sk6bEQNkAUQ" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_YmEv8Y6hEe-sk6bEQNkAUQ" bindingContexts="_YmFYvY6hEe-sk6bEQNkAUQ">
-  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;queue.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/inc/queue.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/inc/queue.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;types.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/inc/types.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/inc/types.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;dynamic_allocator.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/inc/dynamic_allocator.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/inc/dynamic_allocator.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;test_dynamic_allocator.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/tests/test_dynamic_allocator.c&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/tests/test_dynamic_allocator.c&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;test_dynamic_allocator.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/tests/test_dynamic_allocator.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/tests/test_dynamic_allocator.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;dynamic_allocator.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/lib/dynamic_allocator.c&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/lib/dynamic_allocator.c&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;syscall.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/lib/syscall.c&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/lib/syscall.c&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;string.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/lib/string.c&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/lib/string.c&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.ui.DefaultTextEditor&quot; name=&quot;Makefrag&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/Makefrag&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/Makefrag&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;commands.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/cmd/commands.c&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/cmd/commands.c&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;command_prompt.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/cmd/command_prompt.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/cmd/command_prompt.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;command_prompt.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/cmd/command_prompt.c&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/cmd/command_prompt.c&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;command_prompt.c&quot; tooltip=&quot;FOS_Labs_Template/kern/command_prompt.c&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_Labs_Template/kern/command_prompt.c&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;console.c&quot; tooltip=&quot;FOS_Labs_Template/kern/console.c&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_Labs_Template/kern/console.c&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;console.h&quot; tooltip=&quot;FOS_Labs_Template/kern/console.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_Labs_Template/kern/console.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
+  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;command_prompt.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/cmd/command_prompt.c&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/cmd/command_prompt.c&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;commands.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/cmd/commands.c&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/cmd/commands.c&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;command_prompt.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/cmd/command_prompt.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/cmd/command_prompt.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;syscall.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/trap/syscall.c&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/trap/syscall.c&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;string.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/lib/string.c&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/lib/string.c&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;dynamic_allocator.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/lib/dynamic_allocator.c&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/lib/dynamic_allocator.c&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;syscall.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/lib/syscall.c&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/lib/syscall.c&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;utilities.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/tests/utilities.c&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/tests/utilities.c&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;tst_handler.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/tests/tst_handler.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/tests/tst_handler.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;utilities.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/tests/utilities.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/tests/utilities.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;chunk_operations.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/mem/chunk_operations.c&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/mem/chunk_operations.c&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;test_working_set.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/tests/test_working_set.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/tests/test_working_set.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;test_scheduler.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/tests/test_scheduler.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/tests/test_scheduler.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;test_priority.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/tests/test_priority.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/tests/test_priority.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;test_kheap.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/tests/test_kheap.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/tests/test_kheap.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
   <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
   <tags>ModelMigrationProcessor.001</tags>
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_YmEv8Y6hEe-sk6bEQNkAUQ" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_YmEv8o6hEe-sk6bEQNkAUQ" label="%trimmedwindow.label.eclipseSDK" x="0" y="0" width="1024" height="767">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_YmEv8Y6hEe-sk6bEQNkAUQ" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_YmEv8o6hEe-sk6bEQNkAUQ" label="%trimmedwindow.label.eclipseSDK" x="3359" y="-313" width="1024" height="767">
     <persistedState key="coolBarVisible" value="true"/>
     <persistedState key="perspectiveBarVisible" value="true"/>
     <persistedState key="isRestored" value="true"/>
@@ -88,10 +88,11 @@
                   <children xsi:type="advanced:Placeholder" xmi:id="_YmEwAY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.mylyn.tasks.ui.views.tasks" ref="_YmEx146hEe-sk6bEQNkAUQ"/>
                 </children>
               </children>
-              <children xsi:type="basic:PartStack" xmi:id="_YmEwAo6hEe-sk6bEQNkAUQ" elementId="bottom" containerData="2761" selectedElement="_YmEwA46hEe-sk6bEQNkAUQ">
+              <children xsi:type="basic:PartStack" xmi:id="_YmEwAo6hEe-sk6bEQNkAUQ" elementId="bottom" visible="false" containerData="2761" selectedElement="_YmEwA46hEe-sk6bEQNkAUQ">
                 <tags>General</tags>
                 <tags>Tracing</tags>
                 <tags>Remote Systems</tags>
+                <tags>Minimized</tags>
                 <children xsi:type="advanced:Placeholder" xmi:id="_YmEwA46hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.views.ProblemView" ref="_YmExhY6hEe-sk6bEQNkAUQ"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="_YmEwBI6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.views.TaskList" ref="_YmExoo6hEe-sk6bEQNkAUQ"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="_YmEwBY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.console.ConsoleView" ref="_YmExqo6hEe-sk6bEQNkAUQ"/>
@@ -213,143 +214,15 @@
       <tags>categoryTag:Help</tags>
     </sharedElements>
     <sharedElements xsi:type="advanced:Area" xmi:id="_YmExK46hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.editorss" selectedElement="_YmExLI6hEe-sk6bEQNkAUQ">
-      <children xsi:type="basic:PartStack" xmi:id="_YmExLI6hEe-sk6bEQNkAUQ" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_YmExPo6hEe-sk6bEQNkAUQ">
+      <children xsi:type="basic:PartStack" xmi:id="_YmExLI6hEe-sk6bEQNkAUQ" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_M091MI6oEe-hC8slvWd8Lg">
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
-        <tags>noFocus</tags>
         <tags>active</tags>
-        <children xsi:type="basic:Part" xmi:id="_YmExLY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="command_prompt.h" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;command_prompt.h&quot; partName=&quot;command_prompt.h&quot; title=&quot;command_prompt.h&quot; tooltip=&quot;FOS_Labs_Template/kern/command_prompt.h&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_Labs_Template/kern/command_prompt.h&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
-          <tags>removeOnHide</tags>
-        </children>
-        <children xsi:type="basic:Part" xmi:id="_YmExLo6hEe-sk6bEQNkAUQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="command_prompt.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;command_prompt.c&quot; partName=&quot;command_prompt.c&quot; title=&quot;command_prompt.c&quot; tooltip=&quot;FOS_Labs_Template/kern/command_prompt.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_Labs_Template/kern/command_prompt.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;2578&quot; selectionTopPixel=&quot;2046&quot;/>&#xD;&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
-          <tags>removeOnHide</tags>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExL46hEe-sk6bEQNkAUQ" elementId="#CEditorContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#CEditorContext</tags>
-            <tags>popup:org.eclipse.cdt.ui.editor.CEditor.EditorContext</tags>
-            <tags>popup:#AbstractTextEditorContext</tags>
-          </menus>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExMI6hEe-sk6bEQNkAUQ" elementId="#CEditorRulerContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#CEditorRulerContext</tags>
-            <tags>popup:org.eclipse.cdt.ui.editor.CEditor.RulerContext</tags>
-            <tags>popup:#AbstractTextEditorRulerContext</tags>
-          </menus>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExMY6hEe-sk6bEQNkAUQ" elementId="#OverviewRulerContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#OverviewRulerContext</tags>
-          </menus>
-        </children>
         <children xsi:type="basic:Part" xmi:id="_YmExMo6hEe-sk6bEQNkAUQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="console.h" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
           <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;console.h&quot; partName=&quot;console.h&quot; title=&quot;console.h&quot; tooltip=&quot;FOS_Labs_Template/kern/console.h&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_Labs_Template/kern/console.h&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
           <tags>removeOnHide</tags>
-        </children>
-        <children xsi:type="basic:Part" xmi:id="_YmExM46hEe-sk6bEQNkAUQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="console.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;console.c&quot; partName=&quot;console.c&quot; title=&quot;console.c&quot; tooltip=&quot;FOS_Labs_Template/kern/console.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_Labs_Template/kern/console.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;1395&quot;/>&#xD;&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
-          <tags>removeOnHide</tags>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExNI6hEe-sk6bEQNkAUQ" elementId="#CEditorContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#CEditorContext</tags>
-            <tags>popup:org.eclipse.cdt.ui.editor.CEditor.EditorContext</tags>
-            <tags>popup:#AbstractTextEditorContext</tags>
-          </menus>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExNY6hEe-sk6bEQNkAUQ" elementId="#CEditorRulerContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#CEditorRulerContext</tags>
-            <tags>popup:org.eclipse.cdt.ui.editor.CEditor.RulerContext</tags>
-            <tags>popup:#AbstractTextEditorRulerContext</tags>
-          </menus>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExNo6hEe-sk6bEQNkAUQ" elementId="#OverviewRulerContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#OverviewRulerContext</tags>
-          </menus>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExN46hEe-sk6bEQNkAUQ" elementId="#CEditorContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#CEditorContext</tags>
-            <tags>popup:org.eclipse.cdt.ui.editor.CEditor.EditorContext</tags>
-            <tags>popup:#AbstractTextEditorContext</tags>
-          </menus>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExOI6hEe-sk6bEQNkAUQ" elementId="#CEditorRulerContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#CEditorRulerContext</tags>
-            <tags>popup:org.eclipse.cdt.ui.editor.CEditor.RulerContext</tags>
-            <tags>popup:#AbstractTextEditorRulerContext</tags>
-          </menus>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExOY6hEe-sk6bEQNkAUQ" elementId="#OverviewRulerContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#OverviewRulerContext</tags>
-          </menus>
-        </children>
-        <children xsi:type="basic:Part" xmi:id="_YmExOo6hEe-sk6bEQNkAUQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="dynamic_allocator.h" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;dynamic_allocator.h&quot; partName=&quot;dynamic_allocator.h&quot; title=&quot;dynamic_allocator.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/inc/dynamic_allocator.h&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/inc/dynamic_allocator.h&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;38&quot; selectionOffset=&quot;893&quot; selectionTopPixel=&quot;372&quot;/>&#xD;&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
-          <tags>removeOnHide</tags>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExO46hEe-sk6bEQNkAUQ" elementId="#CEditorContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#CEditorContext</tags>
-            <tags>popup:org.eclipse.cdt.ui.editor.CEditor.EditorContext</tags>
-            <tags>popup:#AbstractTextEditorContext</tags>
-          </menus>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExPI6hEe-sk6bEQNkAUQ" elementId="#CEditorRulerContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#CEditorRulerContext</tags>
-            <tags>popup:org.eclipse.cdt.ui.editor.CEditor.RulerContext</tags>
-            <tags>popup:#AbstractTextEditorRulerContext</tags>
-          </menus>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExPY6hEe-sk6bEQNkAUQ" elementId="#OverviewRulerContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#OverviewRulerContext</tags>
-          </menus>
-        </children>
-        <children xsi:type="basic:Part" xmi:id="_YmExPo6hEe-sk6bEQNkAUQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="dynamic_allocator.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;dynamic_allocator.c&quot; partName=&quot;dynamic_allocator.c&quot; title=&quot;dynamic_allocator.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/lib/dynamic_allocator.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/lib/dynamic_allocator.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;7000&quot; selectionTopPixel=&quot;5518&quot;/>&#xD;&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
-          <tags>removeOnHide</tags>
-          <tags>active</tags>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExP46hEe-sk6bEQNkAUQ" elementId="#CEditorContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#CEditorContext</tags>
-            <tags>popup:org.eclipse.cdt.ui.editor.CEditor.EditorContext</tags>
-            <tags>popup:#AbstractTextEditorContext</tags>
-          </menus>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExQI6hEe-sk6bEQNkAUQ" elementId="#CEditorRulerContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#CEditorRulerContext</tags>
-            <tags>popup:org.eclipse.cdt.ui.editor.CEditor.RulerContext</tags>
-            <tags>popup:#AbstractTextEditorRulerContext</tags>
-          </menus>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExQY6hEe-sk6bEQNkAUQ" elementId="#OverviewRulerContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#OverviewRulerContext</tags>
-          </menus>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExQo6hEe-sk6bEQNkAUQ" elementId="#CEditorContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#CEditorContext</tags>
-            <tags>popup:org.eclipse.cdt.ui.editor.CEditor.EditorContext</tags>
-            <tags>popup:#AbstractTextEditorContext</tags>
-          </menus>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExQ46hEe-sk6bEQNkAUQ" elementId="#CEditorRulerContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#CEditorRulerContext</tags>
-            <tags>popup:org.eclipse.cdt.ui.editor.CEditor.RulerContext</tags>
-            <tags>popup:#AbstractTextEditorRulerContext</tags>
-          </menus>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExRI6hEe-sk6bEQNkAUQ" elementId="#OverviewRulerContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#OverviewRulerContext</tags>
-          </menus>
         </children>
         <children xsi:type="basic:Part" xmi:id="_YmExRY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="queue.h" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
           <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;queue.h&quot; partName=&quot;queue.h&quot; title=&quot;queue.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/inc/queue.h&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/inc/queue.h&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;4528&quot; selectionTopPixel=&quot;2108&quot;/>&#xD;&#xA;&lt;/editor>"/>
@@ -369,78 +242,6 @@
             <tags>popup:#AbstractTextEditorRulerContext</tags>
           </menus>
           <menus xsi:type="menu:PopupMenu" xmi:id="_YmExSI6hEe-sk6bEQNkAUQ" elementId="#OverviewRulerContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#OverviewRulerContext</tags>
-          </menus>
-        </children>
-        <children xsi:type="basic:Part" xmi:id="_YmExSY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="string.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;string.c&quot; partName=&quot;string.c&quot; title=&quot;string.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/lib/string.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/lib/string.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;6&quot; selectionOffset=&quot;1968&quot; selectionTopPixel=&quot;3441&quot;/>&#xD;&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
-          <tags>removeOnHide</tags>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExSo6hEe-sk6bEQNkAUQ" elementId="#CEditorContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#CEditorContext</tags>
-            <tags>popup:org.eclipse.cdt.ui.editor.CEditor.EditorContext</tags>
-            <tags>popup:#AbstractTextEditorContext</tags>
-          </menus>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExS46hEe-sk6bEQNkAUQ" elementId="#CEditorRulerContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#CEditorRulerContext</tags>
-            <tags>popup:org.eclipse.cdt.ui.editor.CEditor.RulerContext</tags>
-            <tags>popup:#AbstractTextEditorRulerContext</tags>
-          </menus>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExTI6hEe-sk6bEQNkAUQ" elementId="#OverviewRulerContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#OverviewRulerContext</tags>
-          </menus>
-        </children>
-        <children xsi:type="basic:Part" xmi:id="_YmExTY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="test_dynamic_allocator.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;test_dynamic_allocator.c&quot; partName=&quot;test_dynamic_allocator.c&quot; title=&quot;test_dynamic_allocator.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/tests/test_dynamic_allocator.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/tests/test_dynamic_allocator.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;1029&quot; selectionTopPixel=&quot;930&quot;/>&#xD;&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
-          <tags>removeOnHide</tags>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExTo6hEe-sk6bEQNkAUQ" elementId="#CEditorContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#CEditorContext</tags>
-            <tags>popup:org.eclipse.cdt.ui.editor.CEditor.EditorContext</tags>
-            <tags>popup:#AbstractTextEditorContext</tags>
-          </menus>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExT46hEe-sk6bEQNkAUQ" elementId="#CEditorRulerContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#CEditorRulerContext</tags>
-            <tags>popup:org.eclipse.cdt.ui.editor.CEditor.RulerContext</tags>
-            <tags>popup:#AbstractTextEditorRulerContext</tags>
-          </menus>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExUI6hEe-sk6bEQNkAUQ" elementId="#OverviewRulerContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#OverviewRulerContext</tags>
-          </menus>
-        </children>
-        <children xsi:type="basic:Part" xmi:id="_YmExUY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="syscall.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;syscall.c&quot; partName=&quot;syscall.c&quot; title=&quot;syscall.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/lib/syscall.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/lib/syscall.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;465&quot;/>&#xD;&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
-          <tags>removeOnHide</tags>
-        </children>
-        <children xsi:type="basic:Part" xmi:id="_YmExUo6hEe-sk6bEQNkAUQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="test_dynamic_allocator.h" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;test_dynamic_allocator.h&quot; partName=&quot;test_dynamic_allocator.h&quot; title=&quot;test_dynamic_allocator.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/tests/test_dynamic_allocator.h&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/tests/test_dynamic_allocator.h&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;314&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
-          <tags>removeOnHide</tags>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExU46hEe-sk6bEQNkAUQ" elementId="#CEditorContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#CEditorContext</tags>
-            <tags>popup:org.eclipse.cdt.ui.editor.CEditor.EditorContext</tags>
-            <tags>popup:#AbstractTextEditorContext</tags>
-          </menus>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExVI6hEe-sk6bEQNkAUQ" elementId="#CEditorRulerContext">
-            <tags>menuContribution:popup</tags>
-            <tags>popup:#CEditorRulerContext</tags>
-            <tags>popup:org.eclipse.cdt.ui.editor.CEditor.RulerContext</tags>
-            <tags>popup:#AbstractTextEditorRulerContext</tags>
-          </menus>
-          <menus xsi:type="menu:PopupMenu" xmi:id="_YmExVY6hEe-sk6bEQNkAUQ" elementId="#OverviewRulerContext">
             <tags>menuContribution:popup</tags>
             <tags>popup:#OverviewRulerContext</tags>
           </menus>
@@ -466,6 +267,104 @@
             <tags>menuContribution:popup</tags>
             <tags>popup:#OverviewRulerContext</tags>
           </menus>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_eCGMYI6kEe-hC8slvWd8Lg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="syscall.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;syscall.c&quot; partName=&quot;syscall.c&quot; title=&quot;syscall.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/trap/syscall.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/trap/syscall.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;10102&quot; selectionTopPixel=&quot;10323&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_e-yeII6kEe-hC8slvWd8Lg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="trap.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;trap.c&quot; partName=&quot;trap.c&quot; title=&quot;trap.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/trap/trap.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/trap/trap.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_X5YPwI6mEe-hC8slvWd8Lg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="lib.h" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;lib.h&quot; partName=&quot;lib.h&quot; title=&quot;lib.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/inc/lib.h&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/inc/lib.h&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;18&quot; selectionOffset=&quot;2461&quot; selectionTopPixel=&quot;1922&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_Zznu4I6mEe-hC8slvWd8Lg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="tst_handler.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;tst_handler.c&quot; partName=&quot;tst_handler.c&quot; title=&quot;tst_handler.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/tests/tst_handler.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/tests/tst_handler.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;5666&quot; selectionTopPixel=&quot;6696&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_fHjtsI6mEe-hC8slvWd8Lg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="test_commands.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;test_commands.c&quot; partName=&quot;test_commands.c&quot; title=&quot;test_commands.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/tests/test_commands.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/tests/test_commands.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;3&quot; selectionOffset=&quot;17774&quot; selectionTopPixel=&quot;15562&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_i2oAcI6mEe-hC8slvWd8Lg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="test_commands.h" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;test_commands.h&quot; partName=&quot;test_commands.h&quot; title=&quot;test_commands.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/tests/test_commands.h&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/tests/test_commands.h&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;4&quot; selectionTopPixel=&quot;261&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_j_-1MI6mEe-hC8slvWd8Lg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="test_kheap.h" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;test_kheap.h&quot; partName=&quot;test_kheap.h&quot; title=&quot;test_kheap.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/tests/test_kheap.h&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/tests/test_kheap.h&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;4&quot; selectionTopPixel=&quot;279&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_kqubUI6mEe-hC8slvWd8Lg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="test_priority.h" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;test_priority.h&quot; partName=&quot;test_priority.h&quot; title=&quot;test_priority.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/tests/test_priority.h&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/tests/test_priority.h&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;4&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_lKcdMI6mEe-hC8slvWd8Lg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="test_scheduler.h" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;test_scheduler.h&quot; partName=&quot;test_scheduler.h&quot; title=&quot;test_scheduler.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/tests/test_scheduler.h&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/tests/test_scheduler.h&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;4&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_ljTCEI6mEe-hC8slvWd8Lg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="test_working_set.h" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;test_working_set.h&quot; partName=&quot;test_working_set.h&quot; title=&quot;test_working_set.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/tests/test_working_set.h&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/tests/test_working_set.h&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;4&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_CsTYkI6nEe-hC8slvWd8Lg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="syscall.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;syscall.c&quot; partName=&quot;syscall.c&quot; title=&quot;syscall.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/lib/syscall.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/lib/syscall.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;4464&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_2uXxgI6nEe-hC8slvWd8Lg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="dynamic_allocator.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;dynamic_allocator.c&quot; partName=&quot;dynamic_allocator.c&quot; title=&quot;dynamic_allocator.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/lib/dynamic_allocator.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/lib/dynamic_allocator.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;3987&quot; selectionTopPixel=&quot;2883&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_M091MI6oEe-hC8slvWd8Lg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="command_prompt.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;command_prompt.c&quot; partName=&quot;command_prompt.c&quot; title=&quot;command_prompt.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/cmd/command_prompt.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/cmd/command_prompt.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;13512&quot; selectionTopPixel=&quot;13732&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+          <tags>removeOnHide</tags>
+          <tags>active</tags>
+          <tags>activeOnClose</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_013iUI6oEe-hC8slvWd8Lg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="string.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;string.c&quot; partName=&quot;string.c&quot; title=&quot;string.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/lib/string.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/lib/string.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;6&quot; selectionOffset=&quot;996&quot; selectionTopPixel=&quot;1798&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_W_VQEI6rEe-hC8slvWd8Lg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="command_prompt.h" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;command_prompt.h&quot; partName=&quot;command_prompt.h&quot; title=&quot;command_prompt.h&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/cmd/command_prompt.h&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/cmd/command_prompt.h&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;499&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+          <tags>removeOnHide</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_eEnQsI6rEe-hC8slvWd8Lg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="commands.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;commands.c&quot; partName=&quot;commands.c&quot; title=&quot;commands.c&quot; tooltip=&quot;FOS_PROJECT_2024_TEMPLATE/kern/cmd/commands.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/cmd/commands.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;8&quot; selectionOffset=&quot;567&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+          <tags>removeOnHide</tags>
         </children>
       </children>
     </sharedElements>
@@ -534,7 +433,7 @@
       <toolbar xmi:id="_YmExao6hEe-sk6bEQNkAUQ" elementId="org.eclipse.cdt.ui.CView" visible="false"/>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_YmExa46hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.views.ResourceNavigator" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Navigator" iconURI="platform:/plugin/org.eclipse.ui.ide/icons/full/eview16/filenav_nav.png" tooltip="" closeable="true">
-      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view LINK_NAVIGATOR_TO_EDITOR=&quot;0&quot; sorter=&quot;1&quot;>&#xD;&#xA;&lt;filters>&#xD;&#xA;&lt;filter element=&quot;RemoteSystemsConnections&quot; isEnabled=&quot;true&quot;/>&#xD;&#xA;&lt;filter element=&quot;RemoteSystemsTempFiles&quot; isEnabled=&quot;true&quot;/>&#xD;&#xA;&lt;filter element=&quot;.*&quot; isEnabled=&quot;false&quot;/>&#xD;&#xA;&lt;/filters>&#xD;&#xA;&lt;expanded>&#xD;&#xA;&lt;element path=&quot;/FOS_PROJECT_2024_TEMPLATE&quot;/>&#xD;&#xA;&lt;/expanded>&#xD;&#xA;&lt;/view>"/>
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view LINK_NAVIGATOR_TO_EDITOR=&quot;0&quot; sorter=&quot;1&quot;>&#xD;&#xA;&lt;filters>&#xD;&#xA;&lt;filter element=&quot;RemoteSystemsConnections&quot; isEnabled=&quot;true&quot;/>&#xD;&#xA;&lt;filter element=&quot;RemoteSystemsTempFiles&quot; isEnabled=&quot;true&quot;/>&#xD;&#xA;&lt;filter element=&quot;.*&quot; isEnabled=&quot;false&quot;/>&#xD;&#xA;&lt;/filters>&#xD;&#xA;&lt;expanded>&#xD;&#xA;&lt;element path=&quot;/FOS_PROJECT_2024_TEMPLATE&quot;/>&#xD;&#xA;&lt;element path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern&quot;/>&#xD;&#xA;&lt;element path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/cmd&quot;/>&#xD;&#xA;&lt;/expanded>&#xD;&#xA;&lt;selection>&#xD;&#xA;&lt;element path=&quot;/FOS_PROJECT_2024_TEMPLATE/kern/cmd/command_prompt.c&quot;/>&#xD;&#xA;&lt;/selection>&#xD;&#xA;&lt;/view>"/>
       <tags>View</tags>
       <tags>categoryTag:General</tags>
       <menus xmi:id="_YmExbI6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.views.ResourceNavigator">
@@ -556,7 +455,7 @@
       <tags>categoryTag:General</tags>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_YmExhY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.views.ProblemView" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Problems" iconURI="platform:/plugin/org.eclipse.ui.ide/icons/full/eview16/problems_view.png" tooltip="" closeable="true">
-      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view PRIMARY_SORT_FIELD=&quot;org.eclipse.ui.ide.severityAndDescriptionField&quot; categoryGroup=&quot;org.eclipse.ui.ide.severity&quot; markerContentGenerator=&quot;org.eclipse.ui.ide.problemsGenerator&quot; partName=&quot;Problems&quot;>&#xD;&#xA;&lt;expanded>&#xD;&#xA;&lt;category IMemento.internal.id=&quot;Warnings (5 items)&quot;/>&#xD;&#xA;&lt;/expanded>&#xD;&#xA;&lt;columnWidths org.eclipse.ui.ide.locationField=&quot;231&quot; org.eclipse.ui.ide.markerType=&quot;175&quot; org.eclipse.ui.ide.pathField=&quot;120&quot; org.eclipse.ui.ide.resourceField=&quot;128&quot; org.eclipse.ui.ide.severityAndDescriptionField=&quot;578&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.severityAndDescriptionField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.resourceField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.pathField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.locationField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.markerType&quot;/>&#xD;&#xA;&lt;/view>"/>
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view PRIMARY_SORT_FIELD=&quot;org.eclipse.ui.ide.severityAndDescriptionField&quot; categoryGroup=&quot;org.eclipse.ui.ide.severity&quot; markerContentGenerator=&quot;org.eclipse.ui.ide.problemsGenerator&quot; partName=&quot;Problems&quot;>&#xD;&#xA;&lt;expanded>&#xD;&#xA;&lt;category IMemento.internal.id=&quot;Errors&quot;/>&#xD;&#xA;&lt;category IMemento.internal.id=&quot;Warnings (6 items)&quot;/>&#xD;&#xA;&lt;/expanded>&#xD;&#xA;&lt;columnWidths org.eclipse.ui.ide.locationField=&quot;231&quot; org.eclipse.ui.ide.markerType=&quot;175&quot; org.eclipse.ui.ide.pathField=&quot;120&quot; org.eclipse.ui.ide.resourceField=&quot;128&quot; org.eclipse.ui.ide.severityAndDescriptionField=&quot;758&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.severityAndDescriptionField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.resourceField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.pathField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.locationField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.markerType&quot;/>&#xD;&#xA;&lt;/view>"/>
       <tags>View</tags>
       <tags>categoryTag:General</tags>
       <menus xmi:id="_YmExho6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.views.ProblemView">
@@ -1136,49 +1035,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_YmEyKY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyKo6hEe-sk6bEQNkAUQ" elementId="new.group">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyK46hEe-sk6bEQNkAUQ" elementId="newWizardDropDown">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyLI6hEe-sk6bEQNkAUQ" elementId="new.ext" visible="false">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyLY6hEe-sk6bEQNkAUQ" elementId="save.group" visible="false">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyLo6hEe-sk6bEQNkAUQ" elementId="save">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyL46hEe-sk6bEQNkAUQ" elementId="saveAll">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyMI6hEe-sk6bEQNkAUQ" elementId="save.ext" visible="false">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmEyMY6hEe-sk6bEQNkAUQ" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_YmGoA46hEe-sk6bEQNkAUQ"/>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyMo6hEe-sk6bEQNkAUQ" elementId="print.ext" visible="false">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyM46hEe-sk6bEQNkAUQ" elementId="build.group">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyNI6hEe-sk6bEQNkAUQ" elementId="build">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyNY6hEe-sk6bEQNkAUQ" elementId="build.ext" visible="false">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyNo6hEe-sk6bEQNkAUQ" elementId="additions">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyN46hEe-sk6bEQNkAUQ" elementId="org.eclipse.cdt.ui.buildConfigToolbarAction">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyOI6hEe-sk6bEQNkAUQ" elementId="org.eclipse.cdt.ui.buildActiveConfigToolbarAction">
-          <tags>Opaque</tags>
-        </children>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_b7fsQI6kEe-hC8slvWd8Lg" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_YmGoA46hEe-sk6bEQNkAUQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_YmEyOY6hEe-sk6bEQNkAUQ" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -1186,141 +1043,15 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_YmEyZY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.cdt.ui.CElementCreationActionSet">
         <tags>Draggable</tags>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyZo6hEe-sk6bEQNkAUQ" elementId="CCWizards">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyZ46hEe-sk6bEQNkAUQ" elementId="org.eclipse.cdt.ui.actions.NewProjectDropDown">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyaI6hEe-sk6bEQNkAUQ" elementId="org.eclipse.cdt.ui.actions.NewFolderDropDown">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyaY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.cdt.ui.actions.NewFileDropDown">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyao6hEe-sk6bEQNkAUQ" elementId="org.eclipse.cdt.ui.actions.NewTypeDropDown">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEya46hEe-sk6bEQNkAUQ" elementId="CCWizards">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEybI6hEe-sk6bEQNkAUQ" elementId="org.eclipse.cdt.ui.actions.NewProjectDropDown">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEybY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.cdt.ui.actions.NewFolderDropDown">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEybo6hEe-sk6bEQNkAUQ" elementId="org.eclipse.cdt.ui.actions.NewFileDropDown">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyb46hEe-sk6bEQNkAUQ" elementId="org.eclipse.cdt.ui.actions.NewTypeDropDown">
-          <tags>Opaque</tags>
-        </children>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_YmEycI6hEe-sk6bEQNkAUQ" elementId="org.eclipse.debug.ui.launchActionSet">
         <tags>Draggable</tags>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEycY6hEe-sk6bEQNkAUQ" elementId="debug">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyco6hEe-sk6bEQNkAUQ" elementId="org.eclipse.debug.internal.ui.actions.DebugDropDownAction">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyc46hEe-sk6bEQNkAUQ" elementId="org.eclipse.debug.internal.ui.actions.RunDropDownAction">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEydI6hEe-sk6bEQNkAUQ" elementId="org.eclipse.debug.internal.ui.actions.ProfileDropDownAction">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEydY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.externaltools.ExternalToolMenuDelegateToolbar">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEydo6hEe-sk6bEQNkAUQ" elementId="debug">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyd46hEe-sk6bEQNkAUQ" elementId="org.eclipse.debug.internal.ui.actions.DebugDropDownAction">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyeI6hEe-sk6bEQNkAUQ" elementId="org.eclipse.debug.internal.ui.actions.RunDropDownAction">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyeY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.debug.internal.ui.actions.ProfileDropDownAction">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyeo6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.externaltools.ExternalToolMenuDelegateToolbar">
-          <tags>Opaque</tags>
-        </children>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_YmEye46hEe-sk6bEQNkAUQ" elementId="org.eclipse.search.searchActionSet">
         <tags>Draggable</tags>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyfI6hEe-sk6bEQNkAUQ" elementId="Search">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyfY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.OpenWorkspaceFile2">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyfo6hEe-sk6bEQNkAUQ" elementId="org.eclipse.cdt.ui.actions.OpenType">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyf46hEe-sk6bEQNkAUQ" elementId="org.eclipse.mylyn.tasks.ui.openTask">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEygI6hEe-sk6bEQNkAUQ" elementId="org.eclipse.search.OpenSearchDialogPage">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEygY6hEe-sk6bEQNkAUQ" elementId="Search">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEygo6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.OpenWorkspaceFile2">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyg46hEe-sk6bEQNkAUQ" elementId="org.eclipse.cdt.ui.actions.OpenType">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyhI6hEe-sk6bEQNkAUQ" elementId="org.eclipse.mylyn.tasks.ui.openTask">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyhY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.search.OpenSearchDialogPage">
-          <tags>Opaque</tags>
-        </children>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_YmEyho6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.edit.text.actionSet.presentation">
         <tags>Draggable</tags>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyh46hEe-sk6bEQNkAUQ" elementId="Presentation">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyiI6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.edit.text.toggleBlockSelectionMode">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyiY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.edit.text.toggleShowWhitespaceCharacters">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyio6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly" visible="false">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyi46hEe-sk6bEQNkAUQ" elementId="org.eclipse.cdt.ui.edit.text.c.toggleMarkOccurrences">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyjI6hEe-sk6bEQNkAUQ" elementId="org.eclipse.mylyn.cdt.ui.editor.folding.auto">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyjY6hEe-sk6bEQNkAUQ" elementId="Presentation">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyjo6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.edit.text.toggleBlockSelectionMode">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyj46hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.edit.text.toggleShowWhitespaceCharacters">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEykI6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly" visible="false">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEykY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.cdt.ui.edit.text.c.toggleMarkOccurrences">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmEyko6hEe-sk6bEQNkAUQ" elementId="org.eclipse.mylyn.cdt.ui.editor.folding.auto">
-          <tags>Opaque</tags>
-        </children>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_YmEyk46hEe-sk6bEQNkAUQ" elementId="group.nav" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -1328,34 +1059,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_YmFXAI6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmFXAY6hEe-sk6bEQNkAUQ" elementId="history.group">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmFXAo6hEe-sk6bEQNkAUQ" elementId="group.application" visible="false">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmFXA46hEe-sk6bEQNkAUQ" elementId="backardHistory">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmFXBI6hEe-sk6bEQNkAUQ" elementId="forwardHistory">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmFXBY6hEe-sk6bEQNkAUQ" elementId="pin.group">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXBo6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_YmGndY6hEe-sk6bEQNkAUQ"/>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmFXB46hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.edit.text.gotoNextAnnotation">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmFXCI6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.edit.text.gotoPreviousAnnotation">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmFXCY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.edit.text.gotoLastEditPosition">
-          <tags>Opaque</tags>
-        </children>
-      </children>
-      <children xsi:type="menu:ToolBar" xmi:id="_YmFXCo6hEe-sk6bEQNkAUQ" elementId="org.eclipse.cdt.ui.editor.CEditor">
-        <tags>Draggable</tags>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_b7g6Y46kEe-hC8slvWd8Lg" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_YmGndY6hEe-sk6bEQNkAUQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_YmFXC46hEe-sk6bEQNkAUQ" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -1367,12 +1071,6 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_YmFXD46hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.workbench.help" visible="false">
         <tags>Draggable</tags>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmFXEI6hEe-sk6bEQNkAUQ" elementId="group.help">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_YmFXEY6hEe-sk6bEQNkAUQ" elementId="group.application" visible="false">
-          <tags>Opaque</tags>
-        </children>
       </children>
       <children xsi:type="menu:ToolControl" xmi:id="_YmFXEo6hEe-sk6bEQNkAUQ" elementId="PerspectiveSpacer" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.LayoutModifierToolControl">
         <tags>stretch</tags>
@@ -1416,7 +1114,7 @@
       <children xsi:type="menu:ToolControl" xmi:id="_YmFXL46hEe-sk6bEQNkAUQ" elementId="topRight(org.eclipse.cdt.ui.CPerspective)" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.TrimStack">
         <tags>TrimStack</tags>
       </children>
-      <children xsi:type="menu:ToolControl" xmi:id="_YmFXMI6hEe-sk6bEQNkAUQ" elementId="bottom(org.eclipse.cdt.ui.CPerspective)" toBeRendered="false" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.TrimStack">
+      <children xsi:type="menu:ToolControl" xmi:id="_YmFXMI6hEe-sk6bEQNkAUQ" elementId="bottom(org.eclipse.cdt.ui.CPerspective)" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.TrimStack">
         <tags>TrimStack</tags>
       </children>
       <children xsi:type="menu:ToolControl" xmi:id="_YmFXMY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.editorss(org.eclipse.cdt.ui.CPerspective)" toBeRendered="false" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.TrimStack">
@@ -1430,121 +1128,121 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_YmFXNI6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.toolbar">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXNY6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXNY6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" enabled="false" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXNo6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXNo6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" enabled="false" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHoveredBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXN46hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXN46hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" enabled="false" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHintsInEditor"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXOI6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXOI6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" enabled="false" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXOY6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXOY6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" enabled="false" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHoveredBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXOo6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXOo6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" enabled="false" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHintsInEditor"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXO46hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXO46hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" enabled="false" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXPI6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXPI6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" enabled="false" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHoveredBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXPY6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXPY6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" enabled="false" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHintsInEditor"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXPo6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXPo6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" enabled="false" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXP46hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXP46hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" enabled="false" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHoveredBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXQI6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXQI6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" enabled="false" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHintsInEditor"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXQY6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXQY6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" enabled="false" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXQo6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXQo6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" enabled="false" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHoveredBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXQ46hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXQ46hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" enabled="false" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHintsInEditor"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXRI6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXRI6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" enabled="false" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXRY6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXRY6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" enabled="false" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHoveredBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXRo6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXRo6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" enabled="false" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHintsInEditor"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXR46hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXR46hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" enabled="false" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXSI6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXSI6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" enabled="false" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHoveredBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXSY6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXSY6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" enabled="false" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHintsInEditor"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXSo6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXSo6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" enabled="false" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXS46hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXS46hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" enabled="false" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHoveredBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXTI6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXTI6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" enabled="false" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHintsInEditor"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXTY6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXTY6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" enabled="false" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXTo6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXTo6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" enabled="false" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHoveredBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXT46hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXT46hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" enabled="false" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHintsInEditor"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXUI6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXUI6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" enabled="false" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXUY6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXUY6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" enabled="false" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHoveredBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXUo6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXUo6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" enabled="false" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHintsInEditor"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXU46hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXU46hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" enabled="false" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXVI6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXVI6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" enabled="false" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHoveredBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXVY6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXVY6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" enabled="false" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHintsInEditor"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXVo6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXVo6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" enabled="false" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXV46hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXV46hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" enabled="false" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHoveredBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXWI6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXWI6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" enabled="false" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHintsInEditor"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXWY6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXWY6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/surrounding.gif" tooltip="Enable showing the brackets surrounding the cursor" enabled="false" type="Check" command="_YmGpd46hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableSurroundingBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXWo6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXWo6hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHoveredBrackets" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hoveredBrackets.gif" tooltip="Enable showing matching brackets when hovering" enabled="false" selected="true" type="Check" command="_YmGpdY6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHoveredBrackets"/>
         </children>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXW46hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YmFXW46hEe-sk6bEQNkAUQ" elementId="com.chookapp.org.bracketeer.commands.EnableHintsInEditor" iconURI="platform:/plugin/com.chookapp.org.Bracketeer/icons/hint.gif" tooltip="Enable showing hints in the editor" enabled="false" type="Check" command="_YmGpdo6hEe-sk6bEQNkAUQ">
           <persistedState key="IIdentifier" value="com.chookapp.org.Bracketeer/com.chookapp.org.bracketeer.commands.EnableHintsInEditor"/>
         </children>
       </children>
@@ -2338,6 +2036,23 @@
     <tags>View</tags>
     <tags>categoryTag:Other</tags>
   </descriptors>
+  <trimContributions xmi:id="_2r10UF9tEeO-yojH_y4TJA" elementId="org.eclipse.ui.ide.application.trimcontribution.QuickAccess" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" toBeRendered="false" parentId="org.eclipse.ui.main.toolbar" positionInParent="last">
+    <children xsi:type="menu:ToolControl" xmi:id="_76uUAF9tEeO-yojH_y4TJA" elementId="Spacer Glue" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.LayoutModifierToolControl">
+      <tags>glue</tags>
+      <tags>move_after:PerspectiveSpacer</tags>
+      <tags>SHOW_RESTORE_MENU</tags>
+    </children>
+    <children xsi:type="menu:ToolControl" xmi:id="_8tJPcF9tEeO-yojH_y4TJA" elementId="SearchField" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.quickaccess.SearchField">
+      <tags>move_after:Spacer Glue</tags>
+      <tags>HIDEABLE</tags>
+      <tags>SHOW_RESTORE_MENU</tags>
+    </children>
+    <children xsi:type="menu:ToolControl" xmi:id="_9LgmcF9tEeO-yojH_y4TJA" elementId="Search-PS Glue" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.LayoutModifierToolControl">
+      <tags>glue</tags>
+      <tags>move_after:SearchField</tags>
+      <tags>SHOW_RESTORE_MENU</tags>
+    </children>
+  </trimContributions>
   <commands xmi:id="_YmGmKI6hEe-sk6bEQNkAUQ" elementId="org.eclipse.ui.edit.text.select.pageUp" commandName="Select Page Up" description="Select to the top of the page" category="_YmHMYI6hEe-sk6bEQNkAUQ"/>
   <commands xmi:id="_YmGmKY6hEe-sk6bEQNkAUQ" elementId="org.eclipse.cdt.dsf.gdb.ui.command.selectPreviousTraceRecord" commandName="Previous Trace Record" description="Select Previous Trace Record" category="_YmHMdY6hEe-sk6bEQNkAUQ"/>
   <commands xmi:id="_YmGmKo6hEe-sk6bEQNkAUQ" elementId="org.eclipse.egit.ui.history.ResetQuickdiffBaseline" commandName="Reset quickdiff baseline" category="_YmHMdY6hEe-sk6bEQNkAUQ">
