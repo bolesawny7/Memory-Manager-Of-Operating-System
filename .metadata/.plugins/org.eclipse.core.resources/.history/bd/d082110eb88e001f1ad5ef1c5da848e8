@@ -121,12 +121,6 @@ void initialize_dynamic_allocator(uint32 daStart, uint32 initSizeOfAllocatedSpac
     freeBlocksList.lh_first = firstFreeBlock;
     freeBlocksList.size = 1;
     LIST_HEAD(freeBlocksList , firstFreeBlock);
-
-    //set Block Test
-    //void * va = (void*)0x000000000000001;
-    //set_block_data(va,2*sizeof(int), 0);
-    //int8 res = is_free_block(va);
-    //panic("IS FREE BLOCK: &d\n\n",res);
 }
 //==================================
 // [2] SET BLOCK HEADER & FOOTER:
@@ -135,29 +129,8 @@ void set_block_data(void* va, uint32 totalSize, bool isAllocated)
 {
 	//TODO: [PROJECT'24.MS1 - #05] [3] DYNAMIC ALLOCATOR - set_block_data
 	//COMMENT THE FOLLOWING LINE BEFORE START CODING
-//	panic("set_block_data is not implemented yet");
+	panic("set_block_data is not implemented yet");
 	//Your Code is Here...
-//	struct BlockElement* block = (struct BlockElement*)va;
-//	uint32* currentBlockMetaData = (uint32*)((uint32*)block - 1);
-//	uint32* header = va - 1;
-//	uint32* footer = va + get_block_size(va) - 1;
-//	header = totalSize;
-//	footer = totalSize;
-//	*currentBlockMetaData &= isAllocated;
-
-	uint32 header_footer_data;
-	//lw allocated el flag = 1 lw la =0
-	if(isAllocated){
-		header_footer_data = totalSize | 1;
-	}
-	else{
-		header_footer_data = totalSize | 0;
-	}
-	//el header abl el address b 4 bytes
-	*(uint32*)(va - sizeof(uint32))  = header_footer_data;
-
-	//el footer 3nd el address + el size - size of el footer wl header
-	*(uint32*)(va + totalSize - 2*(sizeof(uint32))) = header_footer_data;
 }
 
 
