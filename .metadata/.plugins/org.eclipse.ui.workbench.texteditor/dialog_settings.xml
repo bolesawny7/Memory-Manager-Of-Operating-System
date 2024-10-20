@@ -6,20 +6,20 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="block" key="selection"/>
+		<item value="process" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="process"/>
+			<item value="sys_allocate_chunk"/>
+			<item value="sys"/>
 			<item value="block"/>
 			<item value="realloc"/>
 			<item value="rea"/>
 			<item value="dyn"/>
 			<item value="Command"/>
-			<item value="-1"/>
-			<item value="ptr_allocations[8]"/>
-			<item value="ptr_allocations[12]"/>
 		</list>
 		<list key="replacehistory">
 			<item value="cprintf(&quot;\n"/>
@@ -36,7 +36,7 @@
 		<item value="305" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="444" key="DIALOG_HEIGHT"/>
-		<item value="939" key="DIALOG_X_ORIGIN"/>
-		<item value="305" key="DIALOG_Y_ORIGIN"/>
+		<item value="1615" key="DIALOG_X_ORIGIN"/>
+		<item value="238" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>
