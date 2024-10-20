@@ -123,15 +123,10 @@ void initialize_dynamic_allocator(uint32 daStart, uint32 initSizeOfAllocatedSpac
     LIST_HEAD(freeBlocksList , firstFreeBlock);
 
     //set Block Test
-
-//    void * va = (void*)0xF6000000;
-//    set_block_data(va,9*sizeof(int), 1);
-//    uint32 res =  get_block_size(va);
-//    panic("BLOCK Size: %d\n\n",res);
-//    void * va = (void*)0xF6000000;
-//    set_block_data(va,2*sizeof(int), 0);
-//    int8 res = is_free_block(va);
-//    panic("IS FREE BLOCK: %d\n\n",res);
+    void * va = (void*)0xF6000000;
+    set_block_data(va,2*sizeof(int), 0);
+    int8 res = is_free_block(va);
+    panic("IS FREE BLOCK: %d\n\n",res);
 }
 //==================================
 // [2] SET BLOCK HEADER & FOOTER:

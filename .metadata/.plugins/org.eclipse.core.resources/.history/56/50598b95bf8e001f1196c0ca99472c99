@@ -123,15 +123,10 @@ void initialize_dynamic_allocator(uint32 daStart, uint32 initSizeOfAllocatedSpac
     LIST_HEAD(freeBlocksList , firstFreeBlock);
 
     //set Block Test
-
-//    void * va = (void*)0xF6000000;
-//    set_block_data(va,9*sizeof(int), 1);
-//    uint32 res =  get_block_size(va);
-//    panic("BLOCK Size: %d\n\n",res);
-//    void * va = (void*)0xF6000000;
-//    set_block_data(va,2*sizeof(int), 0);
-//    int8 res = is_free_block(va);
-//    panic("IS FREE BLOCK: %d\n\n",res);
+    void * va = (void*)0x0000ffde;
+    set_block_data(va,2*sizeof(int), 0);
+    int8 res = is_free_block(va);
+    panic("IS FREE BLOCK: &d\n\n",res);
 }
 //==================================
 // [2] SET BLOCK HEADER & FOOTER:
@@ -141,7 +136,14 @@ void set_block_data(void* va, uint32 totalSize, bool isAllocated)
 	//TODO: [PROJECT'24.MS1 - #05] [3] DYNAMIC ALLOCATOR - set_block_data
 	//COMMENT THE FOLLOWING LINE BEFORE START CODING
 //	panic("set_block_data is not implemented yet");
-//	Your Code is Here...
+	//Your Code is Here...
+//	struct BlockElement* block = (struct BlockElement*)va;
+//	uint32* currentBlockMetaData = (uint32*)((uint32*)block - 1);
+//	uint32* header = va - 1;
+//	uint32* footer = va + get_block_size(va) - 1;
+//	header = totalSize;
+//	footer = totalSize;
+//	*currentBlockMetaData &= isAllocated;
 
 	uint32 header_footer_data;
 	//lw allocated el flag = 1 lw la =0
