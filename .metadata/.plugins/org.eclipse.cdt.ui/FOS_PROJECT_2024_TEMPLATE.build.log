@@ -1,5 +1,129 @@
-18:37:36 **** Incremental Build of configuration Default for project FOS_PROJECT_2024_TEMPLATE ****
+21:08:47 **** Incremental Build of configuration Default for project FOS_PROJECT_2024_TEMPLATE ****
 make -j12 all 
++ as kern/entry.S
++ cc kern/init.c
++ cc kern/cons/console.c
++ cc kern/cons/printf.c
++ cc kern/cmd/command_prompt.c
++ cc kern/cmd/commands.c
++ cc kern/disk/pagefile_manager.c
++ as kern/cpu/context_switch.S
++ cc kern/cpu/kclock.c
++ cc kern/cpu/sched_helpers.c
++ cc kern/cpu/sched.c
++ cc kern/cpu/picirq.c
++ cc kern/cpu/cpu.c
++ cc kern/mem/boot_memory_manager.c
++ cc kern/mem/memory_manager.c
++ cc kern/mem/shared_memory_manager.c
++ cc kern/mem/kheap.c
++ cc kern/mem/paging_helpers.c
++ cc kern/mem/working_set_manager.c
++ cc kern/mem/chunk_operations.c
++ cc kern/proc/user_environment.c
++ cc kern/proc/priority_manager.c
++ cc kern/proc/user_programs.c
++ cc kern/trap/trap.c
++ as kern/trap/trapentry.S
++ cc kern/trap/syscall.c
++ cc kern/trap/kdebug.c
++ cc kern/trap/fault_handler.c
++ cc kern/conc/spinlock.c
++ cc kern/conc/sleeplock.c
++ cc kern/conc/channel.c
++ cc kern/conc/ksemaphore.c
++ cc kern/tests/tst_handler.c
++ cc kern/tests/test_dynamic_allocator.c
++ cc kern/tests/test_working_set.c
++ cc kern/tests/test_commands.c
++ cc kern/tests/test_priority.c
++ cc kern/tests/test_kheap.c
++ cc kern/tests/test_scheduler.c
++ cc kern/tests/utilities.c
++ cc lib/readline.c
++ cc lib/disk.c
++ cc lib/dynamic_allocator.c
++ cc[USER] user/tst_placement_1.c
++ as[USER] lib/entry.S
++ cc[USER] lib/console.c
++ cc[USER] lib/libmain.c
++ cc[USER] lib/exit.c
++ cc[USER] lib/panic.c
++ cc[USER] lib/printf.c
++ cc[USER] lib/readline.c
++ cc[USER] lib/uheap.c
++ cc[USER] lib/syscall.c
++ cc[USER] lib/dynamic_allocator.c
++ cc[USER] lib/semaphore.c
++ cc[USER] lib/concurrency.c
++ cc[USER] user/fos_alloc.c
++ cc[USER] user/tst_air.c
++ cc[USER] user/tst_syscalls_2_slave1.c
++ cc[USER] user/fos_input.c
++ cc[USER] user/arrayOperations_stats.c
++ cc[USER] user/tst_syscalls_2_slave3.c
++ cc[USER] user/tst_first_fit_3.c
++ cc[USER] user/tst_invalid_access_slave4.c
++ cc[USER] user/tst_air_clerk.c
++ cc[USER] user/concurrent_start.c
++ cc[USER] user/tst_first_fit_2.c
++ cc[USER] user/tst_invalid_access_slave3.c
++ cc[USER] user/tst_semaphore_1master.c
++ cc[USER] user/quicksort_leakage.c
++ cc[USER] user/tst_free_1.c
++ cc[USER] user/MidTermEx_ProcessA.c
++ cc[USER] user/fos_factorial.c
++ cc[USER] user/tst_sharing_5_slave.c
++ cc[USER] user/arrayOperations_quicksort.c
++ cc[USER] user/tst_sharing_3.c
++ cc[USER] user/fos_fibonacci.c
++ cc[USER] user/tst_semaphore_2slave.c
++ cc[USER] user/tst_invalid_access_slave2.c
++ cc[USER] user/arrayOperations_Master.c
++ cc[USER] user/tst_sharing_1.c
++ cc[USER] user/tst_free_1_slave1.c
++ cc[USER] user/tst_syscalls_1.c
++ cc[USER] user/fos_static_data_section.c
++ cc[USER] user/tst_invalid_access_slave1.c
++ cc[USER] user/tst_placement_3.c
++ cc[USER] user/tst_sharing_5_slaveB2.c
++ cc[USER] user/MidTermEx_Master.c
++ cc[USER] user/fos_data_on_stack.c
++ cc[USER] user/game.c
++ cc[USER] user/tst_sharing_2slave2.c
++ cc[USER] user/fos_helloWorld.c
++ cc[USER] user/mergesort_noleakage.c
++ cc[USER] user/tst_semaphore_1slave.c
++ cc[USER] user/tst_free_3.c
++ cc[USER] user/tst_semaphore_2master.c
++ cc[USER] user/tst_first_fit_1.c
++ cc[USER] user/tst_malloc_1.c
++ cc[USER] user/fib_memomize.c
++ cc[USER] user/quicksort_noleakage.c
++ cc[USER] user/fos_add.c
++ cc[USER] user/MidTermEx_ProcessB.c
++ cc[USER] user/tst_free_2.c
++ cc[USER] user/tst_sharing_4.c
++ cc[USER] user/tst_invalid_access.c
++ cc[USER] user/arrayOperations_mergesort.c
++ cc[USER] user/tst_placement.c
++ cc[USER] user/fib_loop.c
++ cc[USER] user/tst_sharing_2slave1.c
++ cc[USER] user/tst_syscalls_2_slave2.c
++ cc[USER] user/tst_air_customer.c
++ cc[USER] user/mergesort_leakage.c
++ cc[USER] user/tst_malloc_3.c
++ cc[USER] user/dummy_process.c
++ cc[USER] user/tst_syscalls_2.c
++ cc[USER] user/tst_malloc_2.c
++ cc[USER] user/matrix_operations.c
++ cc[USER] user/tst_sharing_5_master.c
++ cc[USER] user/tst_sharing_5_slaveB1.c
++ cc[USER] user/tst_sharing_2master.c
++ cc[USER] user/tst_placement_2.c
++ cc[USER] user/tst_free_1_slave2.c
++ cc[USER] user/quicksort_semaphore.c
++ ar obj/lib/libfos.a
 + ld -m elf_i386 obj/user/tst_placement_1
 + ld -m elf_i386 obj/user/fos_alloc
 + ld -m elf_i386 obj/user/tst_air
@@ -68,10 +192,7 @@ make -j12 all
 + ld -m elf_i386 obj/user/tst_placement_2
 + ld -m elf_i386 obj/user/tst_free_1_slave2
 + ld -m elf_i386 obj/user/quicksort_semaphore
-+ cc -Os boot/main.c
-+ ld -m elf_i386 boot/boot
 + ld -m elf_i386 obj/kern/kernel
-boot block is 402 bytes (max 510)
 + mk obj/kern/bochs.img
 touch -m inc/memlayout.h
 touch -m inc/environment_definitions.h
@@ -115,5 +236,5 @@ touch -m kern/tests/test_commands.c
 touch -m kern/tests/test_scheduler.c
 touch -m kern/tests/utilities.c
 
-18:37:44 Build Finished (took 7s.967ms)
+21:08:58 Build Finished (took 10s.461ms)
 

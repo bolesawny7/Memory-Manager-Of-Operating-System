@@ -103,9 +103,24 @@ void initialize_dynamic_allocator(uint32 daStart, uint32 initSizeOfAllocatedSpac
 
 	//TODO: [PROJECT'24.MS1 - #04] [3] DYNAMIC ALLOCATOR - initialize_dynamic_allocator
 	//COMMENT THE FOLLOWING LINE BEFORE START CODING
-	panic("initialize_dynamic_allocator is not implemented yet");
+    //panic("initialize_dynamic_allocator is not implemented yet");
 	//Your Code is Here...
+	LIST_INIT(&freeBlocksList);
 
+	uint32* BEG_Block =(uint32*) daStart ;
+    uint32* END_Block =(uint32*) (daStart + initSizeOfAllocatedSpace - sizeof(uint32)) ;
+    uint32* Header = (uint32*) (daStart + sizeof(uint32));
+    uint32* Footer = (uint32*) (daStart + initSizeOfAllocatedSpace - 2 * sizeof(uint32));
+
+    *Header = (initSizeOfAllocatedSpace - 2 * sizeof(uint32)) ;
+    *Footer = (initSizeOfAllocatedSpace - 2 * sizeof(uint32)) ;
+    struct BlockElement* firstFreeBlock = (struct BlockElement*)(daStart + 2* sizeof(uint32));
+
+    *BEG_Block = 0x0001;
+    *END_Block = 0x0001;
+    freeBlocksList.lh_first = firstFreeBlock;
+    freeBlocksList.size = 1;
+    LIST_HEAD(freeBlocksList , firstFreeBlock);
 }
 //==================================
 // [2] SET BLOCK HEADER & FOOTER:
@@ -178,8 +193,43 @@ void *realloc_block_FF(void* va, uint32 new_size)
 {
 	//TODO: [PROJECT'24.MS1 - #08] [3] DYNAMIC ALLOCATOR - realloc_block_FF
 	//COMMENT THE FOLLOWING LINE BEFORE START CODING
-	panic("realloc_block_FF is not implemented yet");
+	//panic("realloc_block_FF is not implemented yet");
 	//Your Code is Here...
+
+	//
+
+	if ( new_size < 16 || va == NULL) return NULL;
+	if ((new_size ^ 1) != (new_size + 1)) new_size++;
+	uint32 remainingSizeAfterReallocation = get_block_size(va) - new_size - sizeof(uint32);
+	if (remainingSizeAfterReallocation >= 16) {
+		uint32* currentBlockMetaData = ((uint32*)va - 1);
+		*currentBlockMetaData = new_size | 1;
+		//hana3mel hena free block
+		return va;
+	}
+	struct BlockElement* searchingBlock = freeBlocksList.lh_first;
+	struct BlockElement* foundBlock = NULL;
+	while (searchingBlock != NULL) {
+	    uint32 blockSize = get_block_size(searchingBlock);
+	    if (blockSize - sizeof(uint32) >= new_size + 16 ) {
+	    	foundBlock = searchingBlock;
+	    	break;
+	    }
+	    searchingBlock = searchingBlock->prev_next_info.le_next;
+	}
+	if (foundBlock != NULL) {
+		memcpy(foundBlock, va, get_block_size(va));
+		uint32* new_Block_MetaData = ((uint32*)foundBlock - 1);
+		*new_Block_MetaData = new_size | 1;
+		LIST_REMOVE(&freeBlocksList, foundBlock);
+		if (remainingSizeAfterReallocation > sizeof(uint32)) {
+			//mafrood na3mel hena free Block
+		}
+
+		return foundBlock;
+	}
+//	else sbrk();
+	return NULL;
 }
 
 /*********************************************************************************************/
