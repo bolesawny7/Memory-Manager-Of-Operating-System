@@ -301,6 +301,21 @@ int sys_pf_calculate_allocated_pages(void)
 /*******************************/
 void sys_free_user_mem(uint32 virtual_address, uint32 size)
 {
+	if (virtual_address<USER_HEAP_START || virtual_address>USER_HEAP_MAX || virtual_address==0)
+		    	{
+		    		env_exit();
+
+		    	}
+				else if(size<=0)
+		    	{
+		    		env_exit();
+		    	}
+
+		    	uint32 x = virtual_address + size;
+		    	if(x>= USER_HEAP_MAX)
+		    	{
+		    		env_exit();
+		    	}
 	if(isBufferingEnabled())
 	{
 		__free_user_mem_with_buffering(cur_env, virtual_address, size);
@@ -316,21 +331,22 @@ void sys_allocate_user_mem(uint32 virtual_address, uint32 size)
 {
 	//TODO: [PROJECT'24.MS1 - #03] [2] SYSTEM CALLS - Params Validation
 
-	   	if ((uint32) virtual_address>= USER_TOP || (uint32)virtual_address % PAGE_SIZE != 0||(uint32)virtual_address<0||(uint32)virtual_address==NULL)
+	   	if (virtual_address<USER_HEAP_START || virtual_address>USER_HEAP_MAX || virtual_address==0)
 	    	{
 	    		env_exit();
 
 	    	}
-	    	if(size<=0)
+			else if(size<=0)
 	    	{
 	    		env_exit();
 	    	}
 
-	    	int x =(uint32)virtual_address + size;
-	    	if(x>= USER_TOP)
+	    	uint32 x = virtual_address + size;
+	    	if(x>= USER_HEAP_MAX)
 	    	{
 	    		env_exit();
 	    	}
+
 
 
 	allocate_user_mem(cur_env, virtual_address, size);
@@ -340,26 +356,25 @@ void sys_allocate_user_mem(uint32 virtual_address, uint32 size)
 void sys_allocate_chunk(uint32 virtual_address, uint32 size, uint32 perms)
 {
 	//TODO: [PROJECT'24.MS1 - #03] [2] SYSTEM CALLS - Params Validation
-		   	if ((uint32) virtual_address>= USER_TOP || (uint32)virtual_address % PAGE_SIZE != 0||(uint32)virtual_address<=0)
-		    	{
-		    		env_exit();
+	if (virtual_address<USER_HEAP_START || virtual_address>USER_HEAP_MAX || virtual_address==0)
+			    	{
+			    		env_exit();
 
-		    	}
-		    	if(size<=0)
-		    	{
-		    		env_exit();
-		    	}
+			    	}
+		else if(size<=0)
+			    	{
+			    		env_exit();
+			    	}
 
-		    	int x =(uint32)virtual_address + size;
-		    	if(x>= USER_TOP)
-		    	{
-		    		env_exit();
-		    	}
-		    	if ((perms& (~PERM_AVAILABLE & ~PERM_WRITEABLE)) != (PERM_USER))
-		    	{
-		    		env_exit();
-		    	}
-
+			    	int x =virtual_address + size;
+		if(x>= USER_HEAP_MAX)
+			    	{
+			    		env_exit();
+			    	}
+		if ((perms& (~PERM_AVAILABLE & ~PERM_WRITEABLE)) != (PERM_USER))
+			    	{
+			    		env_exit();
+			    	}
 	allocate_chunk(cur_env->env_page_directory, virtual_address, size, perms);
 	return;
 }
@@ -544,8 +559,7 @@ uint32 syscall(uint32 syscallno, uint32 a1, uint32 a2, uint32 a3, uint32 a4, uin
 	{
 	//TODO: [PROJECT'24.MS1 - #02] [2] SYSTEM CALLS - Add suitable code here
 	case SYS_sbrk:
-			sys_sbrk((int)a1);
-			return NULL;
+			return (int)sys_sbrk(a1);
 			break;
 	case SYS_free_user_mem:
 			sys_free_user_mem((uint32)a1, (uint32)a2);
