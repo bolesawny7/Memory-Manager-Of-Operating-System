@@ -161,19 +161,19 @@ void set_block_data(void *va, uint32 totalSize, bool isAllocated)
 // [3] ALLOCATE BLOCK BY FIRST FIT:
 //=========================================
 void *alloc_block_FF(uint32 size)
+// Size parameter without MetaData.
 {
 	//==================================================================================
-	// DON'T CHANGE THESE LINES==========================================================
+	//DON'T CHANGE THESE LINES==========================================================
 	//==================================================================================
 	{
-		if (size % 2 != 0)
-			size++; // ensure that the size is even (to use LSB as allocation flag)
+		if (size % 2 != 0) size++;	//ensure that the size is even (to use LSB as allocation flag)
 		if (size < DYN_ALLOC_MIN_BLOCK_SIZE)
-			size = DYN_ALLOC_MIN_BLOCK_SIZE;
+			size = DYN_ALLOC_MIN_BLOCK_SIZE ;
 		if (!is_initialized)
 		{
-			uint32 required_size = size + 2 * sizeof(int) /*header & footer*/ + 2 * sizeof(int) /*da begin & end*/;
-			uint32 da_start = (uint32)sbrk(ROUNDUP(required_size, PAGE_SIZE) / PAGE_SIZE);
+			uint32 required_size = size + 2*sizeof(int) /*header & footer*/ + 2*sizeof(int) /*da begin & end*/ ;
+			uint32 da_start = (uint32)sbrk(ROUNDUP(required_size, PAGE_SIZE)/PAGE_SIZE);
 			uint32 da_break = (uint32)sbrk(0);
 			initialize_dynamic_allocator(da_start, da_break - da_start);
 		}
@@ -181,11 +181,63 @@ void *alloc_block_FF(uint32 size)
 	//==================================================================================
 	//==================================================================================
 
-	// TODO: [PROJECT'24.MS1 - #06] [3] DYNAMIC ALLOCATOR - alloc_block_FF
-	// COMMENT THE FOLLOWING LINE BEFORE START CODING
-	panic("alloc_block_FF is not implemented yet");
-	// Your Code is Here...
+	//TODO: [PROJECT'24.MS1 - #06] [3] DYNAMIC ALLOCATOR - alloc_block_FF
+	//COMMENT THE FOLLOWING LINE BEFORE START CODING
+//	panic("alloc_block_FF is not implemented yet");
+	//Your Code is Here...
+
+
+	if(size == 0){
+		return NULL;
+	}
+
+	uint32 size_with_metadata = size + 2*sizeof(uint32);
+
+	struct BlockElement* blk;
+	LIST_FOREACH(blk, &freeBlocksList){
+
+		// Get size of each free block.
+
+		uint32 current_blk_size_from_header = get_block_size((void *)blk);
+//		cprintf("size_with_metadata: %d \n current_blk_size_from_header: %d \n", size_with_metadata, current_blk_size_from_header);
+		if(size_with_metadata <= current_blk_size_from_header){
+			uint32 free_blk_size = current_blk_size_from_header - size_with_metadata;
+
+			if(free_blk_size < 2*DYN_ALLOC_MIN_BLOCK_SIZE){
+				// There is an internal fragmentation.
+				// Allocate size of header *current_blk_size_from_header.
+//				cprintf("internal fragmentation. \n");
+				set_block_data((void*) blk, current_blk_size_from_header, 1);
+				LIST_REMOVE(&freeBlocksList, blk);
+			}
+			else {
+//				cprintf("no internal fragmentation. Splitting occurs. \n");
+				// There is no internal fragmentation. Splitting occurs.
+
+//				cprintf("old free block: %p\n", blk);
+				set_block_data((void*) blk, size_with_metadata, 1);
+
+				struct BlockElement* remaining_blk = (struct BlockElement *)((char *)blk + size_with_metadata);
+//				cprintf("new free block: %p\n", remaining_blk);
+				set_block_data((void *) remaining_blk, free_blk_size, 0);
+
+				LIST_INSERT_AFTER(&freeBlocksList, blk, remaining_blk);
+				LIST_REMOVE(&freeBlocksList, blk);
+
+			}
+//			cprintf("block pointer: %p\n", (void *)blk);
+			return (void *)blk;
+
+		}
+		else {
+//			cprintf("size msh mkaffy \n");
+			sbrk(5);
+			return NULL;
+		}
+	}
+	return NULL;
 }
+
 //=========================================
 // [4] ALLOCATE BLOCK BY BEST FIT:
 //=========================================
@@ -197,101 +249,131 @@ void *alloc_block_BF(uint32 size)
 	// Your Code is Here...
 }
 
-
 //===================================================
 // [5] FREE BLOCK WITH COALESCING:
 //===================================================
 
-// Finished adding the free block to the list.
-// Tasks to do:
-//  1) Insure that merging is done correctly.
-//  2) test the implemented work so far with init dynamic allocator.
-
 void free_block(void *va)
 {
-	// TODO: [PROJECT'24.MS1 - #07] [3] DYNAMIC ALLOCATOR - free_block
-	// COMMENT THE FOLLOWING LINE BEFORE START CODING
-	panic("free_block is not implemented yet");
+	cprintf("-------ITERATION---------\n\n");
+	//TODO: [PROJECT'24.MS1 - #07] [3] DYNAMIC ALLOCATOR - free_block
+	//COMMENT THE FOLLOWING LINE BEFORE START CODING
+//	panic("free_block is not implemented yet");
 	//Your Code is Here...
 
-//	int initAllocatedSpace = 3*Kilo;
-//	initialize_dynamic_allocator(KERNEL_HEAP_START, initAllocatedSpace);
-//
-//	uint32 allocSizes[numOfAllocs] = {4*Kilo, 1*Kilo, 2*Kilo, 7*Kilo};
-//	//4 4 1 1 1 1 2 2 2 2 2 7
-//	uint32 allocCountPerSize[numOfAllocs] = {2, 4, 5, 1};
-//
-//	int totalSizes = 0;
-//	for (int i = 0; i < numOfAllocs; ++i)
-//	{
-//		totalSizes += allocSizes[i] * allocCountPerSize[i] ;
-//	}
-//	int remainSize = initAllocatedSpace - totalSizes - 2*sizeof(int); //exclude size of "DA Begin & End" blocks
+	if (va == NULL) {
+	        cprintf("Please specify a valid address.\n");
+	        return;
+	}
 
-//	if (va == NULL) {
-//	        printf("Please specify a valid address.\n");
-//	        return;
-//	}
-//
-//	struct BlockElement* block = (struct BlockElement*)va;
-//
-//	// Check if the block is already free
-//	if (is_free_block(va)) {
-//		printf("The block at address %p is already free.\n", va);
-//		return;
-//	}
-//
-//	// Free the block
-//	uint32* curBlkMetaData = (uint32*)((uint32*)block - 1);
-//	*curBlkMetaData &= ~0x1;
-//
-//	// Add the freed block to the freeBlocksList
-//	if(freeBlocksList == NULL){
-//		LIST_INSERT_HEAD(&freeBlocksList, block);
-//		return;
-//	}
-//
-//	struct BlockElement* firstBlock = LIST_FIRST(&freeBlocksList);
-//	struct BlockElement* lastBlock = LIST_LAST(&freeBlocksList);
-//
-//	if((va - sizeof(int)) < firstBlock){
-//		LIST_INSERT_HEAD(&freeBlocksList, block);
-//		return;
-//	}
-//
-//	if((va - sizeof(int)) > lastBlock){
-//		LIST_INSERT_TAIL(&freeBlocksList, block);
-//		return;
-//	}
-//	// Track previous and next blocks in the free blocks list for merging.
-//	struct BlockElement* currentFreeBlock = LIST_FIRST(&freeBlocksList);
-//	struct BlockElement* previousFreeBlock = NULL;
-//	struct BlockElement* nextFreeBlock = NULL;
-//
-//	while (currentFreeBlock != NULL) {
-//		if (currentFreeBlock == (struct BlockElement*)(va - sizeof(int))) {
-//			if (previousFreeBlock != NULL) {
-//				printf("Previous Block address: %p\n", previousFreeBlock);
-//				LIST_INSERT_AFTER(&freeBlocksList, previousFreeBlock, block);
-//			} else {
-//				printf("There is no previous block (current block is the first element).\n");
-//			}
-//
-//			nextFreeBlock = LIST_NEXT(currentFreeBlock);
-//			if (nextFreeBlock != NULL) {
-//				printf("Next Block address: %p\n", nextFreeBlock);
-//
-//			} else {
-//				printf("There is no next block (current block is the last element).\n");
-//			}
-//
-//			break;
-//		}
-//		previousFreeBlock = currentFreeBlock;
-//		currentFreeBlock = LIST_NEXT(currentFreeBlock);
-//	}
+	// Check if the block is already free.
+	if (is_free_block(va)) {
+		cprintf("The block at address %p is already free.\n", va);
+		return;
+	}
+
+	// Free the block.
+	uint32 size = get_block_size(va);
+//	cprintf("Size of va: %d at address: %p\n", size, va);
+	set_block_data(va, size, 0);
+
+	// Add the freed block to the list.
+	struct BlockElement* block = (struct BlockElement*) va;
+
+	// Add it to the head of the list.
+	if(LIST_SIZE(&freeBlocksList) == 0){
+		cprintf("LIST IS EMPTY..\n");
+		LIST_INSERT_HEAD(&freeBlocksList, block);
+		return;
+	}
+
+
+//	cprintf("Size of first free block: %d\n", get_block_size(firstBlock));
+//	cprintf("Size of last free block: %d\n", get_block_size(lastBlock));
+
+	struct BlockElement* currentFreeBlock;
+
+
+	// Getting previous and next block by their footer and header for merging.
+	uint32 * previous_blk_footer = (uint32 *)((char *)block - 2 * sizeof(uint32));
+	uint32 previous_blk_size = (*previous_blk_footer) & ~(0x1);
+
+//	cprintf("Size of previous block without LSB: %d\n", previous_blk_size);
+
+	// Track previous and next blocks in the free blocks list for merging.
+	uint32 * previous_blk = (uint32 *)((char *)block - previous_blk_size);
+	previous_blk =  previous_blk_size == 0 ? NULL : previous_blk;
+
+	uint32 * next_blk = (uint32 *)((char *)block + get_block_size(block));
+	next_blk = get_block_size(next_blk) == 0 ? NULL : next_blk;
+
+//	cprintf("Size of previous block: %d Bytes at address: %p is free: %d\n", get_block_size(previous_blk), previous_blk, is_free_block(previous_blk));
+//	cprintf("Size of next block: %d Bytes at address: %p is free: %d\n", get_block_size(next_blk), next_blk, is_free_block(next_blk));
+
+	uint32 total_size_after_coalesce = get_block_size(block);
+
+	// COALESCE WITH PREVIOUS BLOCK.
+	if(previous_blk != NULL){
+//	cprintf("Size of block PREV: %d\n", total_size_after_coalesce);
+		if(is_free_block(previous_blk)){
+			cprintf("COALESCE WITH PREVIOUS BLOCK.\n");
+			total_size_after_coalesce += get_block_size(previous_blk);
+			block = (struct BlockElement *)previous_blk;
+
+			LIST_REMOVE(&freeBlocksList, (struct BlockElement *)previous_blk);
+		}
+	}
+
+	// COALESCE WITH NEXT BLOCK.
+	if(next_blk != NULL){
+//		cprintf("Size of block NEXT: %d\n", total_size_after_coalesce);
+		if(is_free_block(next_blk)){
+			cprintf("COALESCE WITH NEXT BLOCK.\n");
+			total_size_after_coalesce += get_block_size(next_blk);
+
+			LIST_REMOVE(&freeBlocksList, (struct BlockElement *)next_blk);
+		}
+	}
+	// Setting block with the total size according to the conditions above..
+	set_block_data(block, total_size_after_coalesce, 0);
+
+	struct BlockElement* firstFreeBlock = LIST_FIRST(&freeBlocksList);
+	struct BlockElement* lastFreeBlock = LIST_LAST(&freeBlocksList);
+	// Check if it's before the first free block in the list.
+	if(block < firstFreeBlock){
+//		cprintf("before the first free block\n");
+//		cprintf("firstFreeBlockSize: %d\n", get_block_size(firstFreeBlock));
+		LIST_INSERT_HEAD(&freeBlocksList, block);
+		print_blocks_list(freeBlocksList);
+		return;
+	}
+	// Check if it's after the last free block in the list.
+	if(block > lastFreeBlock){
+//		cprintf("after the last free block\n");
+//		cprintf("lastFreeBlockSize: %d\n", get_block_size(lastFreeBlock));
+		LIST_INSERT_TAIL(&freeBlocksList, block);
+		print_blocks_list(freeBlocksList);
+		return;
+	}
+
+
+
+	LIST_FOREACH(currentFreeBlock, &freeBlocksList){
+		// Between 2 free blocks.
+		if(LIST_NEXT(currentFreeBlock)){
+			if(currentFreeBlock < block && LIST_NEXT(currentFreeBlock) > block){
+//				cprintf("inside foreach\n");
+				if(LIST_PREV(currentFreeBlock)){
+					LIST_INSERT_AFTER(&freeBlocksList, LIST_PREV(currentFreeBlock), block);
+				}
+				else if(LIST_NEXT(currentFreeBlock)){
+					LIST_INSERT_BEFORE(&freeBlocksList, LIST_NEXT(currentFreeBlock), block);
+				}
+				return;
+			}
+		}
+	}
 }
-
 
 //=========================================
 // [6] REALLOCATE BLOCK BY FIRST FIT:
