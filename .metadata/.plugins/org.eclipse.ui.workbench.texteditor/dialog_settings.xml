@@ -6,20 +6,20 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="process" key="selection"/>
+		<item value="UhLimit" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
-		<item value="false" key="wholeword"/>
+		<item value="true" key="wholeword"/>
 		<list key="findhistory">
-			<item value="process"/>
-			<item value="sys_allocate_chunk"/>
-			<item value="sys"/>
-			<item value="block"/>
-			<item value="realloc"/>
-			<item value="rea"/>
-			<item value="dyn"/>
-			<item value="Command"/>
+			<item value="uhLimit"/>
+			<item value="TODO"/>
+			<item value="Check"/>
+			<item value="fault handler"/>
+			<item value="create"/>
+			<item value="cprintf"/>
+			<item value="kheap"/>
+			<item value="fast"/>
 		</list>
 		<list key="replacehistory">
 			<item value="cprintf(&quot;\n"/>

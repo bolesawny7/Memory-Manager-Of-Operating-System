@@ -15,7 +15,7 @@
  */
 
 /*2016*/
-#define USE_KHEAP 0
+#define USE_KHEAP 1
 
 // Global descriptor numbers
 #define GD_KT     0x08     // kernel text
@@ -191,6 +191,7 @@
 extern volatile uint32 vpt[];     // VA of "virtual page table"
 extern volatile uint32 vpd[];     // VA of current page directory
 
+
 /*
  * Frame_Info descriptor structures.
  * Read/write to the kernel.
@@ -199,8 +200,10 @@ extern volatile uint32 vpd[];     // VA of current page directory
  * You can map a Frame_Info * to the corresponding physical address
  * with page2pa() in kern/pmap.h.
  */
+
 LIST_HEAD(FrameInfo_List, FrameInfo);
 typedef LIST_ENTRY(FrameInfo) Page_LIST_entry_t;
+
 
 struct FrameInfo {
 	/* free list link */

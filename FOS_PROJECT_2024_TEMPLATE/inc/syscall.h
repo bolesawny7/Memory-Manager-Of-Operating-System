@@ -51,7 +51,13 @@ enum
 	//TODO: [PROJECT'24.MS1 - #02] [2] SYSTEM CALLS - Add suitable code here
 
 	//=====================================================================
-	NSYSCALLS
+	NSYSCALLS,
+	SYS_allocateUserMem,
+	SYS_freeUserMem,
+	SYS_sbrk,
+	SYS_isMarkedPage,
+
+
 };
 
 #endif /* !FOS_INC_SYSCALL_H */

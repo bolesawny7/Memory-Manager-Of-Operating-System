@@ -1152,9 +1152,10 @@ void test_free_block_BF()
 		panic("7.2 Failed");
 	}
 
-	cprintf("		7.2: in block coalesces with PREV & NEXT\n\n") ;
+	cprintf("		7.2: in block coalesces with PREV & NEXT\n\n");
 	actualSize = 2*kilo + 1;
 	expected_size = ROUNDUP(actualSize + sizeOfMetaData,2) ;
+	cprintf("expected_size: %d\n", expected_size);
 	va = alloc_block(actualSize, DA_BF);
 	//Check returned va
 	expected = startVAs[4*allocCntPerSize - 2];

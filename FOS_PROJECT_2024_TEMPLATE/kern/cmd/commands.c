@@ -458,6 +458,7 @@ struct Env * CreateEnv(int number_of_arguments, char **arguments)
 
 int command_run_program(int number_of_arguments, char **arguments)
 {
+	cprintf("Args[2]: %s\n", arguments[1]);
 	//[1] Create and initialize a new environment for the program to be run
 	struct Env *env = CreateEnv(number_of_arguments, arguments);
 

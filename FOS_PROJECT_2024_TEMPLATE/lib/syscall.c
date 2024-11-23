@@ -294,24 +294,35 @@ void sys_utilities(char* utilityName, int value)
 	return;
 }
 
+bool sys_is_marked_page(uint32 va)
+{
+	//Comment the following line before start coding...
+//	panic("not implemented yet");
+//	cprintf("1 lib\n");
+	return syscall(SYS_isMarkedPage, va, 0, 0, 0, 0);
+}
 
 //TODO: [PROJECT'24.MS1 - #02] [2] SYSTEM CALLS - Implement these system calls
 void* sys_sbrk(int increment)
 {
 	//Comment the following line before start coding...
-	panic("not implemented yet");
-	return NULL;
+//	panic("not implemented yet");
+	return (void *)syscall(SYS_sbrk, increment, 0, 0, 0, 0);
 }
 
 void sys_free_user_mem(uint32 virtual_address, uint32 size)
 {
 	//Comment the following line before start coding...
-	panic("not implemented yet");
+//	panic("not implemented yet");
+	syscall(SYS_freeUserMem, virtual_address, size, 0, 0, 0);
+	return;
 }
 
 void sys_allocate_user_mem(uint32 virtual_address, uint32 size)
 {
 	//Comment the following line before start coding...
-	panic("not implemented yet");
+//	panic("not implemented yet");
+	syscall(SYS_allocateUserMem, virtual_address, size, 0, 0, 0);
+	return;
 }
 

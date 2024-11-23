@@ -1,5 +1,9 @@
 #include <inc/lib.h>
 
+
+#define USER_HEAP_ARRAY_SIZE ((USER_HEAP_MAX - USER_HEAP_START) / PAGE_SIZE)
+uint32 allocation_sizes[USER_HEAP_ARRAY_SIZE];
+
 //==================================================================================//
 //============================ REQUIRED FUNCTIONS ==================================//
 //==================================================================================//
@@ -18,29 +22,79 @@ void* sbrk(int increment)
 //=================================
 void* malloc(uint32 size)
 {
-	//==============================================================
-	//DON'T CHANGE THIS CODE========================================
-	if (size == 0) return NULL ;
-	//==============================================================
-	//[PROJECT'24.MS2] [2] USER HEAP - malloc() [User Side]
-	// Write your code here, remove the panic and write your code
-	panic("malloc() is not implemented yet...!!");
-	return NULL;
-	//Use sys_isUHeapPlacementStrategyFIRSTFIT() and	sys_isUHeapPlacementStrategyBESTFIT()
-	//to check the current strategy
+    //==============================================================
+    //DON'T CHANGE THIS CODE========================================
+    if (size == 0) return NULL ;
+    //==============================================================
+    //TODO: [PROJECT'24.MS2 - #12] [3] USER HEAP [USER SIDE] - malloc()
+    // Write your code here, remove the panic and write your code
+    //panic("malloc() is not implemented yet...!!");
+    //return NULL;
+    //Use sys_isUHeapPlacementStrategyFIRSTFIT() and    sys_isUHeapPlacementStrategyBESTFIT()
+    //to check the current strategy
 
+    if (sys_isUHeapPlacementStrategyFIRSTFIT()) {
+        if (size <= DYN_ALLOC_MAX_BLOCK_SIZE){
+            return (void*)alloc_block_FF(size);
+        }
+        uint32* virtual_address = (uint32 *)((char *)myEnv->UhLimit + PAGE_SIZE);
+        uint32 numOfPages = ROUNDUP(size, PAGE_SIZE) / PAGE_SIZE;
+        uint32 countPages = 0;
+        uint32 *current = virtual_address, *startAdd = virtual_address;
+
+        while(countPages < numOfPages){
+            if ((uint32)current > USER_HEAP_MAX){
+                return NULL;
+            }
+
+            if(sys_is_marked_page((uint32)current)){
+                countPages = 0;
+                current = (uint32*)((char*)current + PAGE_SIZE);
+                virtual_address = current;
+                continue;
+            }
+            countPages++;
+            current =(uint32*)((char*)current + PAGE_SIZE);
+        }
+        sys_allocate_user_mem((uint32)virtual_address , size);
+        return (void*)virtual_address;
+    } else if (sys_isUHeapPlacementStrategyBESTFIT()) {
+
+    }
+
+    return NULL;
+//    bool d = sys_get_marked_page((uint32)virtual_address);
+//    cprintf("bool: %d\n", d);
+//    sys_free_user_mem((uint32)0,0);
 }
-
 //=================================
 // [3] FREE SPACE FROM USER HEAP:
 //=================================
 void free(void* virtual_address)
 {
-	//[PROJECT'24.MS2] [2] USER HEAP - free() [User Side]
+	//TODO: [PROJECT'24.MS2 - #14] [3] USER HEAP [USER SIDE] - free()
 	// Write your code here, remove the panic and write your code
-	panic("free() is not implemented yet...!!");
-}
+	//block allocator free
+	if(virtual_address == NULL) panic("invalid");
 
+	uint32 index = ((uint32)virtual_address - (uint32)(myEnv->UhLimit + PAGE_SIZE)) / PAGE_SIZE;
+	uint32 size = allocation_sizes[index];
+	if(size >DYN_ALLOC_MAX_BLOCK_SIZE||size==DYN_ALLOC_MAX_BLOCK_SIZE)
+	{
+		free_block( virtual_address);
+	}
+	 if (size == 0) {
+		 panic("Invalid ");
+	 }
+	//page allocator free
+	if(size>DYN_ALLOC_MAX_BLOCK_SIZE)
+	{
+		sys_free_user_mem((uint32) virtual_address ,size);
+	}
+	else{
+		panic("invalid");
+	}
+}
 
 //=================================
 // [4] ALLOCATE SHARED VARIABLE:
@@ -51,7 +105,7 @@ void* smalloc(char *sharedVarName, uint32 size, uint8 isWritable)
 	//DON'T CHANGE THIS CODE========================================
 	if (size == 0) return NULL ;
 	//==============================================================
-	//[PROJECT'24.MS2] [2] USER HEAP - smalloc() [User Side]
+	//TODO: [PROJECT'24.MS2 - #18] [4] SHARED MEMORY [USER SIDE] - smalloc()
 	// Write your code here, remove the panic and write your code
 	panic("smalloc() is not implemented yet...!!");
 	return NULL;
@@ -62,7 +116,7 @@ void* smalloc(char *sharedVarName, uint32 size, uint8 isWritable)
 //========================================
 void* sget(int32 ownerEnvID, char *sharedVarName)
 {
-	//[PROJECT'24.MS2] [2] USER HEAP - sget() [User Side]
+	//TODO: [PROJECT'24.MS2 - #20] [4] SHARED MEMORY [USER SIDE] - sget()
 	// Write your code here, remove the panic and write your code
 	panic("sget() is not implemented yet...!!");
 	return NULL;
@@ -86,7 +140,7 @@ void* sget(int32 ownerEnvID, char *sharedVarName)
 
 void sfree(void* virtual_address)
 {
-	//[PROJECT'24.MS2 BONUS] [2] USER HEAP - sfree() [User Side]
+	//TODO: [PROJECT'24.MS2 - BONUS#4] [4] SHARED MEMORY [USER SIDE] - sfree()
 	// Write your code here, remove the panic and write your code
 	panic("sfree() is not implemented yet...!!");
 }

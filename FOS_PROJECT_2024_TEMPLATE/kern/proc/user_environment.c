@@ -229,20 +229,22 @@ struct Env* env_create(char* user_program_name, unsigned int page_WS_size, unsig
 			uint32 end_first_page = ROUNDUP(seg_va , PAGE_SIZE);
 			uint32 offset_first_page = seg_va  - start_first_page ;
 
-			memset(ptr_temp_page , 0, PAGE_SIZE);
 			uint8 *src_ptr =  (uint8*) dataSrc_va;
 			uint8 *dst_ptr =  (uint8*) (ptr_temp_page + offset_first_page);
 			int i;
-			for (i = seg_va ; i < end_first_page ; i++, src_ptr++,dst_ptr++ )
+			if (offset_first_page)
 			{
-				*dst_ptr = *src_ptr ;
+				memset(ptr_temp_page , 0, PAGE_SIZE);
+				for (i = seg_va ; i < end_first_page ; i++, src_ptr++,dst_ptr++ )
+				{
+					*dst_ptr = *src_ptr ;
+				}
+
+				if (pf_add_env_page(e, start_first_page, ptr_temp_page) == E_NO_PAGE_FILE_SPACE)
+					panic("ERROR: Page File OUT OF SPACE. can't load the program in Page file!!");
+
+				//LOG_STRING(" -------------------- PAGE FILE: 1st page is written");
 			}
-
-			if (pf_add_env_page(e, start_first_page, ptr_temp_page) == E_NO_PAGE_FILE_SPACE)
-				panic("ERROR: Page File OUT OF SPACE. can't load the program in Page file!!");
-
-			//LOG_STRING(" -------------------- PAGE FILE: 1st page is written");
-
 
 			/// 7.3) Start writing the segment ,from 2nd page until before last page, to page file ...
 
@@ -863,15 +865,41 @@ uint32 __cur_k_stk = KERNEL_HEAP_START;
 void* create_user_kern_stack(uint32* ptr_user_page_directory)
 {
 #if USE_KHEAP
-	//[PROJECT'24.MS2]
+	//TODO: [PROJECT'24.MS2 - #07] [2] FAULT HANDLER I - create_user_kern_stack
 	// Write your code here, remove the panic and write your code
-	panic("create_user_kern_stack() is not implemented yet...!!");
+	void *stack = kmalloc(KERNEL_STACK_SIZE);
+	void* initial_stack = stack;
+	struct FrameInfo *FrameToBeReserved = NULL;
+	for(int Iterator=0; Iterator<8;Iterator++){
 
+		int Allocated= allocate_frame(&FrameToBeReserved);
+		if(Allocated!=0) panic("Invalid allocation ");
+
+		if(Iterator==0){
+			stack+=PAGE_SIZE;
+			uint32* PageTable = NULL;
+			get_page_table(ptr_user_page_directory,(uint32)stack, &PageTable);
+
+			if(PageTable==NULL){
+				create_page_table(ptr_user_page_directory, (uint32)stack);
+			}
+
+			PageTable[PTX(stack)] &= (~PERM_PRESENT);
+
+		}else{
+			stack+=PAGE_SIZE;
+			int CheckMapping = map_frame(ptr_user_page_directory, FrameToBeReserved, (uint32)stack ,PERM_WRITEABLE|PERM_USER|PERM_PRESENT);
+			if(CheckMapping!=0){
+				free_frame(FrameToBeReserved);
+				panic("not mapped!!");
+			}
+		}
+	}
+	return (void*) initial_stack;
 	//allocate space for the user kernel stack.
 	//remember to leave its bottom page as a GUARD PAGE (i.e. not mapped)
 	//return a pointer to the start of the allocated space (including the GUARD PAGE)
-
-
+	//On failure: panic
 #else
 	if (KERNEL_HEAP_MAX - __cur_k_stk < KERNEL_STACK_SIZE)
 		panic("Run out of kernel heap!! Unable to create a kernel stack for the process. Can't create more processes!");
@@ -899,16 +927,22 @@ void delete_user_kern_stack(struct Env* e)
 	panic("KERNEL HEAP is OFF! user kernel stack can't be deleted");
 #endif
 }
+
 //===============================================
 // 7) INITIALIZE DYNAMIC ALLOCATOR OF UHEAP:
 //===============================================
 void initialize_uheap_dynamic_allocator(struct Env* e, uint32 daStart, uint32 daLimit)
 {
-	//[PROJECT'24.MS2] Initialize the dynamic allocator of the user heap
-	//Remember:
-	//	1) there's no initial allocations for the dynamic allocator of the user heap (=0)
-	//	2) call the initialize_dynamic_allocator(..) to complete the initialization
-	//panic("initialize_uheap_dynamic_allocator() is not implemented yet...!!");
+    //TODO: [PROJECT'24.MS2 - #10] [3] USER HEAP - initialize_uheap_dynamic_allocator
+    //Remember:
+    //    1) there's no initial allocations for the dynamic allocator of the user heap (=0)
+    //    2) call the initialize_dynamic_allocator(..) to complete the initialization
+    //panic("initialize_uheap_dynamic_allocator() is not implemented yet...!!");
+    e->UhStart =(uint32*)daStart;
+    e->UhSbrk = (uint32*)daStart;
+    e->UhLimit = (uint32*)daLimit;
+    initialize_dynamic_allocator(((uint32)e->UhStart) , 0);
+
 }
 
 //==============================================================

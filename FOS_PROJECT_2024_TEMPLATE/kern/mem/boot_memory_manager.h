@@ -29,9 +29,9 @@ struct FrameInfo* frames_info;		// Virtual address of physical frames_info array
 
 struct
 {
-	struct FrameInfo_List free_frame_list;		// Free list of physical frames_info
-	struct FrameInfo_List modified_frame_list;	// Modified frame list for buffering
-	struct spinlock mfllock;					// Lock to protect the frame info lists
+	struct FrameInfo_List free_frame_list;						// Free list of physical frames_info
+	struct FrameInfo_List modified_frame_list;					// Modified frame list for buffering
+	struct spinlock mfllock;									// Lock to protect the frame info lists
 } MemFrameLists;
 
 //BOOT TIME [KERNEL SPACE]
