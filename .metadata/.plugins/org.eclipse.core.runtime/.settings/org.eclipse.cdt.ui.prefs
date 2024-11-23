@@ -12,6 +12,7 @@ c_type=83,83,83
 c_type_bold=false
 content_assist_disabled_computers=org.eclipse.cdt.ui.textProposalCategory\u0000org.eclipse.cdt.ui.parserProposalCategory\u0000
 eclipse.preferences.version=1
+formattingScopeForEmptySelection=statement
 org.eclipse.cdt.ui.outline.groupincludes=true
 pp_header=0,55,205
 semanticHighlighting.class.color=0,0,0

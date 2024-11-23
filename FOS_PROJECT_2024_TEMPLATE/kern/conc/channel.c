@@ -30,8 +30,23 @@ void sleep(struct Channel *chan, struct spinlock* lk)
 {
 	//TODO: [PROJECT'24.MS1 - #10] [4] LOCKS - sleep
 	//COMMENT THE FOLLOWING LINE BEFORE START CODING
-	panic("sleep is not implemented yet");
+	//panic("sleep is not implemented yet");
 	//Your Code is Here...
+
+	// bashuf eh el process el shaghala 3l cpu
+	    struct Env* currentProcess = get_cpu_proc();
+	    // release el spinlock
+	    release_spinlock(lk);
+	    acquire_spinlock(&(ProcessQueues.qlock));
+	    //bakhly el currentProcess blocked
+	    currentProcess ->env_status = ENV_BLOCKED;
+	    //add el process fl blocked queue (channel)
+	    enqueue(&(chan->queue),currentProcess);
+	    //schedule el process el b3daha
+	    sched();
+	    //reaquire el spinlock
+	    release_spinlock(&ProcessQueues.qlock);
+	    acquire_spinlock(lk);
 
 }
 
@@ -46,9 +61,16 @@ void wakeup_one(struct Channel *chan)
 {
 	//TODO: [PROJECT'24.MS1 - #11] [4] LOCKS - wakeup_one
 	//COMMENT THE FOLLOWING LINE BEFORE START CODING
-	panic("wakeup_one is not implemented yet");
+	//panic("wakeup_one is not implemented yet");
 	//Your Code is Here...
-}
+
+	acquire_spinlock(&ProcessQueues.qlock);
+	if(queue_size(&(chan->queue))!=0){
+	struct Env* DequeuedProcess= dequeue(&(chan->queue));
+	sched_insert_ready0(DequeuedProcess);
+	}
+	release_spinlock(&ProcessQueues.qlock);
+	}
 
 //====================================================
 // 4) WAKEUP ALL BLOCKED PROCESSES ON A GIVEN CHANNEL:
@@ -62,8 +84,14 @@ void wakeup_all(struct Channel *chan)
 {
 	//TODO: [PROJECT'24.MS1 - #12] [4] LOCKS - wakeup_all
 	//COMMENT THE FOLLOWING LINE BEFORE START CODING
-	panic("wakeup_all is not implemented yet");
+	//panic("wakeup_all is not implemented yet");
 	//Your Code is Here...
+		acquire_spinlock(&ProcessQueues.qlock);
+		while(queue_size(&(chan->queue))!=0){
+			struct Env* DequeuedProcess= dequeue(&(chan->queue));
+			sched_insert_ready0(DequeuedProcess);
+			}
+		release_spinlock(&ProcessQueues.qlock);
 
 }
 

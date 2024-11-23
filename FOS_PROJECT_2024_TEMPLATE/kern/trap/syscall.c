@@ -299,6 +299,12 @@ int sys_pf_calculate_allocated_pages(void)
 /*******************************/
 /* USER HEAP SYSTEM CALLS */
 /*******************************/
+bool sys_is_marked_page(uint32 va)
+{
+	return IsPageMarked(cur_env, va);
+}
+
+
 void sys_free_user_mem(uint32 virtual_address, uint32 size)
 {
 	if(isBufferingEnabled())
@@ -316,35 +322,14 @@ void sys_allocate_user_mem(uint32 virtual_address, uint32 size)
 {
 	//TODO: [PROJECT'24.MS1 - #03] [2] SYSTEM CALLS - Params Validation
 
-//	if (virtual_address>= USER_TOP || virtual_address % PAGE_SIZE != 0||(uint32)virtual_address<0||(uint32)virtual_address==NULL)
-//	{
-//		env_exit();
-//
-//	}
-//	if(size<=0)
-//	{
-//		env_exit();
-//	}
-//
-//	int x =(uint32)virtual_address + size;
-//	if(x>= USER_TOP)
-//	{
-//		env_exit();
-//	}
-
-
-	cprintf("%d", virtual_address);
-
-   	allocate_user_mem(cur_env, virtual_address, size);
+	allocate_user_mem(cur_env, virtual_address, size);
 	return;
 }
 
 void sys_allocate_chunk(uint32 virtual_address, uint32 size, uint32 perms)
 {
 	//TODO: [PROJECT'24.MS1 - #03] [2] SYSTEM CALLS - Params Validation
-//	if (virtual_address == NULL || virtual_address < USER_HEAP_START || virtual_address > USER_HEAP_MAX ) {
-//		return;
-//	}
+
 	allocate_chunk(cur_env->env_page_directory, virtual_address, size, perms);
 	return;
 }
@@ -691,7 +676,16 @@ uint32 syscall(uint32 syscallno, uint32 a1, uint32 a2, uint32 a3, uint32 a4, uin
 	case SYS_utilities:
 		sys_utilities((char*)a1, (int)a2);
 		return 0;
-
+	case SYS_isMarkedPage:
+		return sys_is_marked_page(a1);
+	case SYS_sbrk:
+		return (uint32)sys_sbrk(a1);
+	case SYS_allocateUserMem:
+		sys_allocate_user_mem(a1, a2);
+		return 0;
+	case SYS_freeUserMem:
+		sys_free_user_mem(a1, a2);
+		return 0;
 	case NSYSCALLS:
 		return 	-E_INVAL;
 		break;
