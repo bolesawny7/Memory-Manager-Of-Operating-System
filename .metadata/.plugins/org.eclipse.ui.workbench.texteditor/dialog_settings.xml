@@ -6,20 +6,20 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="UhLimit" key="selection"/>
+		<item value="cprintf" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="true" key="wholeword"/>
 		<list key="findhistory">
-			<item value="uhLimit"/>
-			<item value="TODO"/>
-			<item value="Check"/>
-			<item value="fault handler"/>
-			<item value="create"/>
 			<item value="cprintf"/>
-			<item value="kheap"/>
-			<item value="fast"/>
+			<item value="Header"/>
+			<item value="header"/>
+			<item value="wrong"/>
+			<item value="wrong header/footer"/>
+			<item value="wrong header/footer data"/>
+			<item value="wrong header/footer data."/>
+			<item value="uhLimit"/>
 		</list>
 		<list key="replacehistory">
 			<item value="cprintf(&quot;\n"/>
@@ -36,7 +36,7 @@
 		<item value="305" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="444" key="DIALOG_HEIGHT"/>
-		<item value="1615" key="DIALOG_X_ORIGIN"/>
-		<item value="238" key="DIALOG_Y_ORIGIN"/>
+		<item value="1811" key="DIALOG_X_ORIGIN"/>
+		<item value="462" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>
