@@ -14,6 +14,8 @@
 
 //extern void inctst();
 
+#define USER_HEAP_ARRAY_SIZE ((USER_HEAP_MAX - USER_HEAP_START) / PAGE_SIZE)
+uint32 FramesToPages[USER_HEAP_ARRAY_SIZE];
 
 // functions helper The Great Boda did
 
@@ -26,6 +28,7 @@ bool IsPageMarked(struct Env* myEnv, uint32 va) {
 //    	isTableExist = (uint32)create_page_table(myEnv->env_page_directory,va);
     	return 0;
     }
+
     uint32 addr = pt_get_page_permissions(myEnv->env_page_directory,va);
     bool isMarked = ((addr & PERM_MARKED) == PERM_MARKED);
     return isMarked;
@@ -204,6 +207,8 @@ void allocate_user_mem(struct Env* e, uint32 virtual_address, uint32 size)
 			PtrPageTable = create_page_table(e->env_page_directory, current_va);
 		}
 //		PtrPageTable[PTX(current_va)] = PtrPageTable[PTX(current_va)] | PERM_MARKED;
+		uint32 index = (current_va - USER_HEAP_START) / PAGE_SIZE;
+		FramesToPages[index] = (uint32)virtual_address;
 		pt_set_page_permissions(e->env_page_directory,current_va,PERM_MARKED,0);
 	}
 }
@@ -221,28 +226,22 @@ void free_user_mem(struct Env* e, uint32 virtual_address, uint32 size)
 	//TODO: [PROJECT'24.MS2 - #15] [3] USER HEAP [KERNEL SIDE] - free_user_mem
 	// Write your code here, remove the panic and write your code
 	//panic("free_user_mem() is not implemented yet...!!");
-	uint32 start_va = ROUNDDOWN(virtual_address, PAGE_SIZE);
-	uint32 end_va = ROUNDUP(virtual_address + size, PAGE_SIZE);
-	uint32* PtrPageTable = NULL;
+//	uint32 start_va = ROUNDDOWN(virtual_address, PAGE_SIZE);
+		uint32 start_va = ROUNDDOWN(virtual_address, PAGE_SIZE);
+	    uint32 end_va = ROUNDUP(virtual_address + size, PAGE_SIZE);
+	    uint32* PtrPageTable = NULL;
 
-	for (uint32 current_va = start_va; current_va < end_va; current_va += PAGE_SIZE) {
+	for (uint32 current_va = virtual_address; current_va < end_va; current_va += PAGE_SIZE) {
 		//unmark
-		PtrPageTable[PTX(current_va)] = PtrPageTable[PTX(current_va)] & (~PERM_MARKED);
+		if (get_page_table(e->env_page_directory, current_va, &PtrPageTable) == TABLE_IN_MEMORY)
+			PtrPageTable[PTX(current_va)] &= ~PERM_MARKED;
+
 		//remove mn el page file
-		pf_remove_env_page(e,  current_va);
+		pf_remove_env_page(e, current_va);
+//		cprintf("1\n");
 		//remove pages lw mwgooda fl ws
 		struct WorkingSetElement* element;
-		bool found_in_ws = 0;
-		LIST_FOREACH(element, &e->page_WS_list ) {
-			if (element->virtual_address == current_va) {
-				env_page_ws_invalidate(e, current_va);
-				struct FrameInfo* frame = get_frame_info(e->env_page_directory, current_va, NULL);
-				if (frame != NULL) {
-					unmap_frame(e->env_page_directory, current_va);
-					free_frame(frame);
-				}
-			}
-		 }
+		env_page_ws_invalidate(e, current_va);
 	}
 	//TODO: [PROJECT'24.MS2 - BONUS#3] [3] USER HEAP [KERNEL SIDE] - O(1) free_user_mem
 }

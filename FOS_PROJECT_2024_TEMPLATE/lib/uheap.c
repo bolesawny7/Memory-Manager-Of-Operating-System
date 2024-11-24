@@ -38,8 +38,7 @@ void* malloc(uint32 size)
             return (void*)alloc_block_FF(size);
         }
         uint32 virtual_address = myEnv->UhLimit + PAGE_SIZE;
-        uint32 numOfPages = ROUNDUP(size, PAGE_SIZE) / PAGE_SIZE;
-        uint32 countPages = 0;
+        uint32 numOfPages = ROUNDUP(size, PAGE_SIZE) / PAGE_SIZE, countPages = 0;
         uint32 current = virtual_address, startAdd = virtual_address;
 
         while(countPages < numOfPages){
@@ -49,14 +48,21 @@ void* malloc(uint32 size)
 
             if(sys_is_marked_page((uint32)current)){
                 countPages = 0;
-                current = current + PAGE_SIZE;
+                current += PAGE_SIZE;
                 virtual_address = current;
                 continue;
             }
-            countPages++;
-            current = current + PAGE_SIZE;
+            ++countPages;
+            current += PAGE_SIZE;
         }
         sys_allocate_user_mem((uint32)virtual_address , size);
+
+        uint32 index = ((uint32)virtual_address - USER_HEAP_START)/PAGE_SIZE;
+		uint32 totalSize = ROUNDUP(size, PAGE_SIZE);
+		allocation_sizes[index] = totalSize;
+		if((virtual_address + totalSize) > USER_HEAP_MAX){
+			return NULL;
+		}
         return (void*)virtual_address;
     } else if (sys_isUHeapPlacementStrategyBESTFIT()) {
 
@@ -67,33 +73,44 @@ void* malloc(uint32 size)
 //    cprintf("bool: %d\n", d);
 //    sys_free_user_mem((uint32)0,0);
 }
+
 //=================================
 // [3] FREE SPACE FROM USER HEAP:
 //=================================
 void free(void* virtual_address)
 {
-	//TODO: [PROJECT'24.MS2 - #14] [3] USER HEAP [USER SIDE] - free()
-	// Write your code here, remove the panic and write your code
-	//block allocator free
-	if(virtual_address == NULL) panic("invalid");
+//	cprintf("va: %x\n", virtual_address);
+    if (virtual_address == NULL) return;
 
-	uint32 index = ((uint32)virtual_address - (uint32)(myEnv->UhLimit + PAGE_SIZE)) / PAGE_SIZE;
-	uint32 size = allocation_sizes[index];
-	if(size >DYN_ALLOC_MAX_BLOCK_SIZE||size==DYN_ALLOC_MAX_BLOCK_SIZE)
-	{
-		free_block( virtual_address);
+    if ((uint32)virtual_address >= myEnv->UhStart && (uint32)virtual_address < myEnv->UhLimit) {
+		free_block(virtual_address);
+		return;
 	}
-	 if (size == 0) {
-		 panic("Invalid ");
-	 }
-	//page allocator free
-	if(size>DYN_ALLOC_MAX_BLOCK_SIZE)
-	{
-		sys_free_user_mem((uint32) virtual_address ,size);
-	}
-	else{
-		panic("invalid");
-	}
+    if ((uint32)virtual_address < USER_HEAP_START || (uint32)virtual_address >= USER_HEAP_MAX)
+		return;
+
+
+    // Calculate index and retrieve size
+    uint32 index = ((uint32)virtual_address - USER_HEAP_START) / PAGE_SIZE;
+
+    // Validate the address is within the heap range
+    if (index < 0) {
+        panic("Invalid address: address out of heap range");
+    }
+
+    uint32 size = allocation_sizes[index];
+//	cprintf("size: %d\n", size);
+
+    // Check for zero-sized allocations
+    if (size == 0) {
+        panic("Invalid allocation size: zero-sized block");
+    }
+
+
+    // Free from page allocator
+    sys_free_user_mem((uint32)virtual_address, size);
+//	cprintf("size: %d\n", size);
+    allocation_sizes[index] = 0;
 }
 
 //=================================

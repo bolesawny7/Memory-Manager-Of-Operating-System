@@ -240,6 +240,8 @@ void kfree(void* virtual_address)
         uint32 *ptr_page_table = NULL;
         struct FrameInfo* frame = get_frame_info(ptr_page_directory,va,&ptr_page_table);
 		unmap_frame(ptr_page_directory, va);
+		if(frame->references == 0)
+			free_frame(frame);
 		FramesToPages[to_frame_number(frame)] = 0;
 		va += PAGE_SIZE;
 	}

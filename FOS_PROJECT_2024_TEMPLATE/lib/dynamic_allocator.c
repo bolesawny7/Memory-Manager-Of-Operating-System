@@ -215,7 +215,7 @@ void *alloc_block_FF(uint32 size)
 				LIST_REMOVE(&freeBlocksList, blk);
 
 			}
-			cprintf("\n %x \n",blk);
+//			cprintf("\n %x \n",blk);
 			return (void *) blk;
 		}
 	}
@@ -351,13 +351,13 @@ void free_block(void *va) {
 		if(previous_blk != NULL){
 	//	cprintf("Size of block PREV: %d\n", total_size_after_coalesce);
 			if(is_free_block(previous_blk)){
-	//			cprintf("COALESCE WITH PREVIOUS BLOCK.\n");
-				cprintf("total size before coalesce: %d\n", total_size_after_coalesce);
+				cprintf("COALESCE WITH PREVIOUS BLOCK.\n");
+//				cprintf("total size before coalesce: %d\n", total_size_after_coalesce);
 				total_size_after_coalesce += get_block_size(previous_blk);
-				cprintf("total size after coalesce: %d\n", total_size_after_coalesce);
-				cprintf("blk before coalesce: %p\n", block);
+//				cprintf("total size after coalesce: %d\n", total_size_after_coalesce);
+//				cprintf("blk before coalesce: %p\n", block);
 				block = (struct BlockElement *)previous_blk;
-				cprintf("blk after coalesce: %p\n", block);
+//				cprintf("blk after coalesce: %p\n", block);
 
 				LIST_REMOVE(&freeBlocksList, (struct BlockElement *)previous_blk);
 			}
@@ -375,7 +375,7 @@ void free_block(void *va) {
 		}
 		// Setting block with the total size according to the conditions above..
 		set_block_data(block, total_size_after_coalesce, 0);
-		print_blocks_list(freeBlocksList);
+//		print_blocks_list(freeBlocksList);
 
 		struct BlockElement* firstFreeBlock = LIST_FIRST(&freeBlocksList);
 		struct BlockElement* lastFreeBlock = LIST_LAST(&freeBlocksList);
