@@ -22,6 +22,7 @@ int check_block(void* va, void* expectedVA, uint32 expectedSize, uint8 expectedF
 	uint32 header = *((uint32*)va-1);
 	uint32 footer = *((uint32*)(va + expectedSize - 8));
 	uint32 expectedData = expectedSize | expectedFlag ;
+
 	if(header != expectedData || footer != expectedData)
 	{
 		cprintf("wrong header/footer data. Expected %d, Actual H:%d F:%d\n", expectedData, header, footer);

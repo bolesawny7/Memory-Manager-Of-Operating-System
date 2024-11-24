@@ -37,10 +37,10 @@ void* malloc(uint32 size)
         if (size <= DYN_ALLOC_MAX_BLOCK_SIZE){
             return (void*)alloc_block_FF(size);
         }
-        uint32* virtual_address = (uint32 *)((char *)myEnv->UhLimit + PAGE_SIZE);
+        uint32 virtual_address = myEnv->UhLimit + PAGE_SIZE;
         uint32 numOfPages = ROUNDUP(size, PAGE_SIZE) / PAGE_SIZE;
         uint32 countPages = 0;
-        uint32 *current = virtual_address, *startAdd = virtual_address;
+        uint32 current = virtual_address, startAdd = virtual_address;
 
         while(countPages < numOfPages){
             if ((uint32)current > USER_HEAP_MAX){
@@ -49,12 +49,12 @@ void* malloc(uint32 size)
 
             if(sys_is_marked_page((uint32)current)){
                 countPages = 0;
-                current = (uint32*)((char*)current + PAGE_SIZE);
+                current = current + PAGE_SIZE;
                 virtual_address = current;
                 continue;
             }
             countPages++;
-            current =(uint32*)((char*)current + PAGE_SIZE);
+            current = current + PAGE_SIZE;
         }
         sys_allocate_user_mem((uint32)virtual_address , size);
         return (void*)virtual_address;

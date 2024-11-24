@@ -160,11 +160,11 @@ void* sys_sbrk(int numOfPages)
 	/*====================================*/
 	struct Env* env = get_cpu_proc(); //the current running Environment to adjust its break limit
 	uint32 sizeOfIncrement = numOfPages * PAGE_SIZE;
-	uint32* OldSbrk = env->UhSbrk;
+	uint32 OldSbrk = (uint32)env->UhSbrk;
 	if(numOfPages == 0) return (void*)env->UhSbrk;
 
 	if((env->UhSbrk + sizeOfIncrement) > env->UhLimit) return (void*)-1;
-
+//	cprintf("\n\n\n\n sabaho sbrk \n\n\n\n\n\n");
 	env->UhSbrk += sizeOfIncrement;
 	uint32* PtrPageTable = NULL;
 	for (uint32 current_va = (uint32)OldSbrk; current_va < (uint32)env->UhSbrk; current_va += PAGE_SIZE) {
@@ -174,6 +174,10 @@ void* sys_sbrk(int numOfPages)
 		}
 		pt_set_page_permissions(env->env_page_directory,current_va,PERM_MARKED,0);
 	}
+
+	uint32*  addressOfNewEndBlock = (uint32*)(env->UhSbrk - sizeof(uint32));
+	*addressOfNewEndBlock = 1;
+
 	return (void*)OldSbrk;
 }
 //=====================================

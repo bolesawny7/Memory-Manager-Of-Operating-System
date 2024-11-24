@@ -3560,3 +3560,369 @@ Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING
 	at com.google.gson.stream.JsonReader.beginObject(JsonReader.java:374)
 	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:165)
 	... 9 more
+!SESSION 2024-11-24 00:33:42.785 -----------------------------------------------
+eclipse.buildId=4.5.2.M20160212-1500
+java.version=1.8.0_73
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.jface 2 0 2024-11-24 00:33:47.274
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-11-24 00:33:47.274
+!MESSAGE A conflict occurred for ALT+CTRL+C:
+Binding(ALT+CTRL+C,
+	ParameterizedCommand(Command(org.eclipse.linuxtools.changelog.core.actions.KeyActionCommand,Insert ChangeLog entry,
+		Insert a ChangeLog entry,
+		Category(org.eclipse.linuxtools.changelog,Changelog,Changelog key bindings,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@136e806,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+Binding(ALT+CTRL+C,
+	ParameterizedCommand(Command(AnyEdit.capitalize.command,Capitalize,
+		,
+		Category(AnyEdit.category,AnyEdit Tools,AnyEdit Tools key bindings,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@145dc06,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.egit.ui 2 0 2024-11-24 00:33:48.540
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Christopher'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.oomph.setup.ui 2 0 2024-11-24 00:33:49.295
+!MESSAGE java.lang.NullPointerException
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.performStartup(SetupUIPlugin.java:352)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.access$3(SetupUIPlugin.java:346)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin$1$1.run(SetupUIPlugin.java:243)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.epp.logging.aeri.ide 2 16 2024-11-24 00:33:49.812
+!MESSAGE Server ‘org.eclipse.epp.logging.aeri.ide.server’ failed with exception: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1. ; version: 1.100.0.v20160217-0435
+!STACK 0
+com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:176)
+	at com.google.gson.Gson.fromJson(Gson.java:803)
+	at com.google.gson.Gson.fromJson(Gson.java:768)
+	at com.google.gson.Gson.fromJson(Gson.java:717)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.json.Json.deserialize(Json.java:88)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.IO.refreshConfiguration(IO.java:70)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.ServerConnection.startUp(ServerConnection.java:101)
+	at com.google.common.util.concurrent.AbstractIdleService$2$1.run(AbstractIdleService.java:54)
+	at com.google.common.util.concurrent.Callables$3.run(Callables.java:93)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1
+	at com.google.gson.stream.JsonReader.beginObject(JsonReader.java:374)
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:165)
+	... 9 more
+!SESSION 2024-11-24 00:40:21.745 -----------------------------------------------
+eclipse.buildId=4.5.2.M20160212-1500
+java.version=1.8.0_73
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.jface 2 0 2024-11-24 00:40:26.188
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-11-24 00:40:26.188
+!MESSAGE A conflict occurred for ALT+CTRL+C:
+Binding(ALT+CTRL+C,
+	ParameterizedCommand(Command(org.eclipse.linuxtools.changelog.core.actions.KeyActionCommand,Insert ChangeLog entry,
+		Insert a ChangeLog entry,
+		Category(org.eclipse.linuxtools.changelog,Changelog,Changelog key bindings,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@136e806,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+Binding(ALT+CTRL+C,
+	ParameterizedCommand(Command(AnyEdit.capitalize.command,Capitalize,
+		,
+		Category(AnyEdit.category,AnyEdit Tools,AnyEdit Tools key bindings,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@703934,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.egit.ui 2 0 2024-11-24 00:40:27.474
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Christopher'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.oomph.setup.ui 2 0 2024-11-24 00:40:28.208
+!MESSAGE java.lang.NullPointerException
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.performStartup(SetupUIPlugin.java:352)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.access$3(SetupUIPlugin.java:346)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin$1$1.run(SetupUIPlugin.java:243)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.epp.logging.aeri.ide 2 16 2024-11-24 00:40:28.871
+!MESSAGE Server ‘org.eclipse.epp.logging.aeri.ide.server’ failed with exception: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1. ; version: 1.100.0.v20160217-0435
+!STACK 0
+com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:176)
+	at com.google.gson.Gson.fromJson(Gson.java:803)
+	at com.google.gson.Gson.fromJson(Gson.java:768)
+	at com.google.gson.Gson.fromJson(Gson.java:717)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.json.Json.deserialize(Json.java:88)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.IO.refreshConfiguration(IO.java:70)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.ServerConnection.startUp(ServerConnection.java:101)
+	at com.google.common.util.concurrent.AbstractIdleService$2$1.run(AbstractIdleService.java:54)
+	at com.google.common.util.concurrent.Callables$3.run(Callables.java:93)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1
+	at com.google.gson.stream.JsonReader.beginObject(JsonReader.java:374)
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:165)
+	... 9 more
+
+!ENTRY org.eclipse.e4.ui.workbench.renderers.swt 4 2 2024-11-24 00:40:29.357
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.e4.ui.workbench.renderers.swt".
+!STACK 0
+org.eclipse.e4.core.di.InjectionException: java.lang.IllegalAccessException: Class org.eclipse.e4.core.internal.di.MethodRequestor can not access a member of class org.eclipse.ui.internal.handlers.E4HandlerProxy with modifiers ""
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:60)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.invokeUsingClass(InjectorImpl.java:252)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.invoke(InjectorImpl.java:234)
+	at org.eclipse.e4.core.contexts.ContextInjectionFactory.invoke(ContextInjectionFactory.java:132)
+	at org.eclipse.e4.core.commands.internal.HandlerServiceHandler.setEnabled(HandlerServiceHandler.java:80)
+	at org.eclipse.core.commands.Command.setEnabled(Command.java:875)
+	at org.eclipse.e4.core.commands.internal.HandlerServiceImpl.canExecute(HandlerServiceImpl.java:179)
+	at org.eclipse.e4.ui.workbench.renderers.swt.HandledContributionItem.canExecuteItem(HandledContributionItem.java:813)
+	at org.eclipse.e4.ui.workbench.renderers.swt.HandledContributionItem.access$1(HandledContributionItem.java:802)
+	at org.eclipse.e4.ui.workbench.renderers.swt.HandledContributionItem$3.run(HandledContributionItem.java:167)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.workbench.renderers.swt.HandledContributionItem.updateItemEnablement(HandledContributionItem.java:198)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ToolItemUpdater.updateContributionItems(ToolItemUpdater.java:37)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ToolBarManagerRenderer$3.changed(ToolBarManagerRenderer.java:360)
+	at org.eclipse.e4.core.internal.contexts.TrackableComputationExt.update(TrackableComputationExt.java:114)
+	at org.eclipse.e4.core.internal.contexts.EclipseContext.processScheduled(EclipseContext.java:341)
+	at org.eclipse.e4.core.internal.contexts.EclipseContext.set(EclipseContext.java:356)
+	at org.eclipse.ui.internal.services.EvaluationService.contextEvaluate(EvaluationService.java:139)
+	at org.eclipse.ui.internal.services.EvaluationService.addSourceProvider(EvaluationService.java:180)
+	at org.eclipse.debug.internal.ui.contexts.DebugContextSourceProvider.<init>(DebugContextSourceProvider.java:51)
+	at org.eclipse.debug.internal.ui.contexts.DebugWindowContextService.<init>(DebugWindowContextService.java:62)
+	at org.eclipse.debug.internal.ui.contexts.DebugContextManager.createService(DebugContextManager.java:163)
+	at org.eclipse.debug.internal.ui.contexts.DebugContextManager.getContextService(DebugContextManager.java:221)
+	at org.eclipse.debug.internal.ui.views.ViewContextService.<init>(ViewContextService.java:627)
+	at org.eclipse.debug.internal.ui.views.ViewContextManager.windowOpened(ViewContextManager.java:93)
+	at org.eclipse.debug.internal.ui.views.ViewContextManager.<init>(ViewContextManager.java:55)
+	at org.eclipse.debug.internal.ui.views.ViewContextManager.getDefault(ViewContextManager.java:44)
+	at org.eclipse.debug.internal.ui.contexts.DebugContextManager.getDefault(DebugContextManager.java:150)
+	at org.eclipse.debug.ui.DebugUITools.getDebugContextManager(DebugUITools.java:1076)
+	at org.eclipse.debug.internal.ui.sourcelookup.SourceLookupService.<init>(SourceLookupService.java:40)
+	at org.eclipse.debug.internal.ui.sourcelookup.SourceLookupManager.windowOpened(SourceLookupManager.java:91)
+	at org.eclipse.debug.internal.ui.sourcelookup.SourceLookupManager.<init>(SourceLookupManager.java:41)
+	at org.eclipse.debug.internal.ui.sourcelookup.SourceLookupManager.getDefault(SourceLookupManager.java:53)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.initializeLaunchListeners(DebugUIPlugin.java:935)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.launchAdded(DebugUIPlugin.java:920)
+	at org.eclipse.debug.internal.core.LaunchManager$LaunchNotifier.run(LaunchManager.java:451)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.debug.internal.core.LaunchManager$LaunchNotifier.notify(LaunchManager.java:438)
+	at org.eclipse.debug.internal.core.LaunchManager.fireUpdate(LaunchManager.java:1048)
+	at org.eclipse.debug.internal.core.LaunchManager.addLaunch(LaunchManager.java:708)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:834)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: java.lang.IllegalAccessException: Class org.eclipse.e4.core.internal.di.MethodRequestor can not access a member of class org.eclipse.ui.internal.handlers.E4HandlerProxy with modifiers ""
+	at sun.reflect.Reflection.ensureMemberAccess(Unknown Source)
+	at java.lang.reflect.AccessibleObject.slowCheckMemberAccess(Unknown Source)
+	at java.lang.reflect.AccessibleObject.checkAccess(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:56)
+	... 44 more
+
+!ENTRY org.eclipse.e4.ui.workbench 4 0 2024-11-24 00:40:29.358
+!MESSAGE Internal error during tool item enablement updating, this is only logged once per tool item.
+!STACK 0
+org.eclipse.e4.core.di.InjectionException: java.lang.IllegalAccessException: Class org.eclipse.e4.core.internal.di.MethodRequestor can not access a member of class org.eclipse.ui.internal.handlers.E4HandlerProxy with modifiers ""
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:60)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.invokeUsingClass(InjectorImpl.java:252)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.invoke(InjectorImpl.java:234)
+	at org.eclipse.e4.core.contexts.ContextInjectionFactory.invoke(ContextInjectionFactory.java:132)
+	at org.eclipse.e4.core.commands.internal.HandlerServiceHandler.setEnabled(HandlerServiceHandler.java:80)
+	at org.eclipse.core.commands.Command.setEnabled(Command.java:875)
+	at org.eclipse.e4.core.commands.internal.HandlerServiceImpl.canExecute(HandlerServiceImpl.java:179)
+	at org.eclipse.e4.ui.workbench.renderers.swt.HandledContributionItem.canExecuteItem(HandledContributionItem.java:813)
+	at org.eclipse.e4.ui.workbench.renderers.swt.HandledContributionItem.access$1(HandledContributionItem.java:802)
+	at org.eclipse.e4.ui.workbench.renderers.swt.HandledContributionItem$3.run(HandledContributionItem.java:167)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.workbench.renderers.swt.HandledContributionItem.updateItemEnablement(HandledContributionItem.java:198)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ToolItemUpdater.updateContributionItems(ToolItemUpdater.java:37)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ToolBarManagerRenderer$3.changed(ToolBarManagerRenderer.java:360)
+	at org.eclipse.e4.core.internal.contexts.TrackableComputationExt.update(TrackableComputationExt.java:114)
+	at org.eclipse.e4.core.internal.contexts.EclipseContext.processScheduled(EclipseContext.java:341)
+	at org.eclipse.e4.core.internal.contexts.EclipseContext.set(EclipseContext.java:356)
+	at org.eclipse.ui.internal.services.EvaluationService.contextEvaluate(EvaluationService.java:139)
+	at org.eclipse.ui.internal.services.EvaluationService.addSourceProvider(EvaluationService.java:180)
+	at org.eclipse.debug.internal.ui.contexts.DebugContextSourceProvider.<init>(DebugContextSourceProvider.java:51)
+	at org.eclipse.debug.internal.ui.contexts.DebugWindowContextService.<init>(DebugWindowContextService.java:62)
+	at org.eclipse.debug.internal.ui.contexts.DebugContextManager.createService(DebugContextManager.java:163)
+	at org.eclipse.debug.internal.ui.contexts.DebugContextManager.getContextService(DebugContextManager.java:221)
+	at org.eclipse.debug.internal.ui.views.ViewContextService.<init>(ViewContextService.java:627)
+	at org.eclipse.debug.internal.ui.views.ViewContextManager.windowOpened(ViewContextManager.java:93)
+	at org.eclipse.debug.internal.ui.views.ViewContextManager.<init>(ViewContextManager.java:55)
+	at org.eclipse.debug.internal.ui.views.ViewContextManager.getDefault(ViewContextManager.java:44)
+	at org.eclipse.debug.internal.ui.contexts.DebugContextManager.getDefault(DebugContextManager.java:150)
+	at org.eclipse.debug.ui.DebugUITools.getDebugContextManager(DebugUITools.java:1076)
+	at org.eclipse.debug.internal.ui.sourcelookup.SourceLookupService.<init>(SourceLookupService.java:40)
+	at org.eclipse.debug.internal.ui.sourcelookup.SourceLookupManager.windowOpened(SourceLookupManager.java:91)
+	at org.eclipse.debug.internal.ui.sourcelookup.SourceLookupManager.<init>(SourceLookupManager.java:41)
+	at org.eclipse.debug.internal.ui.sourcelookup.SourceLookupManager.getDefault(SourceLookupManager.java:53)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.initializeLaunchListeners(DebugUIPlugin.java:935)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.launchAdded(DebugUIPlugin.java:920)
+	at org.eclipse.debug.internal.core.LaunchManager$LaunchNotifier.run(LaunchManager.java:451)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.debug.internal.core.LaunchManager$LaunchNotifier.notify(LaunchManager.java:438)
+	at org.eclipse.debug.internal.core.LaunchManager.fireUpdate(LaunchManager.java:1048)
+	at org.eclipse.debug.internal.core.LaunchManager.addLaunch(LaunchManager.java:708)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:834)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:739)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1039)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1256)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: java.lang.IllegalAccessException: Class org.eclipse.e4.core.internal.di.MethodRequestor can not access a member of class org.eclipse.ui.internal.handlers.E4HandlerProxy with modifiers ""
+	at sun.reflect.Reflection.ensureMemberAccess(Unknown Source)
+	at java.lang.reflect.AccessibleObject.slowCheckMemberAccess(Unknown Source)
+	at java.lang.reflect.AccessibleObject.checkAccess(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:56)
+	... 44 more
+!SESSION 2024-11-24 00:41:07.659 -----------------------------------------------
+eclipse.buildId=4.5.2.M20160212-1500
+java.version=1.8.0_73
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.jface 2 0 2024-11-24 00:41:12.060
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-11-24 00:41:12.060
+!MESSAGE A conflict occurred for ALT+CTRL+C:
+Binding(ALT+CTRL+C,
+	ParameterizedCommand(Command(org.eclipse.linuxtools.changelog.core.actions.KeyActionCommand,Insert ChangeLog entry,
+		Insert a ChangeLog entry,
+		Category(org.eclipse.linuxtools.changelog,Changelog,Changelog key bindings,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@136e806,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+Binding(ALT+CTRL+C,
+	ParameterizedCommand(Command(AnyEdit.capitalize.command,Capitalize,
+		,
+		Category(AnyEdit.category,AnyEdit Tools,AnyEdit Tools key bindings,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@12cec71,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.egit.ui 2 0 2024-11-24 00:41:13.326
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Christopher'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.oomph.setup.ui 2 0 2024-11-24 00:41:14.026
+!MESSAGE java.lang.NullPointerException
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.performStartup(SetupUIPlugin.java:352)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.access$3(SetupUIPlugin.java:346)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin$1$1.run(SetupUIPlugin.java:243)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.epp.logging.aeri.ide 2 16 2024-11-24 00:41:14.539
+!MESSAGE Server ‘org.eclipse.epp.logging.aeri.ide.server’ failed with exception: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1. ; version: 1.100.0.v20160217-0435
+!STACK 0
+com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:176)
+	at com.google.gson.Gson.fromJson(Gson.java:803)
+	at com.google.gson.Gson.fromJson(Gson.java:768)
+	at com.google.gson.Gson.fromJson(Gson.java:717)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.json.Json.deserialize(Json.java:88)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.IO.refreshConfiguration(IO.java:70)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.ServerConnection.startUp(ServerConnection.java:101)
+	at com.google.common.util.concurrent.AbstractIdleService$2$1.run(AbstractIdleService.java:54)
+	at com.google.common.util.concurrent.Callables$3.run(Callables.java:93)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1
+	at com.google.gson.stream.JsonReader.beginObject(JsonReader.java:374)
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:165)
+	... 9 more
+!SESSION 2024-11-24 12:28:24.733 -----------------------------------------------
+eclipse.buildId=4.5.2.M20160212-1500
+java.version=1.8.0_73
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.jface 2 0 2024-11-24 12:28:36.552
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2024-11-24 12:28:36.552
+!MESSAGE A conflict occurred for ALT+CTRL+C:
+Binding(ALT+CTRL+C,
+	ParameterizedCommand(Command(org.eclipse.linuxtools.changelog.core.actions.KeyActionCommand,Insert ChangeLog entry,
+		Insert a ChangeLog entry,
+		Category(org.eclipse.linuxtools.changelog,Changelog,Changelog key bindings,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@136e806,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+Binding(ALT+CTRL+C,
+	ParameterizedCommand(Command(AnyEdit.capitalize.command,Capitalize,
+		,
+		Category(AnyEdit.category,AnyEdit Tools,AnyEdit Tools key bindings,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@12cec71,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.egit.ui 2 0 2024-11-24 12:28:38.173
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Christopher'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.oomph.setup.ui 2 0 2024-11-24 12:28:39.331
+!MESSAGE java.lang.NullPointerException
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.performStartup(SetupUIPlugin.java:352)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin.access$3(SetupUIPlugin.java:346)
+	at org.eclipse.oomph.setup.ui.SetupUIPlugin$1$1.run(SetupUIPlugin.java:243)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.epp.logging.aeri.ide 2 16 2024-11-24 12:28:39.604
+!MESSAGE Server ‘org.eclipse.epp.logging.aeri.ide.server’ failed with exception: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1. ; version: 1.100.0.v20160217-0435
+!STACK 0
+com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:176)
+	at com.google.gson.Gson.fromJson(Gson.java:803)
+	at com.google.gson.Gson.fromJson(Gson.java:768)
+	at com.google.gson.Gson.fromJson(Gson.java:717)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.json.Json.deserialize(Json.java:88)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.IO.refreshConfiguration(IO.java:70)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.ServerConnection.startUp(ServerConnection.java:101)
+	at com.google.common.util.concurrent.AbstractIdleService$2$1.run(AbstractIdleService.java:54)
+	at com.google.common.util.concurrent.Callables$3.run(Callables.java:93)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1
+	at com.google.gson.stream.JsonReader.beginObject(JsonReader.java:374)
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:165)
+	... 9 more

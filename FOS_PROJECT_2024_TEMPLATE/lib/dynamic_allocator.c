@@ -187,34 +187,35 @@ void *alloc_block_FF(uint32 size)
 		return NULL;
 	}
 
-	uint32 size_with_metadata = size + 2 * sizeof(uint32);
+	uint32 needed_size_with_metadata = size + 2 * sizeof(uint32);
 
 	struct BlockElement* blk;
 
 	LIST_FOREACH(blk, &freeBlocksList)
 	{
 		// Get size of each free block.
-		uint32 current_blk_size_from_header = get_block_size((void *) blk);
-		if (size_with_metadata <= current_blk_size_from_header) {
+		uint32 current_size_with_meta_data = get_block_size((void *) blk);
+		if (needed_size_with_metadata <= current_size_with_meta_data) {
 
-			uint32 free_blk_size = current_blk_size_from_header - size_with_metadata;
-
-			if (free_blk_size < 2 * DYN_ALLOC_MIN_BLOCK_SIZE) {
+			uint32 remaining_blk_size = current_size_with_meta_data - needed_size_with_metadata;
+//			cprintf("\n needed: %d current_size: %d \n", needed_size_with_metadata,current_size_with_meta_data);
+			if (remaining_blk_size < (2 * DYN_ALLOC_MIN_BLOCK_SIZE)) {
 
 				// There is an internal fragmentation.
 				// Allocate size of header *current_blk_size_from_header.
-				set_block_data((void*) blk, current_blk_size_from_header, 1);
+				set_block_data((void*) blk, current_size_with_meta_data, 1);
 				LIST_REMOVE(&freeBlocksList, blk);
 			} else {
 				// There is no internal fragmentation. Splitting occurs.
-				set_block_data((void*) blk, size_with_metadata, 1);
-				struct BlockElement* remaining_blk = (struct BlockElement *) ((char *) blk + size_with_metadata);
-				set_block_data((void *) remaining_blk, free_blk_size, 0);
-
+				set_block_data((void*) blk, needed_size_with_metadata, 1);
+				struct BlockElement* remaining_blk = (struct BlockElement *) ((char *) blk + needed_size_with_metadata);
+				set_block_data((void *) remaining_blk, remaining_blk_size, 0);
+//				cprintf("\n no internal frag 3 \n");
 				LIST_INSERT_AFTER(&freeBlocksList, blk, remaining_blk);
 				LIST_REMOVE(&freeBlocksList, blk);
 
 			}
+			cprintf("\n %x \n",blk);
 			return (void *) blk;
 		}
 	}
@@ -223,19 +224,21 @@ void *alloc_block_FF(uint32 size)
 
 	if (oldEndBlock == (void*) -1) return NULL; // Cannot increase block allocator.
 
-	uint32* addressOfNewEndBlock = oldEndBlock - sizeof(uint32) + PAGE_SIZE;
-	*addressOfNewEndBlock = 1;
-
 	struct BlockElement* lastFreeBlock = LIST_LAST(&freeBlocksList);
 
+//	cprintf("\n%p\n",lastFreeBlock);
 	if (lastFreeBlock && ((uint32*) oldEndBlock ==
 		(uint32*)((char*)lastFreeBlock + get_block_size(lastFreeBlock)))) {
 		// Coalesce with PREVIOUS BLOCK.
-		uint32 total_size = get_block_size(lastFreeBlock) + PAGE_SIZE - sizeof(uint32);
+//		cprintf("\n Coalesce \n");
+		uint32 total_size = get_block_size(lastFreeBlock) + PAGE_SIZE;
+
 		set_block_data(lastFreeBlock, total_size, 0); // Update with new pointer of prev and add the size of free block and page_size.
 	} else {
-		struct BlockElement* newFreeBlock = (struct BlockElement*) oldEndBlock;
-		set_block_data(newFreeBlock, PAGE_SIZE - sizeof(uint32), 0);
+//		cprintf("\n NO Coalesce \n");
+		struct BlockElement* newFreeBlock = (struct BlockElement*)(oldEndBlock);
+		set_block_data(newFreeBlock, PAGE_SIZE, 0);
+//		cprintf("\n %x \n",newFreeBlock);
 		LIST_INSERT_TAIL(&freeBlocksList, newFreeBlock);
 	}
 
