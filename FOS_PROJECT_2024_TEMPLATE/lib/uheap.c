@@ -165,6 +165,8 @@ void *realloc(void *virtual_address, uint32 new_size) {
 void* AllocateInPageAllocator(uint32 size) {
 	uint32 virtual_address = myEnv->UhLimit + PAGE_SIZE;
 	uint32 numOfPages = ROUNDUP(size, PAGE_SIZE) / PAGE_SIZE, countPages = 0;
+
+	cprintf("--------numOfPages: %d\t,\tSize: %d------------\n", numOfPages, size);
 	uint32 current = virtual_address, startAdd = virtual_address;
 
 	while (countPages < numOfPages) {

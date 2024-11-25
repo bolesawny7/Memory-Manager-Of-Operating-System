@@ -25,7 +25,7 @@ bool IsPageMarked(struct Env* myEnv, uint32 va) {
     if (isTableExist == TABLE_NOT_EXIST){
     	return 0;
     }
-    pt_set_page_permissions(myEnv->env_page_directory, va, PERM_WRITEABLE, 0);
+//    pt_set_page_permissions(myEnv->env_page_directory, va, PERM_MARKED|PERM_WRITEABLE, PERM_PRESENT);
     uint32 addr = pt_get_page_permissions(myEnv->env_page_directory,va);
     bool isMarked = ((addr & PERM_MARKED) == PERM_MARKED);
     return isMarked;
@@ -172,7 +172,8 @@ void* sys_sbrk(int numOfPages)
 		if (get_page_table(env->env_page_directory, current_va, &PtrPageTable) == TABLE_NOT_EXIST) {
 			PtrPageTable = create_page_table(env->env_page_directory, current_va);
 		}
-		pt_set_page_permissions(env->env_page_directory,current_va,PERM_MARKED,0);
+		pt_set_page_permissions(env->env_page_directory, (uint32)PtrPageTable, PERM_PRESENT | PERM_WRITEABLE, 0);
+		pt_set_page_permissions(env->env_page_directory, current_va, PERM_MARKED | PERM_WRITEABLE, PERM_PRESENT);
 	}
 
 	uint32*  addressOfNewEndBlock = (uint32*)(env->UhSbrk - sizeof(uint32));
@@ -203,10 +204,12 @@ void allocate_user_mem(struct Env* e, uint32 virtual_address, uint32 size)
 		if (get_page_table(e->env_page_directory, current_va, &PtrPageTable) == TABLE_NOT_EXIST) {
 			PtrPageTable = create_page_table(e->env_page_directory, current_va);
 		}
+		pt_set_page_permissions(e->env_page_directory, (uint32)PtrPageTable, PERM_PRESENT | PERM_WRITEABLE, 0);
+		pt_set_page_permissions(e->env_page_directory, current_va, PERM_MARKED | PERM_WRITEABLE, PERM_PRESENT);
+//		pt_set_page_permissions(e->env_page_directory, current_va, PERM_WRITEABLE, PERM_PRESENT);
 //		PtrPageTable[PTX(current_va)] = PtrPageTable[PTX(current_va)] | PERM_MARKED;
 		uint32 index = (current_va - USER_HEAP_START) / PAGE_SIZE;
 		FramesToPages[index] = (uint32)virtual_address;
-		pt_set_page_permissions(e->env_page_directory,current_va,PERM_MARKED,0);
 	}
 }
 

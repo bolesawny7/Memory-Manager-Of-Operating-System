@@ -157,12 +157,12 @@ int createSharedObject(int32 ownerID, char* shareName, uint32 size, uint8 isWrit
 //	panic("createSharedObject is not implemented yet");
 	//Your Code is Here...
 	struct Env* myenv = get_cpu_proc(); //The calling environment
-	cprintf("ownerID: %d\n", ownerID);
+//	cprintf("ownerID: %d\n", ownerID);
 	struct Share* existingSharedObject = get_share(ownerID, shareName);
-	cprintf("existingSharedObject: %d\n", existingSharedObject);
+//	cprintf("existingSharedObject: %d\n", existingSharedObject);
 	if (existingSharedObject != NULL)
 		return 0;
-	cprintf("VA: %p \t IsWritable: \%d \n",virtual_address, isWritable);
+//	cprintf("VA: %p \t IsWritable: \%d \n",virtual_address, isWritable);
 	struct Share* createdSharedObject = create_share(ownerID, shareName, size,
 			isWritable);
 	if (createdSharedObject == NULL)

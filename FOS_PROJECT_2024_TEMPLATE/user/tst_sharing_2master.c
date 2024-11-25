@@ -33,6 +33,7 @@ _main(void)
 	//x: Readonly
 	int freeFrames = sys_calculate_free_frames() ;
 	x = smalloc("x", 4, 0);
+	cprintf("x: %p\n", x);
 	if (x != (uint32*)pagealloc_start) {is_correct = 0; cprintf("Create(): Returned address is not correct. make sure that you align the allocation on 4KB boundary");}
 	expected = 1+1 ; /*1page +1table*/
 	diff = (freeFrames - sys_calculate_free_frames());
