@@ -299,6 +299,12 @@ int sys_pf_calculate_allocated_pages(void)
 /*******************************/
 /* USER HEAP SYSTEM CALLS */
 /*******************************/
+bool sys_is_marked_page(uint32 va)
+{
+	return IsPageMarked(cur_env, va);
+}
+
+
 void sys_free_user_mem(uint32 virtual_address, uint32 size)
 {
 	if(isBufferingEnabled())
@@ -670,7 +676,16 @@ uint32 syscall(uint32 syscallno, uint32 a1, uint32 a2, uint32 a3, uint32 a4, uin
 	case SYS_utilities:
 		sys_utilities((char*)a1, (int)a2);
 		return 0;
-
+	case SYS_isMarkedPage:
+		return sys_is_marked_page(a1);
+	case SYS_sbrk:
+		return (uint32)sys_sbrk(a1);
+	case SYS_allocateUserMem:
+		sys_allocate_user_mem(a1, a2);
+		return 0;
+	case SYS_freeUserMem:
+		sys_free_user_mem(a1, a2);
+		return 0;
 	case NSYSCALLS:
 		return 	-E_INVAL;
 		break;

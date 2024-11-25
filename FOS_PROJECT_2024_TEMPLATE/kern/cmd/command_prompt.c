@@ -453,16 +453,47 @@ int execute_command(char *command_string)
 }
 
 
+bool isSubSequenceRecursive(const char* s1, const char* s2, int m, int n) {
+	if(m==0)
+		return 1;
+	if (n == 0)
+		return 0;
+	if(s1[m-1] == s2[n-1])
+		return isSubSequenceRecursive(s1,s2,m-1,n-1);
+	return isSubSequenceRecursive(s1,s2,m,n-1);
+}
 int process_command(int number_of_arguments, char** arguments)
 {
-	//TODO: [PROJECT'24.MS1 - #01] [1] PLAY WITH CODE! - process_command
-
+	//command invalid, command found with invalid args num, command not found but chars subsequence-matched, command found with correct args num
+	LIST_INIT(&foundCommands);
+	int m = strlen(arguments[0]);
+	bool mtch = 0;
+	struct Command_LIST MatchedCommands;
 	for (int i = 0; i < NUM_OF_COMMANDS; i++)
 	{
+		//found
 		if (strcmp(arguments[0], commands[i].name) == 0)
 		{
-			return i;
+			if (commands[i].num_of_args == -1) return i;
+			//invalid args num
+			if (commands[i].num_of_args != number_of_arguments - 1) {
+				LIST_INSERT_HEAD(&foundCommands,&commands[i]);
+				return CMD_INV_NUM_ARGS;
+			} //correct args num
+			else {
+				return i;
+			}
 		}
+		int n = strlen(commands[i].name);
+		if (m > n) continue;
+		if(isSubSequenceRecursive(arguments[0],commands[i].name,m,n)) {
+			mtch = 1;
+			LIST_INSERT_HEAD(&foundCommands,&commands[i]);
+		}
+	}
+	if (mtch) {
+		return CMD_MATCHED;
 	}
 	return CMD_INVALID;
 }
+

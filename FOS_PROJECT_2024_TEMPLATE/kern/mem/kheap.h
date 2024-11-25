@@ -7,6 +7,24 @@
 
 #include <inc/types.h>
 
+#include <inc/queue.h>
+
+
+
+
+uint32 *khStart;
+uint32 *sBreak;
+uint32 *khLimit;
+
+
+struct consecutiveAllocatedPages {
+	LIST_ENTRY(consecutiveAllocatedPages) prev_next_info;
+
+	uint32 numOfPages;
+};// __attribute__((packed))
+LIST_HEAD(consecutive_allocated_pages_list, consecutiveAllocatedPages);
+struct consecutive_allocated_pages_list consecutiveAllocatedPages_list;
+
 
 /*2017*/
 uint32 _KHeapPlacementStrategy;
@@ -35,13 +53,15 @@ void* kmalloc(unsigned int size);
 void kfree(void* virtual_address);
 void *krealloc(void *virtual_address, unsigned int new_size);
 
+//uint32 *findConsecutivePages(int numOfPages);
+
 unsigned int kheap_virtual_address(unsigned int physical_address);
 unsigned int kheap_physical_address(unsigned int virtual_address);
 
 int numOfKheapVACalls ;
 
 
-//[PROJECT'24.MS2] add suitable code here
+//TODO: [PROJECT'24.MS2 - #01] [1] KERNEL HEAP - add suitable code here
 
 
 #endif // FOS_KERN_KHEAP_H_

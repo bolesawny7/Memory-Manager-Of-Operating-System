@@ -14,6 +14,26 @@
 
 //extern void inctst();
 
+#define USER_HEAP_ARRAY_SIZE ((USER_HEAP_MAX - USER_HEAP_START) / PAGE_SIZE)
+uint32 FramesToPages[USER_HEAP_ARRAY_SIZE];
+
+// functions helper The Great Boda did
+
+bool IsPageMarked(struct Env* myEnv, uint32 va) {
+//    cprintf("\n\nflag:\n\n");
+    uint32* ptr = NULL;
+    uint32 isTableExist = get_page_table(myEnv->env_page_directory,va,&ptr);
+//    	cprintf("bara el ispagemarked\n");
+    if (isTableExist == TABLE_NOT_EXIST){
+//    	isTableExist = (uint32)create_page_table(myEnv->env_page_directory,va);
+    	return 0;
+    }
+
+    uint32 addr = pt_get_page_permissions(myEnv->env_page_directory,va);
+    bool isMarked = ((addr & PERM_MARKED) == PERM_MARKED);
+    return isMarked;
+}
+
 /******************************/
 /*[1] RAM CHUNKS MANIPULATION */
 /******************************/
@@ -136,17 +156,33 @@ void* sys_sbrk(int numOfPages)
 	 * 		You might have to undo any operations you have done so far in this case.
 	 */
 
-	struct Env* env = get_cpu_proc(); //the current running Environment to adjust its break limit
-
+	//TODO: [PROJECT'24.MS2 - #11] [3] USER HEAP - sys_sbrk
 	/*====================================*/
 	/*Remove this line before start coding*/
-	return (void*)-1 ;
+//	return (void*)-1 ;
 	/*====================================*/
+	struct Env* env = get_cpu_proc(); //the current running Environment to adjust its break limit
+	uint32 sizeOfIncrement = numOfPages * PAGE_SIZE;
+	uint32 OldSbrk = (uint32)env->UhSbrk;
+	if(numOfPages == 0) return (void*)env->UhSbrk;
 
-	//[PROJECT'24.MS2] Implement this function
+	if((env->UhSbrk + sizeOfIncrement) > env->UhLimit) return (void*)-1;
+//	cprintf("\n\n\n\n sabaho sbrk \n\n\n\n\n\n");
+	env->UhSbrk += sizeOfIncrement;
+	uint32* PtrPageTable = NULL;
+	for (uint32 current_va = (uint32)OldSbrk; current_va < (uint32)env->UhSbrk; current_va += PAGE_SIZE) {
+		// Create page table if not exist
+		if (get_page_table(env->env_page_directory, current_va, &PtrPageTable) == TABLE_NOT_EXIST) {
+			PtrPageTable = create_page_table(env->env_page_directory, current_va);
+		}
+		pt_set_page_permissions(env->env_page_directory,current_va,PERM_MARKED,0);
+	}
 
+	uint32*  addressOfNewEndBlock = (uint32*)(env->UhSbrk - sizeof(uint32));
+	*addressOfNewEndBlock = 1;
+
+	return (void*)OldSbrk;
 }
-
 //=====================================
 // 1) ALLOCATE USER MEMORY:
 //=====================================
@@ -154,13 +190,27 @@ void allocate_user_mem(struct Env* e, uint32 virtual_address, uint32 size)
 {
 	/*====================================*/
 	/*Remove this line before start coding*/
-	inctst();
-	return;
+//	inctst();
+//	return;
 	/*====================================*/
 
-	//[PROJECT'24.MS2] [USER HEAP - KERNEL SIDE] allocate_user_mem
+	//TODO: [PROJECT'24.MS2 - #13] [3] USER HEAP [KERNEL SIDE] - allocate_user_mem()
 	// Write your code here, remove the panic and write your code
-	panic("allocate_user_mem() is not implemented yet...!!");
+	//panic("allocate_user_mem() is not implemented yet...!!");
+	uint32 start_va = ROUNDDOWN(virtual_address, PAGE_SIZE);
+	uint32 end_va = ROUNDUP(virtual_address + size, PAGE_SIZE);
+	uint32* PtrPageTable = NULL;
+
+	for (uint32 current_va = start_va; current_va < end_va; current_va += PAGE_SIZE) {
+		// Create page table if not exist
+		if (get_page_table(e->env_page_directory, current_va, &PtrPageTable) == TABLE_NOT_EXIST) {
+			PtrPageTable = create_page_table(e->env_page_directory, current_va);
+		}
+//		PtrPageTable[PTX(current_va)] = PtrPageTable[PTX(current_va)] | PERM_MARKED;
+		uint32 index = (current_va - USER_HEAP_START) / PAGE_SIZE;
+		FramesToPages[index] = (uint32)virtual_address;
+		pt_set_page_permissions(e->env_page_directory,current_va,PERM_MARKED,0);
+	}
 }
 
 //=====================================
@@ -170,15 +220,31 @@ void free_user_mem(struct Env* e, uint32 virtual_address, uint32 size)
 {
 	/*====================================*/
 	/*Remove this line before start coding*/
-	inctst();
-	return;
+	//inctst();
+	//return;
 	/*====================================*/
-
-	//[PROJECT'24.MS2] [USER HEAP - KERNEL SIDE] free_user_mem
+	//TODO: [PROJECT'24.MS2 - #15] [3] USER HEAP [KERNEL SIDE] - free_user_mem
 	// Write your code here, remove the panic and write your code
-	panic("free_user_mem() is not implemented yet...!!");
-}
+	//panic("free_user_mem() is not implemented yet...!!");
+//	uint32 start_va = ROUNDDOWN(virtual_address, PAGE_SIZE);
+		uint32 start_va = ROUNDDOWN(virtual_address, PAGE_SIZE);
+	    uint32 end_va = ROUNDUP(virtual_address + size, PAGE_SIZE);
+	    uint32* PtrPageTable = NULL;
 
+	for (uint32 current_va = virtual_address; current_va < end_va; current_va += PAGE_SIZE) {
+		//unmark
+		if (get_page_table(e->env_page_directory, current_va, &PtrPageTable) == TABLE_IN_MEMORY)
+			PtrPageTable[PTX(current_va)] &= ~PERM_MARKED;
+
+		//remove mn el page file
+		pf_remove_env_page(e, current_va);
+//		cprintf("1\n");
+		//remove pages lw mwgooda fl ws
+		struct WorkingSetElement* element;
+		env_page_ws_invalidate(e, current_va);
+	}
+	//TODO: [PROJECT'24.MS2 - BONUS#3] [3] USER HEAP [KERNEL SIDE] - O(1) free_user_mem
+}
 //=====================================
 // 2) FREE USER MEMORY (BUFFERING):
 //=====================================

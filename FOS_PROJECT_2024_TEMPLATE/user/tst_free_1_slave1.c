@@ -1,6 +1,3 @@
-/* *********************************************************** */
-/* MAKE SURE PAGE_WS_MAX_SIZE = 1000 */
-/* *********************************************************** */
 #include <inc/lib.h>
 
 
@@ -50,6 +47,7 @@ void _main(void)
 			freeFrames = sys_calculate_free_frames() ;
 			usedDiskPages = sys_pf_calculate_allocated_pages() ;
 			ptr_allocations[0] = malloc(2*Mega-kilo);
+			cprintf("hey\n");
 			if ((uint32) ptr_allocations[0] != (pagealloc_start)) panic("Wrong start address for the allocated space... ");
 			if ((sys_pf_calculate_allocated_pages() - usedDiskPages) != 0) panic("Extra or less pages are allocated in PageFile");
 
@@ -86,6 +84,9 @@ void _main(void)
 		}
 	}
 	inctst(); //to ensure that it reached here
+
+	//wait until receiving a signal from the master
+	while (gettst() != 3) ;
 
 	//Test accessing a freed area but NOT ACCESSED Before (processes should be killed by the validation of the fault handler)
 	{
