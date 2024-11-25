@@ -124,8 +124,18 @@ void* smalloc(char *sharedVarName, uint32 size, uint8 isWritable)
 	//==============================================================
 	//TODO: [PROJECT'24.MS2 - #18] [4] SHARED MEMORY [USER SIDE] - smalloc()
 	// Write your code here, remove the panic and write your code
-	panic("smalloc() is not implemented yet...!!");
-	return NULL;
+//	panic("smalloc() is not implemented yet...!!");
+	uint32 AllocationSize = ROUNDUP(size, PAGE_SIZE);
+
+	uint32* VirtualAddress = malloc(AllocationSize);
+	if (VirtualAddress == NULL)
+		return NULL;
+
+	int Creation = sys_createSharedObject(sharedVarName, size, isWritable, VirtualAddress);
+	if (Creation != 0)
+		return NULL;
+	cprintf("Virtual Address: %p \n",VirtualAddress);
+	return VirtualAddress;
 }
 
 //========================================
