@@ -157,23 +157,24 @@ int createSharedObject(int32 ownerID, char* shareName, uint32 size, uint8 isWrit
 //	panic("createSharedObject is not implemented yet");
 	//Your Code is Here...
 	struct Env* myenv = get_cpu_proc(); //The calling environment
-
+	cprintf("ownerID: %d\n", ownerID);
 	struct Share* existingSharedObject = get_share(ownerID, shareName);
+	cprintf("existingSharedObject: %d\n", existingSharedObject);
 	if (existingSharedObject != NULL)
-		return E_SHARED_MEM_EXISTS;
+		return 0;
 
 	struct Share* createdSharedObject = create_share(ownerID, shareName, size,
 			isWritable);
 	if (createdSharedObject == NULL)
-		return E_NO_SHARE;
+		return 0;
 
 	int numOfFrames = ROUNDUP(size, PAGE_SIZE) / PAGE_SIZE;
-	cprintf("size %d\n",size);
-	cprintf("num of frames %d\n",numOfFrames) ;
+//	cprintf("size %d\n",size);
+//	cprintf("num of frames %d\n",numOfFrames) ;
 
 //	createdSharedObject->framesStorage = (struct FrameInfo**) kmalloc(numOfFrames * sizeof(struct FrameInfo*));
 	if (createdSharedObject->framesStorage == NULL)
-		return E_NO_MEM;
+		return 0;
 
 	for (int i = 0; i < numOfFrames; i++) {
 		struct FrameInfo* CreatingFrameForAllocation = NULL;
@@ -181,18 +182,19 @@ int createSharedObject(int32 ownerID, char* shareName, uint32 size, uint8 isWrit
 		// Allocate a frame
 		int Checking = allocate_frame(&CreatingFrameForAllocation);
 		if (Checking != 0)
-			return E_NO_MEM;
+			return 0;
 
 		void* va = (void*) ((uint32*) virtual_address + i * PAGE_SIZE);
 		int checkMapping = map_frame(myenv->env_page_directory,CreatingFrameForAllocation, (uint32) va, PERM_WRITEABLE);
 		if (checkMapping != 0){
 			free_frame(CreatingFrameForAllocation);
-			return E_NO_MEM;
+			return 0;
 		}
 		createdSharedObject->framesStorage[i] = CreatingFrameForAllocation;
 	}
 
 	LIST_INSERT_TAIL(&(AllShares.shares_list), createdSharedObject);
+	cprintf("ID: %d\n", createdSharedObject->ID);
 
 //	createdSharedObject->ID &= 0x7FFFFFFF;
 	return createdSharedObject->ID;

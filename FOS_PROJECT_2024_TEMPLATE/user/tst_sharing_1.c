@@ -34,7 +34,9 @@ _main(void)
 	{
 		is_correct = 1;
 		int freeFrames = sys_calculate_free_frames() ;
+
 		x = smalloc("x", PAGE_SIZE, 1);
+		cprintf("x: %p\n", x);
 		if (x != (uint32*)pagealloc_start) {is_correct = 0; cprintf("Returned address is not correct. check the setting of it and/or the updating of the shared_mem_free_address");}
 		expected = 1+1 ; /*1page +1table*/
 		int diff = (freeFrames - sys_calculate_free_frames());
