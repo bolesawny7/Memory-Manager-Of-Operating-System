@@ -1,5 +1,6 @@
 #include <inc/lib.h>
 
+
 #define USER_HEAP_ARRAY_SIZE ((USER_HEAP_MAX - USER_HEAP_START) / PAGE_SIZE)
 uint32 allocation_sizes[USER_HEAP_ARRAY_SIZE];
 
@@ -11,109 +12,116 @@ uint32 allocation_sizes[USER_HEAP_ARRAY_SIZE];
 // [1] CHANGE THE BREAK LIMIT OF THE USER HEAP:
 //=============================================
 /*2023*/
-void* sbrk(int increment) {
+void* sbrk(int increment)
+{
 	return (void*) sys_sbrk(increment);
 }
 
 //=================================
 // [2] ALLOCATE SPACE IN USER HEAP:
 //=================================
-void* malloc(uint32 size) {
-	//==============================================================
-	//DON'T CHANGE THIS CODE========================================
-	if (size == 0)
-		return NULL;
-	//==============================================================
-	//TODO: [PROJECT'24.MS2 - #12] [3] USER HEAP [USER SIDE] - malloc()
-	// Write your code here, remove the panic and write your code
-	//panic("malloc() is not implemented yet...!!");
+void* malloc(uint32 size)
+{
+    //==============================================================
+    //DON'T CHANGE THIS CODE========================================
+    if (size == 0) return NULL ;
+    //==============================================================
+    //TODO: [PROJECT'24.MS2 - #12] [3] USER HEAP [USER SIDE] - malloc()
+    // Write your code here, remove the panic and write your code
+    //panic("malloc() is not implemented yet...!!");
+    //return NULL;
+    //Use sys_isUHeapPlacementStrategyFIRSTFIT() and    sys_isUHeapPlacementStrategyBESTFIT()
+    //to check the current strategy
 
-	if (sys_isUHeapPlacementStrategyFIRSTFIT()) {
-		if (size <= DYN_ALLOC_MAX_BLOCK_SIZE) {
-			cprintf("size: %d \n", size);
-			return (void*) alloc_block_FF(size);
-		}
+    if (sys_isUHeapPlacementStrategyFIRSTFIT()) {
+        if (size <= DYN_ALLOC_MAX_BLOCK_SIZE){
+            return (void*)alloc_block_FF(size);
+        }
+        uint32* virtual_address = (uint32 *)((char *)myEnv->UhLimit + PAGE_SIZE);
+        uint32 numOfPages = ROUNDUP(size, PAGE_SIZE) / PAGE_SIZE;
+        uint32 countPages = 0;
+        uint32 *current = virtual_address, *startAdd = virtual_address;
 
-		uint32* virtual_address = AllocateInPageAllocator(size);
+        while(countPages < numOfPages){
+            if ((uint32)current > USER_HEAP_MAX){
+                return NULL;
+            }
 
-		return (void*) virtual_address;
-	} else if (sys_isUHeapPlacementStrategyBESTFIT()) {
+            if(sys_is_marked_page((uint32)current)){
+                countPages = 0;
+                current = (uint32*)((char*)current + PAGE_SIZE);
+                virtual_address = current;
+                continue;
+            }
+            countPages++;
+            current =(uint32*)((char*)current + PAGE_SIZE);
+        }
+        sys_allocate_user_mem((uint32)virtual_address , size);
+        return (void*)virtual_address;
+    } else if (sys_isUHeapPlacementStrategyBESTFIT()) {
 
-	}
+    }
 
-	return NULL;
+    return NULL;
+//    bool d = sys_get_marked_page((uint32)virtual_address);
+//    cprintf("bool: %d\n", d);
+//    sys_free_user_mem((uint32)0,0);
 }
-
 //=================================
 // [3] FREE SPACE FROM USER HEAP:
 //=================================
-void free(void* virtual_address) {
-//	cprintf("va: %x\n", virtual_address);
-	if (virtual_address == NULL)
-		return;
+void free(void* virtual_address)
+{
+	//TODO: [PROJECT'24.MS2 - #14] [3] USER HEAP [USER SIDE] - free()
+	// Write your code here, remove the panic and write your code
+	//block allocator free
+	if(virtual_address == NULL) panic("invalid");
 
-	if ((uint32) virtual_address >= myEnv->UhStart
-			&& (uint32) virtual_address < myEnv->UhLimit) {
-		free_block(virtual_address);
-		return;
-	}
-	if ((uint32) virtual_address < USER_HEAP_START
-			|| (uint32) virtual_address >= USER_HEAP_MAX)
-		return;
-
-	// Calculate index and retrieve size
-	uint32 index = ((uint32) virtual_address - USER_HEAP_START) / PAGE_SIZE;
-
-	// Validate the address is within the heap range
-	if (index < 0) {
-		panic("Invalid address: address out of heap range");
-	}
-
+	uint32 index = ((uint32)virtual_address - (uint32)(myEnv->UhLimit + PAGE_SIZE)) / PAGE_SIZE;
 	uint32 size = allocation_sizes[index];
-//	cprintf("size: %d\n", size);
-
-	// Check for zero-sized allocations
-	if (size == 0) {
-		panic("Invalid allocation size: zero-sized block");
+	if(size >DYN_ALLOC_MAX_BLOCK_SIZE||size==DYN_ALLOC_MAX_BLOCK_SIZE)
+	{
+		free_block( virtual_address);
 	}
-
-	// Free from page allocator
-	sys_free_user_mem((uint32) virtual_address, size);
-//	cprintf("size: %d\n", size);
-	allocation_sizes[index] = 0;
+	 if (size == 0) {
+		 panic("Invalid ");
+	 }
+	//page allocator free
+	if(size>DYN_ALLOC_MAX_BLOCK_SIZE)
+	{
+		sys_free_user_mem((uint32) virtual_address ,size);
+	}
+	else{
+		panic("invalid");
+	}
 }
 
 //=================================
 // [4] ALLOCATE SHARED VARIABLE:
 //=================================
-void* smalloc(char *sharedVarName, uint32 size, uint8 isWritable) {
+void* smalloc(char *sharedVarName, uint32 size, uint8 isWritable)
+{
 	//==============================================================
 	//DON'T CHANGE THIS CODE========================================
-	if (size == 0)
-		return NULL;
+	if (size == 0) return NULL ;
 	//==============================================================
 	//TODO: [PROJECT'24.MS2 - #18] [4] SHARED MEMORY [USER SIDE] - smalloc()
 	// Write your code here, remove the panic and write your code
-	//	panic("smalloc() is not implemented yet...!!");
-
-	uint32* virtual_address = AllocateInPageAllocator(size);
-
-	int SharedObjectId = sys_createSharedObject(sharedVarName, size, isWritable,
-			(void*) virtual_address);
-	if (SharedObjectId == 0)
-		return NULL;
-	return (void*) virtual_address;
+	panic("smalloc() is not implemented yet...!!");
+	return NULL;
 }
 
 //========================================
 // [5] SHARE ON ALLOCATED SHARED VARIABLE:
 //========================================
-void* sget(int32 ownerEnvID, char *sharedVarName) {
+void* sget(int32 ownerEnvID, char *sharedVarName)
+{
 	//TODO: [PROJECT'24.MS2 - #20] [4] SHARED MEMORY [USER SIDE] - sget()
 	// Write your code here, remove the panic and write your code
 	panic("sget() is not implemented yet...!!");
 	return NULL;
 }
+
 
 //==================================================================================//
 //============================== BONUS FUNCTIONS ===================================//
@@ -130,11 +138,13 @@ void* sget(int32 ownerEnvID, char *sharedVarName) {
 //	calls freeSharedObject(...) in "shared_memory_manager.c", then switch back to the user mode here
 //	the freeSharedObject() function is empty, make sure to implement it.
 
-void sfree(void* virtual_address) {
+void sfree(void* virtual_address)
+{
 	//TODO: [PROJECT'24.MS2 - BONUS#4] [4] SHARED MEMORY [USER SIDE] - sfree()
 	// Write your code here, remove the panic and write your code
 	panic("sfree() is not implemented yet...!!");
 }
+
 
 //=================================
 // REALLOC USER SPACE:
@@ -151,60 +161,32 @@ void sfree(void* virtual_address) {
 //		which switches to the kernel mode, calls move_user_mem(...)
 //		in "kern/mem/chunk_operations.c", then switch back to the user mode here
 //	the move_user_mem() function is empty, make sure to implement it.
-void *realloc(void *virtual_address, uint32 new_size) {
+void *realloc(void *virtual_address, uint32 new_size)
+{
 	//[PROJECT]
 	// Write your code here, remove the panic and write your code
 	panic("realloc() is not implemented yet...!!");
 	return NULL;
 
 }
-/*
- * helper function for Page Allocating
- * */
 
-void* AllocateInPageAllocator(uint32 size) {
-	uint32 virtual_address = myEnv->UhLimit + PAGE_SIZE;
-	uint32 numOfPages = ROUNDUP(size, PAGE_SIZE) / PAGE_SIZE, countPages = 0;
-	uint32 current = virtual_address, startAdd = virtual_address;
-
-	while (countPages < numOfPages) {
-		if ((uint32) current > USER_HEAP_MAX) {
-			return NULL;
-		}
-
-		if (sys_is_marked_page((uint32) current)) {
-			countPages = 0;
-			current += PAGE_SIZE;
-			virtual_address = current;
-			continue;
-		}
-		++countPages;
-		current += PAGE_SIZE;
-	}
-	sys_allocate_user_mem((uint32) virtual_address, size);
-
-	uint32 index = ((uint32) virtual_address - USER_HEAP_START) / PAGE_SIZE;
-	uint32 totalSize = ROUNDUP(size, PAGE_SIZE);
-	allocation_sizes[index] = totalSize;
-	if ((virtual_address + totalSize) > USER_HEAP_MAX) {
-		return NULL;
-	}
-	return (void*) virtual_address;
-}
 
 //==================================================================================//
 //========================== MODIFICATION FUNCTIONS ================================//
 //==================================================================================//
 
-void expand(uint32 newSize) {
+void expand(uint32 newSize)
+{
 	panic("Not Implemented");
 
 }
-void shrink(uint32 newSize) {
+void shrink(uint32 newSize)
+{
 	panic("Not Implemented");
 
 }
-void freeHeap(void* virtual_address) {
+void freeHeap(void* virtual_address)
+{
 	panic("Not Implemented");
 
 }

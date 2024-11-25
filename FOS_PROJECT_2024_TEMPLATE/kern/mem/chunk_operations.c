@@ -20,15 +20,12 @@ uint32 FramesToPages[USER_HEAP_ARRAY_SIZE];
 // functions helper The Great Boda did
 
 bool IsPageMarked(struct Env* myEnv, uint32 va) {
-//    cprintf("\n\nflag:\n\n");
     uint32* ptr = NULL;
     uint32 isTableExist = get_page_table(myEnv->env_page_directory,va,&ptr);
-//    	cprintf("bara el ispagemarked\n");
     if (isTableExist == TABLE_NOT_EXIST){
-//    	isTableExist = (uint32)create_page_table(myEnv->env_page_directory,va);
     	return 0;
     }
-
+    pt_set_page_permissions(myEnv->env_page_directory, va, PERM_WRITEABLE, 0);
     uint32 addr = pt_get_page_permissions(myEnv->env_page_directory,va);
     bool isMarked = ((addr & PERM_MARKED) == PERM_MARKED);
     return isMarked;

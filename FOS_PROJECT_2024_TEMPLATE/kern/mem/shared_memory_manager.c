@@ -162,7 +162,7 @@ int createSharedObject(int32 ownerID, char* shareName, uint32 size, uint8 isWrit
 	cprintf("existingSharedObject: %d\n", existingSharedObject);
 	if (existingSharedObject != NULL)
 		return 0;
-
+	cprintf("VA: %p \t IsWritable: \%d \n",virtual_address, isWritable);
 	struct Share* createdSharedObject = create_share(ownerID, shareName, size,
 			isWritable);
 	if (createdSharedObject == NULL)
