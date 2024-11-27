@@ -30,7 +30,7 @@ void* malloc(uint32 size) {
 
 	if (sys_isUHeapPlacementStrategyFIRSTFIT()) {
 		if (size <= DYN_ALLOC_MAX_BLOCK_SIZE) {
-			cprintf("size: %d \n", size);
+//			cprintf("size: %d \n", size);
 			return (void*) alloc_block_FF(size);
 		}
 
@@ -111,10 +111,24 @@ void* smalloc(char *sharedVarName, uint32 size, uint8 isWritable) {
 void* sget(int32 ownerEnvID, char *sharedVarName) {
 	//TODO: [PROJECT'24.MS2 - #20] [4] SHARED MEMORY [USER SIDE] - sget()
 	// Write your code here, remove the panic and write your code
-	panic("sget() is not implemented yet...!!");
-	return NULL;
-}
+	//1-get size of shared varaible
+	uint32 start_va;
+	uint32 size = sys_getSizeOfSharedObject(ownerEnvID,sharedVarName);
+	if(size == 0) return NULL;
+//	cprintf("Size of shared: %d\n", size);
+	start_va = (uint32) AllocateInPageAllocator(size);
+//	cprintf("start_va: %p\n", start_va);
+//	cprintf("start_va @: %p, deref: %d\n", start_va);
+	if((void *)start_va == NULL) return NULL;
 
+	uint32 id = sys_getSharedObject(ownerEnvID, sharedVarName, (void *) start_va);
+//	cprintf("Share used: ID = %d\n", id);
+
+	if(id == E_SHARED_MEM_NOT_EXISTS) return NULL;
+
+
+	return (void *)start_va;
+}
 //==================================================================================//
 //============================== BONUS FUNCTIONS ===================================//
 //==================================================================================//
@@ -166,14 +180,14 @@ void* AllocateInPageAllocator(uint32 size) {
 	uint32 virtual_address = myEnv->UhLimit + PAGE_SIZE;
 	uint32 numOfPages = ROUNDUP(size, PAGE_SIZE) / PAGE_SIZE, countPages = 0;
 
-	cprintf("--------numOfPages: %d\t,\tSize: %d------------\n", numOfPages, size);
+//	cprintf("--------numOfPages: %d\t,\tSize: %d------------\n", numOfPages, size);
 	uint32 current = virtual_address, startAdd = virtual_address;
-
+	uint32* ptr_page_table = NULL;
 	while (countPages < numOfPages) {
 		if ((uint32) current > USER_HEAP_MAX) {
 			return NULL;
 		}
-
+		// check if marked or present.
 		if (sys_is_marked_page((uint32) current)) {
 			countPages = 0;
 			current += PAGE_SIZE;

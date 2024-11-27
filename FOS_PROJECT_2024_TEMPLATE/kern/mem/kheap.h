@@ -10,8 +10,6 @@
 #include <inc/queue.h>
 
 
-
-
 uint32 *khStart;
 uint32 *sBreak;
 uint32 *khLimit;

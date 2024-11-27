@@ -36,7 +36,7 @@ _main(void)
 		int freeFrames = sys_calculate_free_frames() ;
 
 		x = smalloc("x", PAGE_SIZE, 1);
-		cprintf("FIRST ALLOCATION @: %p\n", x);
+//		cprintf("FIRST ALLOCATION @: %p\n", x);
 		if (x != (uint32*)pagealloc_start) {is_correct = 0; cprintf("Returned address is not correct. check the setting of it and/or the updating of the shared_mem_free_address");}
 		expected = 1+1 ; /*1page +1table*/
 		int diff = (freeFrames - sys_calculate_free_frames());
@@ -81,7 +81,7 @@ _main(void)
 		for(;i<2*PAGE_SIZE/4;i++)
 		{
 			z[i] = -1;
-			cprintf("WRITING Z index: %d\n", i);
+//			cprintf("WRITING Z index: %d\n", i);
 		}
 
 		if( x[0] !=  -1)  					{is_correct = 0; cprintf("Reading/Writing of shared object is failed");}

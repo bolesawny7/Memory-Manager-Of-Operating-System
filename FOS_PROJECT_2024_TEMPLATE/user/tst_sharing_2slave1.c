@@ -30,6 +30,9 @@ _main(void)
 		freeFrames = sys_calculate_free_frames() ;
 		z = sget(parentenvID,"z");
 		expectedVA = (uint32*)(pagealloc_start + 0 * PAGE_SIZE);
+
+//		cprintf("Our Va: %p,\tExperted VA: %p\n", z, expectedVA);
+
 		if (z != expectedVA) panic("Get(): Returned address is not correct. Expected = %x, Actual = %x\nMake sure that you align the allocation on 4KB boundary", expectedVA, z);
 		expected = 1 ; /*1table*/
 		diff = (freeFrames - sys_calculate_free_frames());
@@ -52,12 +55,14 @@ _main(void)
 	sys_unlock_cons();
 	//sys_unlock_cons();
 
-	if (*y != 20) panic("Get(): Shared Variable is not created or got correctly") ;
+//	cprintf("FROM SLAVE -> y@: %p, *y: %d\n", y, *y);
+//	cprintf("dereference y: %d\n", *y);
+	if (*y != 20) panic("Get(): Shared Variable is not created or got correctly");
 
 	//sys_lock_cons();
 	sys_lock_cons();
 	{
-		freeFrames = sys_calculate_free_frames() ;
+		freeFrames = sys_calculate_free_frames();
 		x = sget(parentenvID,"x");
 		expectedVA = (uint32*)(pagealloc_start + 2 * PAGE_SIZE);
 		if (x != expectedVA) panic("Get(): Returned address is not correct. Expected = %x, Actual = %x\nMake sure that you align the allocation on 4KB boundary", expectedVA, x);

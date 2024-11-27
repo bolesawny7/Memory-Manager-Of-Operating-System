@@ -12,6 +12,10 @@
 # error "This is a FOS kernel header; user programs should not #include it"
 #endif
 
+#define USER_HEAP_ARRAY_SIZE ((USER_HEAP_MAX - USER_HEAP_START) / PAGE_SIZE)
+//uint32* FramesToPages[USER_HEAP_ARRAY_SIZE];
+uint32* FramesToPages[USER_HEAP_ARRAY_SIZE];
+
 /******************************/
 /*[1] RAM CHUNKS MANIPULATION */
 /******************************/

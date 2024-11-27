@@ -14,7 +14,7 @@
 
 #define KERNEL_HEAP_ARRAY_SIZE ((KERNEL_HEAP_MAX - KERNEL_HEAP_START) / PAGE_SIZE)
 uint32 allocation_sizes[KERNEL_HEAP_ARRAY_SIZE];
-uint32 FramesToPages[KERNEL_HEAP_ARRAY_SIZE];
+uint32 FramesToPagesK[KERNEL_HEAP_ARRAY_SIZE];
 
 // index calculation => (va-KERNEL_HEAP_START)/PAGE_SIZE
 
@@ -53,7 +53,7 @@ int initialize_kheap_dynamic_allocator(uint32 daStart, uint32 initSizeToAllocate
 			panic(" Failed to map !! ");
 		}
 		uint32 index = to_frame_number(frame);
-		FramesToPages[index] = (uint32)ptr_current;
+		FramesToPagesK[index] = (uint32)ptr_current;
 
 		ptr_current = (uint32 *)((char *)ptr_current + PAGE_SIZE);
 
@@ -110,7 +110,7 @@ void* sbrk(int numOfPages) {
                 return (void*)-1;
             }
 			uint32 index = to_frame_number(currentFrame);
-			FramesToPages[index] = (uint32)va;
+			FramesToPagesK[index] = (uint32)va;
         }
 		// 3addel el end block el gdida 5aliha 0x1
 		uint32* blockFooter = (uint32*)((uint32)newBreak - sizeof(uint32));
@@ -186,7 +186,7 @@ void* kmalloc(unsigned int size) {
                 k = map_frame(ptr_page_directory, ptr_frame_info, (uint32)virtual_address,
                 		PERM_WRITEABLE);
 				uint32 index = to_frame_number(ptr_frame_info);
-				FramesToPages[index] = (uint32)virtual_address;
+				FramesToPagesK[index] = (uint32)virtual_address;
             }
 
             if (k == E_NO_MEM) {
@@ -242,7 +242,7 @@ void kfree(void* virtual_address)
 		unmap_frame(ptr_page_directory, va);
 		if(frame->references == 0)
 			free_frame(frame);
-		FramesToPages[to_frame_number(frame)] = 0;
+		FramesToPagesK[to_frame_number(frame)] = 0;
 		va += PAGE_SIZE;
 	}
 
@@ -284,7 +284,7 @@ unsigned int kheap_virtual_address(unsigned int physical_address)
 	struct FrameInfo* frame = to_frame_info(physical_address);
 	uint32 offset = physical_address & 0xFFF;
 
-	uint32 va = FramesToPages[to_frame_number(frame)];
+	uint32 va = (uint32)FramesToPagesK[to_frame_number(frame)];
 	if (va == 0) return 0;
 
 	return va | offset;

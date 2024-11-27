@@ -32,6 +32,50 @@ void sharing_init()
 #endif
 }
 
+void printShare(struct Share *share, int numOfFrames) {
+    if (share == NULL) {
+        cprintf("Share object is NULL.\n");
+        return;
+    }
+
+    cprintf("===============================================\n");
+    cprintf("Share Object Details:\n");
+    cprintf("===============================================\n");
+    cprintf("ID:\t\t\t%d\n", share->ID);
+    cprintf("Owner ID:\t\t%d\n", share->ownerID);
+    cprintf("Name:\t\t\t%s\n", share->name);
+    cprintf("Size:\t\t\t%d\n", share->size);
+    cprintf("References:\t\t%d\n", share->references);
+    cprintf("Writable:\t\t%s\n", share->isWritable ? "Yes" : "No");
+    cprintf("Frames Storage Address:\t%p\n", share->framesStorage);
+
+//    cprintf("Linked List Info:\n");
+//    cprintf("\tPrevious:\t%p\n", share->prev_next_info.prev);
+//    cprintf("\tNext:\t\t%p\n", share->prev_next_info.next);
+
+    cprintf("===============================================\n");
+    cprintf("Frames Storage Details:\n");
+    cprintf("===============================================\n");
+    cprintf("Frame Address\t\tFrame References\n");
+    cprintf("-----------------------------------------------\n");
+
+    if (share->framesStorage == NULL || numOfFrames <= 0) {
+        cprintf("No frames to display.\n");
+    } else {
+        for (int i = 0; i < numOfFrames; i++) {
+            struct FrameInfo *frame = share->framesStorage[i];
+            if (frame != NULL) {
+                cprintf("%p\t\t%d\n", frame, frame->references);
+            } else {
+                cprintf("NULL\t\t\t-\n");
+            }
+        }
+    }
+
+    cprintf("===============================================\n\n");
+}
+
+
 //==============================
 // [2] Get Size of Share Object:
 //==============================
@@ -74,9 +118,11 @@ inline struct FrameInfo** create_frames_storage(int numOfFrames)
 	struct FrameInfo** frames_storage = (struct FrameInfo**)kmalloc(sizeOfFrames);
 	if (frames_storage == NULL) return NULL;
 
-	for (int i = 0; i < numOfFrames; i++) {
-		frames_storage[i] = NULL;
-	}
+//	for (int i = 0; i < numOfFrames; i++) {
+//		frames_storage[i] = NULL;
+//	}
+	memset(frames_storage, 0, sizeOfFrames);
+
 
 	return frames_storage;
 
@@ -106,6 +152,7 @@ struct Share* create_share(int32 ownerID, char* shareName, uint32 size, uint8 is
 
 	new_shared_obj->ownerID = ownerID;
 	strncpy(new_shared_obj->name, shareName, sizeof(new_shared_obj->name) - 1);
+	new_shared_obj->name[sizeof(new_shared_obj->name) - 1] = '\0'; // Ensures null-terminated.
 	new_shared_obj->size = size;
 	new_shared_obj->references = 1;
 	new_shared_obj->isWritable = isWritable;
@@ -158,6 +205,7 @@ int createSharedObject(int32 ownerID, char* shareName, uint32 size, uint8 isWrit
 	//Your Code is Here...
 	struct Env* myenv = get_cpu_proc(); //The calling environment
 //	cprintf("ownerID: %d\n", ownerID);
+
 	struct Share* existingSharedObject = get_share(ownerID, shareName);
 //	cprintf("existingSharedObject: %d\n", existingSharedObject);
 	if (existingSharedObject != NULL)
@@ -165,38 +213,47 @@ int createSharedObject(int32 ownerID, char* shareName, uint32 size, uint8 isWrit
 //	cprintf("VA: %p \t IsWritable: \%d \n",virtual_address, isWritable);
 	struct Share* createdSharedObject = create_share(ownerID, shareName, size,
 			isWritable);
-	if (createdSharedObject == NULL)
-		return 0;
+
+
+	if (createdSharedObject == NULL) return 0;
 
 	int numOfFrames = ROUNDUP(size, PAGE_SIZE) / PAGE_SIZE;
-//	cprintf("size %d\n",size);
-//	cprintf("num of frames %d\n",numOfFrames) ;
 
 //	createdSharedObject->framesStorage = (struct FrameInfo**) kmalloc(numOfFrames * sizeof(struct FrameInfo*));
 	if (createdSharedObject->framesStorage == NULL)
 		return 0;
 
+	struct FrameInfo* CreatingFrameForAllocation = NULL;
 	for (int i = 0; i < numOfFrames; i++) {
-		struct FrameInfo* CreatingFrameForAllocation = NULL;
 
 		// Allocate a frame
 		int Checking = allocate_frame(&CreatingFrameForAllocation);
-		if (Checking != 0)
-			return 0;
+		if (Checking != 0) return 0;
+
+		createdSharedObject->framesStorage[i] = CreatingFrameForAllocation;
 
 		void* va = (void*) ((uint32*) virtual_address + i * PAGE_SIZE);
-		int checkMapping = map_frame(myenv->env_page_directory,CreatingFrameForAllocation, (uint32) va, PERM_WRITEABLE);
+		int checkMapping = map_frame(myenv->env_page_directory, CreatingFrameForAllocation, (uint32) va, PERM_WRITEABLE);
+		int perm = createdSharedObject->isWritable ? PERM_WRITEABLE : 0;
+//		pt_set_page_permissions(myenv->env_page_directory, (uint32) virtual_address, PERM_MARKED | perm, PERM_PRESENT);
+		pt_set_page_permissions(myenv->env_page_directory, (uint32) va, PERM_MARKED | perm, PERM_PRESENT);
+
 		if (checkMapping != 0){
+			cprintf("FREEING FRAME: %p\n", CreatingFrameForAllocation);
 			free_frame(CreatingFrameForAllocation);
 			return 0;
 		}
-		createdSharedObject->framesStorage[i] = CreatingFrameForAllocation;
+
+//		cprintf("%d# created Frame number: %d, deref: %d\n", i, to_frame_number(createdSharedObject->framesStorage[i]), *(uint32 *)va);
 	}
 
 	LIST_INSERT_TAIL(&(AllShares.shares_list), createdSharedObject);
-	cprintf("ID: %d\n", createdSharedObject->ID);
+//	cprintf("ID: %d\n", createdSharedObject->ID);
 
 //	createdSharedObject->ID &= 0x7FFFFFFF;
+//	printFramesStorage(createdSharedObject->framesStorage, numOfFrames);
+	cprintf("Share created: ID = %d, Name = %s, OwnerID = %d, numOfFrames: %d, isWritable: %d\n", createdSharedObject->ID, createdSharedObject->name, createdSharedObject->ownerID, numOfFrames, createdSharedObject->isWritable);
+	printShare(createdSharedObject, numOfFrames);
 	return createdSharedObject->ID;
 
 //	create_share(ownerID, shareName, size,isWritable);
@@ -208,12 +265,52 @@ int createSharedObject(int32 ownerID, char* shareName, uint32 size, uint8 isWrit
 //======================
 int getSharedObject(int32 ownerID, char* shareName, void* virtual_address)
 {
+	struct Env* myenv = get_cpu_proc(); //The calling environment
 	//TODO: [PROJECT'24.MS2 - #21] [4] SHARED MEMORY [KERNEL SIDE] - getSharedObject()
 	//COMMENT THE FOLLOWING LINE BEFORE START CODING
-	panic("getSharedObject is not implemented yet");
+	//panic("getSharedObject is not implemented yet");
 	//Your Code is Here...
+	struct Share* current_share = get_share(ownerID,shareName);
+	if(current_share == NULL) return E_SHARED_MEM_NOT_EXISTS;
 
-	struct Env* myenv = get_cpu_proc(); //The calling environment
+//	uint32 pa = kheap_physical_address((uint32) virtual_address);
+	uint32 size = getSizeOfSharedObject(ownerID, shareName);
+
+
+	int numOfFrames = ROUNDUP(size, PAGE_SIZE) / PAGE_SIZE;
+	cprintf("Virtual Address deref: %d\n", *(uint32 *)virtual_address);
+
+	struct FrameInfo** framesStorage = current_share->framesStorage;
+
+	for(int i = 0; i < numOfFrames; i++)
+	{
+		struct FrameInfo* frame = framesStorage[i];
+		void* va = (void*) ((uint32*) virtual_address + i * PAGE_SIZE);
+//		cprintf("%d# gotten Frame number: %d, deref: %d\n", i, to_frame_number(current_share->framesStorage[i]), *(uint32 *)va);
+//
+//		uint32* ptr_page_table = NULL;
+//		get_page_table(myenv->env_page_directory, (uint32)va, &ptr_page_table);
+//
+//		uint32 index_page_table = PTX(va);
+//		uint32 page_table_entry = ptr_page_table[index_page_table];
+//
+//		struct FrameInfo* frame = to_frame_info(EXTRACT_ADDRESS(page_table_entry));
+//		cprintf("Frame#%d @ Address: %p\n", i, frame);
+//		if((uint32)frame != (uint32)framesStorage[i]) continue;
+
+		int perm = current_share->isWritable ? PERM_WRITEABLE : 0;
+
+		if (map_frame(myenv->env_page_directory, frame, (uint32)va, perm) != 0) {
+		        return E_SHARED_MEM_NOT_EXISTS;
+		}
+		pt_set_page_permissions(myenv->env_page_directory, (uint32) va, PERM_MARKED | perm, PERM_PRESENT);
+	}
+	current_share->references++;
+
+	cprintf("Share used: ID = %d, Name = %s, OwnerID = %d, numOfFrames: %d, isWritable: %d\n", current_share->ID, current_share->name, current_share->ownerID, numOfFrames, current_share->isWritable);
+	printShare(current_share, numOfFrames);
+	return current_share->ID;
+
 }
 
 //==================================================================================//
