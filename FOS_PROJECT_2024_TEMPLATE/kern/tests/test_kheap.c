@@ -2385,7 +2385,222 @@ int test_krealloc_BF() {
 
 int test_krealloc_FF1()
 {
-	panic("not implemented");
+
+	char minByte = 1<<7;
+	char maxByte = 0x7F;
+	short minShort = 1<<15 ;
+	short maxShort = 0x7FFF;
+	int minInt = 1<<31 ;
+	int maxInt = 0x7FFFFFFF;
+
+	char *byteArr, *byteArr2, *byteArr3 ;
+	short *shortArr, *shortArr2 ;
+	int *intArr;
+	struct MyStruct *structArr ;
+	int lastIndexOfByte, lastIndexOfByte2, lastIndexOfByte3, lastIndexOfShort, lastIndexOfShort2, lastIndexOfInt, lastIndexOfStruct;
+	int start_freeFrames = (int)sys_calculate_free_frames() ;
+	int eval = 0;
+	bool correct = 1 ;
+	int freeFrames, freeDiskFrames;
+	uint32 sizeOfKHeap;
+	void* ptr_allocations[20] = {0};
+
+	cprintf("\n\t\t===> Allocate spaces of different sizes in BOTH ALLOCATORS <===\n");
+		correct = 1 ;
+		{
+			//2 MB
+			freeFrames = (int)sys_calculate_free_frames() ;
+			freeDiskFrames = (int)pf_calculate_free_frames() ;
+			ptr_allocations[0] = kmalloc(2*Mega-kilo);
+			cprintf("ptr_allocations[0]: %p\n", ptr_allocations[0]);
+			if ((uint32) ptr_allocations[0] !=  (ACTUAL_START)) { correct = 0; cprintf("1 Wrong start address for the allocated space... check return address of kmalloc\n"); }
+			if (((int)pf_calculate_free_frames() - freeDiskFrames) != 0) { correct = 0; cprintf("1 Page file is changed while it's not expected to. (pages are wrongly allocated/de-allocated in PageFile)\n"); }
+			if ((freeFrames - (int)sys_calculate_free_frames()) < 512) { correct = 0; cprintf("1 Wrong allocation: pages are not loaded successfully into memory\n"); }
+
+			//2 MB
+			freeFrames = (int)sys_calculate_free_frames();
+			freeDiskFrames = (int)pf_calculate_free_frames() ;
+			ptr_allocations[1] = kmalloc(2*Mega-kilo);
+			if ((uint32) ptr_allocations[1] != (ACTUAL_START + 2*Mega)) { correct = 0; cprintf("2 Wrong start address for the allocated space... check return address of kmalloc\n"); }
+			if (((int)pf_calculate_free_frames() - freeDiskFrames) != 0) { correct = 0; cprintf("2 Page file is changed while it's not expected to. (pages are wrongly allocated/de-allocated in PageFile)\n"); }
+			if ((freeFrames - (int)sys_calculate_free_frames()) < 512) { correct = 0; cprintf("2 Wrong allocation: pages are not loaded successfully into memory\n"); }
+
+			freeFrames = (int)sys_calculate_free_frames() ;
+			{
+				//2 KB - 1 (should be allocated by dynamic allocator not page allocator)
+				freeDiskFrames = (int)pf_calculate_free_frames() ;
+				ptr_allocations[2] = kmalloc(2*kilo-1);
+				if ((uint32) ptr_allocations[2] < KERNEL_HEAP_START || ptr_allocations[2] >= sbrk(0) || (uint32) ptr_allocations[2] >= da_limit)
+				{ correct = 0; cprintf("3 Wrong start address for the allocated space... should allocated by the dynamic allocator! check return address of kmalloc and/or sbrk\n"); }
+				if (((int)pf_calculate_free_frames() - freeDiskFrames) != 0) { correct = 0; cprintf("3 Page file is changed while it's not expected to. (pages are wrongly allocated/de-allocated in PageFile)\n"); }
+				//if ((freeFrames - (int)sys_calculate_free_frames()) != 1) { correct = 0; cprintf("Wrong allocation: pages are not loaded successfully into memory\n"); }
+
+//				2 KB - 1 (should be allocated by dynamic allocator not page allocator)
+				freeDiskFrames = (int)pf_calculate_free_frames() ;
+				ptr_allocations[3] = kmalloc(2*kilo-1);
+				if ((uint32) ptr_allocations[3] < KERNEL_HEAP_START || ptr_allocations[3] >= sbrk(0) || (uint32) ptr_allocations[3] >= da_limit)
+				{ correct = 0; cprintf("4 Wrong start address for the allocated space... should allocated by the dynamic allocator! check return address of kmalloc and/or sbrk\n"); }
+				if (((int)pf_calculate_free_frames() - freeDiskFrames) != 0) { correct = 0; cprintf("4 Page file is changed while it's not expected to. (pages are wrongly allocated/de-allocated in PageFile)\n"); }
+			}
+			if ((freeFrames - (int)sys_calculate_free_frames()) != 1) { correct = 0; cprintf("4 Wrong allocation: sbrk error\n"); }
+
+			//7 KB
+			freeFrames = (int)sys_calculate_free_frames() ;
+			freeDiskFrames = (int)pf_calculate_free_frames() ;
+			ptr_allocations[4] = kmalloc(7*kilo);
+			if ((uint32) ptr_allocations[4] != (ACTUAL_START + 4*Mega /*+ 8*kilo*/)) { correct = 0; cprintf("5 Wrong start address for the allocated space... check return address of kmalloc\n"); }
+			if (((int)pf_calculate_free_frames() - freeDiskFrames) != 0) { correct = 0; cprintf("5 Page file is changed while it's not expected to. (pages are wrongly allocated/de-allocated in PageFile)\n"); }
+			if ((freeFrames - (int)sys_calculate_free_frames()) < 2) { correct = 0; cprintf("5 Wrong allocation: pages are not loaded successfully into memory\n"); }
+
+			//3 MB
+			freeFrames = (int)sys_calculate_free_frames() ;
+			freeDiskFrames = (int)pf_calculate_free_frames() ;
+			ptr_allocations[5] = kmalloc(3*Mega-kilo);
+			if ((uint32) ptr_allocations[5] != (ACTUAL_START + 4*Mega + 8*kilo) ) { correct = 0; cprintf("6 Wrong start address for the allocated space... check return address of kmalloc\n"); }
+			if (((int)pf_calculate_free_frames() - freeDiskFrames) != 0) { correct = 0; cprintf("6 Page file is changed while it's not expected to. (pages are wrongly allocated/de-allocated in PageFile)\n"); }
+			if ((freeFrames - (int)sys_calculate_free_frames()) < 768) { correct = 0; cprintf("6 Wrong allocation: pages are not loaded successfully into memory\n"); }
+
+			//6 MB
+			freeFrames = (int)sys_calculate_free_frames() ;
+			freeDiskFrames = (int)pf_calculate_free_frames() ;
+			ptr_allocations[6] = kmalloc(6*Mega-kilo);
+			if ((uint32) ptr_allocations[6] != (ACTUAL_START + 7*Mega + 8*kilo)) { correct = 0; cprintf("7 Wrong start address for the allocated space... check return address of kmalloc\n"); }
+			if (((int)pf_calculate_free_frames() - freeDiskFrames) != 0) { correct = 0; cprintf("7 Page file is changed while it's not expected to. (pages are wrongly allocated/de-allocated in PageFile)\n"); }
+			if ((freeFrames - (int)sys_calculate_free_frames()) < 1536) { correct = 0; cprintf("7 Wrong allocation: pages are not loaded successfully into memory\n"); }
+
+			//14 KB
+			freeFrames = (int)sys_calculate_free_frames() ;
+			freeDiskFrames = (int)pf_calculate_free_frames() ;
+			ptr_allocations[7] = kmalloc(14*kilo);
+			cprintf("ptr_allocations[7]: %p\n", ptr_allocations[7]);
+			if ((uint32) ptr_allocations[7] != (ACTUAL_START + 13*Mega + 8*kilo)) { correct = 0; cprintf("8 Wrong start address for the allocated space... check return address of kmalloc\n"); }
+			if (((int)pf_calculate_free_frames() - freeDiskFrames) != 0) { correct = 0; cprintf("8 Page file is changed while it's not expected to. (pages are wrongly allocated/de-allocated in PageFile)\n"); }
+			if ((freeFrames - (int)sys_calculate_free_frames()) < 4) { correct = 0; cprintf("8 Wrong allocation: pages are not loaded successfully into memory\n"); }
+		}
+
+		cprintf("\n\t\t1. Virtual Address is NULL (should call kmalloc) [10%]\n");
+		{
+			//Insufficient space
+			freeFrames = (int)sys_calculate_free_frames();
+			freeDiskFrames = (int)pf_calculate_free_frames();
+			sizeOfKHeap = (KERNEL_HEAP_MAX - ACTUAL_START + 1);
+			ptr_allocations[8] = krealloc(NULL, sizeOfKHeap);
+			if (ptr_allocations[8] != NULL) { correct = 0; cprintf("Allocating insufficient space: should return NULL\n"); }
+			if (((int)pf_calculate_free_frames() - freeDiskFrames) != 0) { correct = 0; cprintf("Page file is changed while it's not expected to. (pages are wrongly allocated/de-allocated in PageFile)\n"); }
+			if ((freeFrames - (int)sys_calculate_free_frames()) != 0) { correct = 0; cprintf("Wrong allocation: pages are not loaded successfully into memory\n"); }
+		}
+		if (correct)	eval+=10 ;
+
+		// 2MB (SAME SIZE)
+		cprintf("\n\t\t2. Size is the same of the old size [10%]\n");
+		{
+			freeFrames = (int)sys_calculate_free_frames();
+			freeDiskFrames = (int)pf_calculate_free_frames();
+			ptr_allocations[9] = krealloc(ptr_allocations[0], 2*Mega-kilo);
+			if (ptr_allocations[9] != ptr_allocations[0]) { correct = 0; cprintf("Wrong address: actual %p, expected %p.\n", ptr_allocations[9], ptr_allocations[0]); }
+			if (((int)pf_calculate_free_frames() - freeDiskFrames) != 0) { correct = 0; cprintf("Page file is changed while it's not expected to. (pages are wrongly allocated/de-allocated in PageFile)\n"); }
+			if ((freeFrames - (int)sys_calculate_free_frames()) != 0) { correct = 0; cprintf("Wrong allocation: pages are not loaded successfully into memory\n"); }
+		}
+		if (correct)	eval+=10 ;
+
+		// SIZE = 0.
+		cprintf("\n\t\t3. Size equal 0 [10%]\n");
+		{
+			freeFrames = (int)sys_calculate_free_frames();
+			freeDiskFrames = (int)pf_calculate_free_frames();
+			ptr_allocations[10] = krealloc(ptr_allocations[1], 0);
+			if (ptr_allocations[10] != NULL) { correct = 0; cprintf("Wrong address: should call kfree as size @ is 0, expected %p.\n", ptr_allocations[1]); }
+			if (((int)pf_calculate_free_frames() - freeDiskFrames) != 0) { correct = 0; cprintf("Page file is changed while it's not expected to. (pages are wrongly allocated/de-allocated in PageFile)\n"); }
+//			cprintf("Free frames difference: %d\n", freeFrames - (int)sys_calculate_free_frames());
+			if ((freeFrames - (int)sys_calculate_free_frames()) == 0) { correct = 0; cprintf("Wrong allocation: pages are not loaded successfully into memory\n"); }
+		}
+		if (correct)	eval+=10 ;
+
+		// 1KB - 8B
+		cprintf("\n\t\t4. Old and new blocks in dynamic allocator. [10%]\n");
+		{
+			freeFrames = (int)sys_calculate_free_frames();
+			freeDiskFrames = (int)pf_calculate_free_frames();
+			ptr_allocations[11] = krealloc(ptr_allocations[2], 1*kilo-(2* sizeof(int)));
+			if ((uint32)ptr_allocations[11] < KERNEL_HEAP_START || ptr_allocations[11] >= sbrk(0) || (uint32) ptr_allocations[11] >= da_limit) { correct = 0; cprintf("Wrong address.\n"); }
+			if (((int)pf_calculate_free_frames() - freeDiskFrames) != 0) { correct = 0; cprintf("Page file is changed while it's not expected to. (pages are wrongly allocated/de-allocated in PageFile)\n"); }
+//			cprintf("Free frames difference: %d\n", freeFrames - (int)sys_calculate_free_frames());
+			if ((freeFrames - (int)sys_calculate_free_frames()) != 0) { correct = 0; cprintf("Wrong allocation: pages are not loaded successfully into memory\n"); }
+		}
+		if (correct)	eval+=10 ;
+
+		// 7KB (2 pages)
+		cprintf("\n\t\t5. Old block in dynamic allocator. New in page allocator. [10%]\n");
+		{
+			freeFrames = (int)sys_calculate_free_frames();
+			freeDiskFrames = (int)pf_calculate_free_frames();
+			ptr_allocations[12] = krealloc(ptr_allocations[3], 7*kilo);
+			cprintf("(uint32)ptr_allocations[12]: %p, expected: %p\n", (uint32)ptr_allocations[12], ACTUAL_START + 2*Mega);
+			if ((uint32)ptr_allocations[12] !=  ACTUAL_START + 2*Mega) { correct = 0; cprintf("Wrong address.\n"); }
+			if (((int)pf_calculate_free_frames() - freeDiskFrames) != 0) { correct = 0; cprintf("Page file is changed while it's not expected to. (pages are wrongly allocated/de-allocated in PageFile)\n"); }
+//			cprintf("Free frames difference: %d\n", freeFrames - (int)sys_calculate_free_frames());
+			if ((freeFrames - (int)sys_calculate_free_frames()) == 0) { correct = 0; cprintf("Wrong allocation: pages are not loaded successfully into memory\n"); }
+		}
+		if (correct)	eval+=10 ;
+
+
+		// 2KB - 8B
+		cprintf("\n\t\t6. Old block in page allocator. New in dynamic allocator. [10%]\n");
+		{
+			freeFrames = (int)sys_calculate_free_frames();
+			freeDiskFrames = (int)pf_calculate_free_frames();
+			ptr_allocations[13] = krealloc(ptr_allocations[4], 2*kilo-(2* sizeof(int)));
+			if ((uint32)ptr_allocations[13] < KERNEL_HEAP_START || ptr_allocations[13] >= sbrk(0) || (uint32) ptr_allocations[13] >= da_limit) { correct = 0; cprintf("Wrong address.\n"); }
+			if (((int)pf_calculate_free_frames() - freeDiskFrames) != 0) { correct = 0; cprintf("Page file is changed while it's not expected to. (pages are wrongly allocated/de-allocated in PageFile)\n"); }
+//			cprintf("Free frames difference: %d\n", freeFrames - (int)sys_calculate_free_frames());
+			if ((freeFrames - (int)sys_calculate_free_frames()) == 0) { correct = 0; cprintf("Wrong allocation: pages are not loaded successfully into memory\n"); }
+		}
+		if (correct)	eval+=10 ;
+
+		// OLD 14KB NEW 18KB (added 1 page)
+		cprintf("\n\t7. Old and new blocks in page allocator (Should add more consecutive pages in the same address). [10%]\n");
+		{
+			freeFrames = (int)sys_calculate_free_frames();
+			freeDiskFrames = (int)pf_calculate_free_frames();
+			ptr_allocations[14] = krealloc(ptr_allocations[7], 18*kilo); // adding 1 page.
+			if (ptr_allocations[14] != ptr_allocations[7]) { correct = 0; cprintf("Wrong address.\n"); }
+			if (((int)pf_calculate_free_frames() - freeDiskFrames) != 0) { correct = 0; cprintf("Page file is changed while it's not expected to. (pages are wrongly allocated/de-allocated in PageFile)\n"); }
+//			cprintf("Free frames difference: %d\n", freeFrames - (int)sys_calculate_free_frames());
+			if ((freeFrames - (int)sys_calculate_free_frames()) != 0) { correct = 0; cprintf("Wrong allocation: pages are not loaded successfully into memory\n"); }
+		}
+		if (correct)	eval+=10 ;
+
+		// OLD 18KB NEW 11KB (removed 2 pages)
+		cprintf("\n\t8. Old and new blocks in page allocator (Should free some allocated pages in the same address). [15%]\n");
+		{
+			freeFrames = (int)sys_calculate_free_frames();
+			freeDiskFrames = (int)pf_calculate_free_frames();
+			ptr_allocations[15] = krealloc(ptr_allocations[7], 11*kilo); // There are 5 pages, free 2 of them
+			if (ptr_allocations[15] != ptr_allocations[7]) { correct = 0; cprintf("Wrong address.\n"); }
+			if (((int)pf_calculate_free_frames() - freeDiskFrames) != 0) { correct = 0; cprintf("Page file is changed while it's not expected to. (pages are wrongly allocated/de-allocated in PageFile)\n"); }
+//			cprintf("Free frames difference: %d\n", freeFrames - (int)sys_calculate_free_frames());
+			if ((freeFrames - (int)sys_calculate_free_frames()) != 0) { correct = 0; cprintf("Wrong allocation: pages are not loaded successfully into memory\n"); }
+		}
+		if (correct)	eval+=15 ;
+
+		// Insufficient reallocation.
+		cprintf("\n\t    9. Old and new blocks in page allocator (Insufficient reallocation). [15%]\n");
+		{
+			freeFrames = (int)sys_calculate_free_frames();
+			freeDiskFrames = (int)pf_calculate_free_frames();
+			ptr_allocations[16] = krealloc(ptr_allocations[7], 1000*Mega);
+			if (ptr_allocations[16] != NULL) { correct = 0; cprintf("Wrong address.\n"); }
+			if (((int)pf_calculate_free_frames() - freeDiskFrames) != 0) { correct = 0; cprintf("Page file is changed while it's not expected to. (pages are wrongly allocated/de-allocated in PageFile)\n"); }
+//			cprintf("Free frames difference: %d\n", freeFrames - (int)sys_calculate_free_frames());
+			if ((freeFrames - (int)sys_calculate_free_frames()) != 0) { correct = 0; cprintf("Wrong allocation: pages are not loaded successfully into memory\n"); }
+		}
+		if (correct)	eval+=15 ;
+
+
+
+		cprintf("\nTest krealloc completed. Eval = %d%%\n\n", eval);
+
+		return 1;
 
 }
 int test_krealloc_FF2()

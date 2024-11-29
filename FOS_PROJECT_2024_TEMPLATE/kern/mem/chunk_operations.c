@@ -14,21 +14,17 @@
 
 //extern void inctst();
 
-#define USER_HEAP_ARRAY_SIZE ((USER_HEAP_MAX - USER_HEAP_START) / PAGE_SIZE)
-uint32 FramesToPages[USER_HEAP_ARRAY_SIZE];
+
 
 // functions helper The Great Boda did
 
 bool IsPageMarked(struct Env* myEnv, uint32 va) {
-//    cprintf("\n\nflag:\n\n");
     uint32* ptr = NULL;
     uint32 isTableExist = get_page_table(myEnv->env_page_directory,va,&ptr);
-//    	cprintf("bara el ispagemarked\n");
     if (isTableExist == TABLE_NOT_EXIST){
-//    	isTableExist = (uint32)create_page_table(myEnv->env_page_directory,va);
     	return 0;
     }
-
+//    pt_set_page_permissions(myEnv->env_page_directory, va, PERM_MARKED|PERM_WRITEABLE, PERM_PRESENT);
     uint32 addr = pt_get_page_permissions(myEnv->env_page_directory,va);
     bool isMarked = ((addr & PERM_MARKED) == PERM_MARKED);
     return isMarked;
@@ -175,7 +171,8 @@ void* sys_sbrk(int numOfPages)
 		if (get_page_table(env->env_page_directory, current_va, &PtrPageTable) == TABLE_NOT_EXIST) {
 			PtrPageTable = create_page_table(env->env_page_directory, current_va);
 		}
-		pt_set_page_permissions(env->env_page_directory,current_va,PERM_MARKED,0);
+		pt_set_page_permissions(env->env_page_directory, (uint32)PtrPageTable, PERM_PRESENT | PERM_WRITEABLE, 0);
+		pt_set_page_permissions(env->env_page_directory, current_va, PERM_MARKED | PERM_WRITEABLE, PERM_PRESENT);
 	}
 
 	uint32*  addressOfNewEndBlock = (uint32*)(env->UhSbrk - sizeof(uint32));
@@ -206,10 +203,13 @@ void allocate_user_mem(struct Env* e, uint32 virtual_address, uint32 size)
 		if (get_page_table(e->env_page_directory, current_va, &PtrPageTable) == TABLE_NOT_EXIST) {
 			PtrPageTable = create_page_table(e->env_page_directory, current_va);
 		}
+//		cprintf("current virtual address being allocated: %p, Page table start address: %p, env page directory: %p\n", current_va, PtrPageTable, e->env_page_directory);
+		pt_set_page_permissions(e->env_page_directory, (uint32)PtrPageTable, PERM_PRESENT | PERM_WRITEABLE, 0);
+		pt_set_page_permissions(e->env_page_directory, current_va, PERM_MARKED | PERM_WRITEABLE, PERM_PRESENT);
+//		pt_set_page_permissions(e->env_page_directory, current_va, PERM_WRITEABLE, PERM_PRESENT);
 //		PtrPageTable[PTX(current_va)] = PtrPageTable[PTX(current_va)] | PERM_MARKED;
 		uint32 index = (current_va - USER_HEAP_START) / PAGE_SIZE;
-		FramesToPages[index] = (uint32)virtual_address;
-		pt_set_page_permissions(e->env_page_directory,current_va,PERM_MARKED,0);
+		FramesToPages[index] = (uint32 *)virtual_address;
 	}
 }
 
@@ -238,7 +238,7 @@ void free_user_mem(struct Env* e, uint32 virtual_address, uint32 size)
 
 		//remove mn el page file
 		pf_remove_env_page(e, current_va);
-//		cprintf("1\n");
+
 		//remove pages lw mwgooda fl ws
 		struct WorkingSetElement* element;
 		env_page_ws_invalidate(e, current_va);

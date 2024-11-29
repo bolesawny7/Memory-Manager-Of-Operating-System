@@ -187,35 +187,34 @@ void *alloc_block_FF(uint32 size)
 		return NULL;
 	}
 
-	uint32 needed_size_with_metadata = size + 2 * sizeof(uint32);
+	uint32 size_with_metadata = size + 2 * sizeof(uint32);
 
 	struct BlockElement* blk;
 
 	LIST_FOREACH(blk, &freeBlocksList)
 	{
 		// Get size of each free block.
-		uint32 current_size_with_meta_data = get_block_size((void *) blk);
-		if (needed_size_with_metadata <= current_size_with_meta_data) {
+		uint32 current_blk_size_from_header = get_block_size((void *) blk);
+		if (size_with_metadata <= current_blk_size_from_header) {
 
-			uint32 remaining_blk_size = current_size_with_meta_data - needed_size_with_metadata;
-//			cprintf("\n needed: %d current_size: %d \n", needed_size_with_metadata,current_size_with_meta_data);
-			if (remaining_blk_size < (2 * DYN_ALLOC_MIN_BLOCK_SIZE)) {
+			uint32 free_blk_size = current_blk_size_from_header - size_with_metadata;
+
+			if (free_blk_size < 2 * DYN_ALLOC_MIN_BLOCK_SIZE) {
 
 				// There is an internal fragmentation.
 				// Allocate size of header *current_blk_size_from_header.
-				set_block_data((void*) blk, current_size_with_meta_data, 1);
+				set_block_data((void*) blk, current_blk_size_from_header, 1);
 				LIST_REMOVE(&freeBlocksList, blk);
 			} else {
 				// There is no internal fragmentation. Splitting occurs.
-				set_block_data((void*) blk, needed_size_with_metadata, 1);
-				struct BlockElement* remaining_blk = (struct BlockElement *) ((char *) blk + needed_size_with_metadata);
-				set_block_data((void *) remaining_blk, remaining_blk_size, 0);
-//				cprintf("\n no internal frag 3 \n");
+				set_block_data((void*) blk, size_with_metadata, 1);
+				struct BlockElement* remaining_blk = (struct BlockElement *) ((char *) blk + size_with_metadata);
+				set_block_data((void *) remaining_blk, free_blk_size, 0);
+
 				LIST_INSERT_AFTER(&freeBlocksList, blk, remaining_blk);
 				LIST_REMOVE(&freeBlocksList, blk);
 
 			}
-//			cprintf("\n %x \n",blk);
 			return (void *) blk;
 		}
 	}
@@ -224,21 +223,19 @@ void *alloc_block_FF(uint32 size)
 
 	if (oldEndBlock == (void*) -1) return NULL; // Cannot increase block allocator.
 
+	uint32* addressOfNewEndBlock = oldEndBlock - sizeof(uint32) + PAGE_SIZE;
+	*addressOfNewEndBlock = 1;
+
 	struct BlockElement* lastFreeBlock = LIST_LAST(&freeBlocksList);
 
-//	cprintf("\n%p\n",lastFreeBlock);
 	if (lastFreeBlock && ((uint32*) oldEndBlock ==
 		(uint32*)((char*)lastFreeBlock + get_block_size(lastFreeBlock)))) {
 		// Coalesce with PREVIOUS BLOCK.
-//		cprintf("\n Coalesce \n");
-		uint32 total_size = get_block_size(lastFreeBlock) + PAGE_SIZE;
-
+		uint32 total_size = get_block_size(lastFreeBlock) + PAGE_SIZE - sizeof(uint32);
 		set_block_data(lastFreeBlock, total_size, 0); // Update with new pointer of prev and add the size of free block and page_size.
 	} else {
-//		cprintf("\n NO Coalesce \n");
-		struct BlockElement* newFreeBlock = (struct BlockElement*)(oldEndBlock);
-		set_block_data(newFreeBlock, PAGE_SIZE, 0);
-//		cprintf("\n %x \n",newFreeBlock);
+		struct BlockElement* newFreeBlock = (struct BlockElement*) oldEndBlock;
+		set_block_data(newFreeBlock, PAGE_SIZE - sizeof(uint32), 0);
 		LIST_INSERT_TAIL(&freeBlocksList, newFreeBlock);
 	}
 
@@ -323,8 +320,8 @@ void free_block(void *va) {
 		}
 
 
-//		cprintf("Size of first free block: %d\n", get_block_size(firstBlock));
-//		cprintf("Size of last free block: %d\n", get_block_size(lastBlock));
+	//	cprintf("Size of first free block: %d\n", get_block_size(firstBlock));
+	//	cprintf("Size of last free block: %d\n", get_block_size(lastBlock));
 
 		struct BlockElement* currentFreeBlock;
 
@@ -333,7 +330,7 @@ void free_block(void *va) {
 		uint32 * previous_blk_footer = (uint32 *)((char *)block - 2 * sizeof(uint32));
 		uint32 previous_blk_size = (*previous_blk_footer) & ~(0x1);
 
-//		cprintf("Size of previous block without LSB: %d\n", previous_blk_size);
+	//	cprintf("Size of previous block without LSB: %d\n", previous_blk_size);
 
 		// Track previous and next blocks in the free blocks list for merging.
 		uint32 * previous_blk = (uint32 *)((char *)block - previous_blk_size);
@@ -342,23 +339,22 @@ void free_block(void *va) {
 		uint32 * next_blk = (uint32 *)((char *)block + get_block_size(block));
 		next_blk = get_block_size(next_blk) == 0 ? NULL : next_blk;
 
-//		cprintf("Size of previous block: %d Bytes at address: %p is free: %d\n", get_block_size(previous_blk), previous_blk, is_free_block(previous_blk));
-//		cprintf("Size of next block: %d Bytes at address: %p is free: %d\n", get_block_size(next_blk), next_blk, is_free_block(next_blk));
+	//	cprintf("Size of previous block: %d Bytes at address: %p is free: %d\n", get_block_size(previous_blk), previous_blk, is_free_block(previous_blk));
+	//	cprintf("Size of next block: %d Bytes at address: %p is free: %d\n", get_block_size(next_blk), next_blk, is_free_block(next_blk));
 
 		uint32 total_size_after_coalesce = get_block_size(block);
 
 		// COALESCE WITH PREVIOUS BLOCK.
 		if(previous_blk != NULL){
-//		cprintf("Size of block PREV: %d\n", total_size_after_coalesce);
+	//	cprintf("Size of block PREV: %d\n", total_size_after_coalesce);
 			if(is_free_block(previous_blk)){
-				cprintf("COALESCE WITH PREVIOUS BLOCK.\n");
-//				cprintf("total size before coalesce: %d\n", total_size_after_coalesce);
+	//			cprintf("COALESCE WITH PREVIOUS BLOCK.\n");
+				cprintf("total size before coalesce: %d\n", total_size_after_coalesce);
 				total_size_after_coalesce += get_block_size(previous_blk);
-//				cprintf("total size after coalesce: %d\n", total_size_after_coalesce);
-//				cprintf("blk before coalesce: %p\n", block);
+				cprintf("total size after coalesce: %d\n", total_size_after_coalesce);
+				cprintf("blk before coalesce: %p\n", block);
 				block = (struct BlockElement *)previous_blk;
-//				cprintf("blk after coalesce: %p\n", block);
-//				cprintf("Size of free blocks list: %d\n", LIST_SIZE(&freeBlocksList));
+				cprintf("blk after coalesce: %p\n", block);
 
 				LIST_REMOVE(&freeBlocksList, (struct BlockElement *)previous_blk);
 			}
@@ -376,7 +372,7 @@ void free_block(void *va) {
 		}
 		// Setting block with the total size according to the conditions above..
 		set_block_data(block, total_size_after_coalesce, 0);
-//		print_blocks_list(freeBlocksList);
+		print_blocks_list(freeBlocksList);
 
 		struct BlockElement* firstFreeBlock = LIST_FIRST(&freeBlocksList);
 		struct BlockElement* lastFreeBlock = LIST_LAST(&freeBlocksList);
