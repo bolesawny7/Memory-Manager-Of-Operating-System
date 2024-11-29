@@ -1,4 +1,4 @@
-15:32:08 **** Incremental Build of configuration Default for project FOS_PROJECT_2024_TEMPLATE ****
+17:51:23 **** Incremental Build of configuration Default for project FOS_PROJECT_2024_TEMPLATE ****
 make -j12 all 
 + as kern/entry.S
 + cc kern/init.c
@@ -236,5 +236,5 @@ touch -m kern/tests/test_commands.c
 touch -m kern/tests/test_scheduler.c
 touch -m kern/tests/utilities.c
 
-15:32:18 Build Finished (took 10s.324ms)
+17:51:34 Build Finished (took 10s.583ms)
 
