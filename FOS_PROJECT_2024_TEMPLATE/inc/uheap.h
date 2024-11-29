@@ -17,5 +17,6 @@ void free(void* virtual_address);
 void sfree(void* virtual_address);
 void *realloc(void *virtual_address, uint32 new_size);
 void *AllocateInPageAllocator(uint32 size);
+uint32* GetConsecutivePages(uint32 size);
 
 #endif

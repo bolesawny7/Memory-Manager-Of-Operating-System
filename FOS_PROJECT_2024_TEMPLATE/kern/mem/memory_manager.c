@@ -364,7 +364,7 @@ int map_frame(uint32 *ptr_page_directory, struct FrameInfo *ptr_frame_info, uint
 #if USE_KHEAP
 		{
 			ptr_page_table = create_page_table(ptr_page_directory, (uint32)virtual_address);
-			//cprintf("======>page table created using kheap for VA %x at dir = %x PT = %x\n", virtual_address, ptr_page_directory[PDX(virtual_address)], ptr_page_table);
+//			cprintf("======>page table created using kheap for VA %x at dir = %x PT = %x\n", virtual_address, ptr_page_directory[PDX(virtual_address)], ptr_page_table);
 			uint32* ptr_page_table2 =NULL;
 			//cprintf("======> After the table created at %x\n\n", get_page_table(ptr_page_directory, virtual_address,&ptr_page_table2));
 		}
@@ -376,7 +376,7 @@ int map_frame(uint32 *ptr_page_directory, struct FrameInfo *ptr_frame_info, uint
 
 	}
 
-	//cprintf("NOW .. map add = %x ptr_page_table = %x PTX(virtual_address) = %d\n", virtual_address, ptr_page_table,PTX(virtual_address));
+//	cprintf("NOW .. map add = %x ptr_page_table = %x PTX(virtual_address) = %d\n", virtual_address, ptr_page_table,PTX(virtual_address));
 	uint32 page_table_entry = ptr_page_table[PTX(virtual_address)];
 
 	/*NEW'15 CORRECT SOLUTION*/

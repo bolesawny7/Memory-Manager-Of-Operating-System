@@ -13,6 +13,9 @@
 #include "kheap.h"
 #include "memory_manager.h"
 
+struct FrameInfo* frames_info_collection[PAGE_SIZE/4];
+
+
 //==================================================================================//
 //============================== GIVEN FUNCTIONS ===================================//
 //==================================================================================//
@@ -193,6 +196,154 @@ struct Share* get_share(int32 ownerID, char* name)
 
 	return NULL;
 }
+//
+////=========================
+//// [4] Create Share Object:
+////=========================
+//int createSharedObject(int32 ownerID, char* shareName, uint32 size, uint8 isWritable, void* virtual_address)
+//{
+//	//TODO: [PROJECT'24.MS2 - #19] [4] SHARED MEMORY [KERNEL SIDE] - createSharedObject()
+//	//COMMENT THE FOLLOWING LINE BEFORE START CODING
+////	panic("createSharedObject is not implemented yet");
+//	//Your Code is Here...
+//	struct Env* myenv = get_cpu_proc(); //The calling environment
+////	cprintf("ownerID: %d\n", ownerID);
+//
+//	struct Share* existingSharedObject = get_share(ownerID, shareName);
+////	cprintf("existingSharedObject: %d\n", existingSharedObject);
+//	if (existingSharedObject != NULL)
+//		return 0;
+////	cprintf("VA: %p \t IsWritable: \%d \n",virtual_address, isWritable);
+//	struct Share* createdSharedObject = create_share(ownerID, shareName, size,
+//			isWritable);
+//
+//
+//	if (createdSharedObject == NULL) return 0;
+//
+//	int numOfFrames = ROUNDUP(size, PAGE_SIZE) / PAGE_SIZE;
+//
+////	createdSharedObject->framesStorage = (struct FrameInfo**) kmalloc(numOfFrames * sizeof(struct FrameInfo*));
+//	if (createdSharedObject->framesStorage == NULL)
+//		return 0;
+//
+//	struct FrameInfo* CreatingFrameForAllocation = NULL;
+//	for (int i = 0; i < numOfFrames; i++) {
+//
+//		// Allocate a frame
+//		int Checking = allocate_frame(&CreatingFrameForAllocation);
+//		if (Checking != 0) return 0;
+//
+//		createdSharedObject->framesStorage[i] = CreatingFrameForAllocation;
+//
+//		void* va = (void*) ((uint32*) virtual_address + i * PAGE_SIZE);
+//		int checkMapping = map_frame(myenv->env_page_directory, CreatingFrameForAllocation, (uint32) va, PERM_WRITEABLE);
+//		int perm = createdSharedObject->isWritable ? PERM_WRITEABLE : 0;
+////		pt_set_page_permissions(myenv->env_page_directory, (uint32) virtual_address, PERM_MARKED | perm, PERM_PRESENT);
+//		pt_set_page_permissions(myenv->env_page_directory, (uint32) va, PERM_MARKED | perm, PERM_PRESENT);
+//
+//		if (checkMapping != 0){
+//			cprintf("FREEING FRAME: %p\n", CreatingFrameForAllocation);
+//			free_frame(CreatingFrameForAllocation);
+//			return 0;
+//		}
+//
+////		cprintf("%d# created Frame number: %d, deref: %d\n", i, to_frame_number(createdSharedObject->framesStorage[i]), *(uint32 *)va);
+//	}
+//
+//	LIST_INSERT_TAIL(&(AllShares.shares_list), createdSharedObject);
+////	cprintf("ID: %d\n", createdSharedObject->ID);
+//
+////	createdSharedObject->ID &= 0x7FFFFFFF;
+////	printFramesStorage(createdSharedObject->framesStorage, numOfFrames);
+//	cprintf("Share created: ID = %d, Name = %s, OwnerID = %d, numOfFrames: %d, isWritable: %d\n", createdSharedObject->ID, createdSharedObject->name, createdSharedObject->ownerID, numOfFrames, createdSharedObject->isWritable);
+//	printShare(createdSharedObject, numOfFrames);
+//	return createdSharedObject->ID;
+//
+////	create_share(ownerID, shareName, size,isWritable);
+//}
+//
+//
+////======================
+//// [5] Get Share Object:
+////======================
+//int getSharedObject(int32 ownerID, char* shareName, void* virtual_address)
+//{
+//	struct Env* myenv = get_cpu_proc(); //The calling environment
+//	//TODO: [PROJECT'24.MS2 - #21] [4] SHARED MEMORY [KERNEL SIDE] - getSharedObject()
+//	//COMMENT THE FOLLOWING LINE BEFORE START CODING
+//	//panic("getSharedObject is not implemented yet");
+//	//Your Code is Here...
+//	struct Share* current_share = get_share(ownerID,shareName);
+//	if(current_share == NULL) return E_SHARED_MEM_NOT_EXISTS;
+//
+////	uint32 pa = kheap_physical_address((uint32) virtual_address);
+//	uint32 size = getSizeOfSharedObject(ownerID, shareName);
+//
+//
+//	int numOfFrames = ROUNDUP(size, PAGE_SIZE) / PAGE_SIZE;
+//	cprintf("Virtual Address deref: %d\n", *(uint32 *)virtual_address);
+//
+//	struct FrameInfo** framesStorage = current_share->framesStorage;
+//
+//	for(int i = 0; i < numOfFrames; i++)
+//	{
+//		struct FrameInfo* frame = framesStorage[i];
+//		void* va = (void*) ((uint32*) virtual_address + i * PAGE_SIZE);
+////		cprintf("%d# gotten Frame number: %d, deref: %d\n", i, to_frame_number(current_share->framesStorage[i]), *(uint32 *)va);
+////
+////		uint32* ptr_page_table = NULL;
+////		get_page_table(myenv->env_page_directory, (uint32)va, &ptr_page_table);
+////
+////		uint32 index_page_table = PTX(va);
+////		uint32 page_table_entry = ptr_page_table[index_page_table];
+////
+////		struct FrameInfo* frame = to_frame_info(EXTRACT_ADDRESS(page_table_entry));
+////		cprintf("Frame#%d @ Address: %p\n", i, frame);
+////		if((uint32)frame != (uint32)framesStorage[i]) continue;
+//
+//		int perm = current_share->isWritable ? PERM_WRITEABLE : 0;
+//
+//		if (map_frame(myenv->env_page_directory, frame, (uint32)va, perm) != 0) {
+//		        return E_SHARED_MEM_NOT_EXISTS;
+//		}
+//		pt_set_page_permissions(myenv->env_page_directory, (uint32) va, PERM_MARKED | perm, PERM_PRESENT);
+//	}
+//	current_share->references++;
+//
+//	cprintf("Share used: ID = %d, Name = %s, OwnerID = %d, numOfFrames: %d, isWritable: %d\n", current_share->ID, current_share->name, current_share->ownerID, numOfFrames, current_share->isWritable);
+//	printShare(current_share, numOfFrames);
+//	return current_share->ID;
+//
+//}
+//
+////==================================================================================//
+////============================== BONUS FUNCTIONS ===================================//
+////==================================================================================//
+//
+////==========================
+//// [B1] Delete Share Object:
+////==========================
+////delete the given shared object from the "shares_list"
+////it should free its framesStorage and the share object itself
+//void free_share(struct Share* ptrShare)
+//{
+//	//TODO: [PROJECT'24.MS2 - BONUS#4] [4] SHARED MEMORY [KERNEL SIDE] - free_share()
+//	//COMMENT THE FOLLOWING LINE BEFORE START CODING
+//	panic("free_share is not implemented yet");
+//	//Your Code is Here...
+//
+//}
+////========================
+//// [B2] Free Share Object:
+////========================
+//int freeSharedObject(int32 sharedObjectID, void *startVA)
+//{
+//	//TODO: [PROJECT'24.MS2 - BONUS#4] [4] SHARED MEMORY [KERNEL SIDE] - freeSharedObject()
+//	//COMMENT THE FOLLOWING LINE BEFORE START CODING
+//	panic("freeSharedObject is not implemented yet");
+//	//Your Code is Here...
+//
+//}
 
 //=========================
 // [4] Create Share Object:
@@ -204,59 +355,51 @@ int createSharedObject(int32 ownerID, char* shareName, uint32 size, uint8 isWrit
 //	panic("createSharedObject is not implemented yet");
 	//Your Code is Here...
 	struct Env* myenv = get_cpu_proc(); //The calling environment
-//	cprintf("ownerID: %d\n", ownerID);
 
 	struct Share* existingSharedObject = get_share(ownerID, shareName);
-//	cprintf("existingSharedObject: %d\n", existingSharedObject);
-	if (existingSharedObject != NULL)
-		return 0;
-//	cprintf("VA: %p \t IsWritable: \%d \n",virtual_address, isWritable);
-	struct Share* createdSharedObject = create_share(ownerID, shareName, size,
-			isWritable);
+	if (existingSharedObject != NULL) return 0;
 
+//	cprintf("VA: %p \t IsWritable: \%d \n",virtual_address, isWritable);
+	struct Share* createdSharedObject = create_share(ownerID, shareName, size, isWritable);
 
 	if (createdSharedObject == NULL) return 0;
 
 	int numOfFrames = ROUNDUP(size, PAGE_SIZE) / PAGE_SIZE;
 
-//	createdSharedObject->framesStorage = (struct FrameInfo**) kmalloc(numOfFrames * sizeof(struct FrameInfo*));
-	if (createdSharedObject->framesStorage == NULL)
-		return 0;
+	if (createdSharedObject->framesStorage == NULL) return 0;
 
 	struct FrameInfo* CreatingFrameForAllocation = NULL;
 	for (int i = 0; i < numOfFrames; i++) {
 
-		// Allocate a frame
 		int Checking = allocate_frame(&CreatingFrameForAllocation);
 		if (Checking != 0) return 0;
 
 		createdSharedObject->framesStorage[i] = CreatingFrameForAllocation;
+		uint32* va = (uint32*)((uint32*) virtual_address + i * PAGE_SIZE);
 
-		void* va = (void*) ((uint32*) virtual_address + i * PAGE_SIZE);
-		int checkMapping = map_frame(myenv->env_page_directory, CreatingFrameForAllocation, (uint32) va, PERM_WRITEABLE);
+//		cprintf("%d# created Frame number: %d, deref: %d\n", i, to_frame_number(createdSharedObject->framesStorage[i]), *(uint32 *)va);
+		uint32 pageNumber = ((uint32) va - USER_HEAP_START) / PAGE_SIZE;
+		frames_info_collection[pageNumber] = CreatingFrameForAllocation;
+
 		int perm = createdSharedObject->isWritable ? PERM_WRITEABLE : 0;
-//		pt_set_page_permissions(myenv->env_page_directory, (uint32) virtual_address, PERM_MARKED | perm, PERM_PRESENT);
-		pt_set_page_permissions(myenv->env_page_directory, (uint32) va, PERM_MARKED | perm, PERM_PRESENT);
+
+		int checkMapping = map_frame(myenv->env_page_directory, CreatingFrameForAllocation, (uint32) va, perm);
 
 		if (checkMapping != 0){
 			cprintf("FREEING FRAME: %p\n", CreatingFrameForAllocation);
 			free_frame(CreatingFrameForAllocation);
 			return 0;
 		}
+		cprintf("Creating frame @: %p Virtual Address @: %p, DEREFERENCE FRAME: %d, DEREFERENCE VA: %d\n", CreatingFrameForAllocation, va, *CreatingFrameForAllocation, *va);
 
-//		cprintf("%d# created Frame number: %d, deref: %d\n", i, to_frame_number(createdSharedObject->framesStorage[i]), *(uint32 *)va);
+		pt_set_page_permissions(myenv->env_page_directory, (uint32) va, PERM_MARKED | perm, PERM_PRESENT);
 	}
 
 	LIST_INSERT_TAIL(&(AllShares.shares_list), createdSharedObject);
-//	cprintf("ID: %d\n", createdSharedObject->ID);
 
-//	createdSharedObject->ID &= 0x7FFFFFFF;
-//	printFramesStorage(createdSharedObject->framesStorage, numOfFrames);
-	cprintf("Share created: ID = %d, Name = %s, OwnerID = %d, numOfFrames: %d, isWritable: %d\n", createdSharedObject->ID, createdSharedObject->name, createdSharedObject->ownerID, numOfFrames, createdSharedObject->isWritable);
-	printShare(createdSharedObject, numOfFrames);
+//	cprintf("Share created: ID = %d, Name = %s, OwnerID = %d, numOfFrames: %d, isWritable: %d\n", createdSharedObject->ID, createdSharedObject->name, createdSharedObject->ownerID, numOfFrames, createdSharedObject->isWritable);
+//	printShare(createdSharedObject, numOfFrames);
 	return createdSharedObject->ID;
-
-//	create_share(ownerID, shareName, size,isWritable);
 }
 
 
@@ -273,20 +416,20 @@ int getSharedObject(int32 ownerID, char* shareName, void* virtual_address)
 	struct Share* current_share = get_share(ownerID,shareName);
 	if(current_share == NULL) return E_SHARED_MEM_NOT_EXISTS;
 
-//	uint32 pa = kheap_physical_address((uint32) virtual_address);
 	uint32 size = getSizeOfSharedObject(ownerID, shareName);
 
-
 	int numOfFrames = ROUNDUP(size, PAGE_SIZE) / PAGE_SIZE;
-	cprintf("Virtual Address deref: %d\n", *(uint32 *)virtual_address);
 
 	struct FrameInfo** framesStorage = current_share->framesStorage;
-
 	for(int i = 0; i < numOfFrames; i++)
 	{
+
+
 		struct FrameInfo* frame = framesStorage[i];
-		void* va = (void*) ((uint32*) virtual_address + i * PAGE_SIZE);
-//		cprintf("%d# gotten Frame number: %d, deref: %d\n", i, to_frame_number(current_share->framesStorage[i]), *(uint32 *)va);
+		uint32* va = (uint32*)((uint32*) virtual_address + i * PAGE_SIZE);
+
+//		uint32 pageNumber = ((uint32)va - USER_HEAP_START) / PAGE_SIZE;
+//		struct FrameInfo* frame_in_arr = frames_info_collection[pageNumber];
 //
 //		uint32* ptr_page_table = NULL;
 //		get_page_table(myenv->env_page_directory, (uint32)va, &ptr_page_table);
@@ -296,19 +439,23 @@ int getSharedObject(int32 ownerID, char* shareName, void* virtual_address)
 //
 //		struct FrameInfo* frame = to_frame_info(EXTRACT_ADDRESS(page_table_entry));
 //		cprintf("Frame#%d @ Address: %p\n", i, frame);
-//		if((uint32)frame != (uint32)framesStorage[i]) continue;
+//		if(frame_in_arr != frame) continue;
 
 		int perm = current_share->isWritable ? PERM_WRITEABLE : 0;
 
 		if (map_frame(myenv->env_page_directory, frame, (uint32)va, perm) != 0) {
-		        return E_SHARED_MEM_NOT_EXISTS;
+			cprintf("FREEING FRAME: %p\n", frame);
+			free_frame(frame);
+			return E_SHARED_MEM_NOT_EXISTS;
 		}
+//		*(uint32 *)frame = *va;
+		cprintf("Fetching frame @: %p Virtual Address @: %p, DEREFERENCE FRAME: %d, DEREFERENCE VA: %d\n", frame, va, *frame, *va);
 		pt_set_page_permissions(myenv->env_page_directory, (uint32) va, PERM_MARKED | perm, PERM_PRESENT);
 	}
 	current_share->references++;
 
-	cprintf("Share used: ID = %d, Name = %s, OwnerID = %d, numOfFrames: %d, isWritable: %d\n", current_share->ID, current_share->name, current_share->ownerID, numOfFrames, current_share->isWritable);
-	printShare(current_share, numOfFrames);
+//	cprintf("Share used: ID = %d, Name = %s, OwnerID = %d, numOfFrames: %d, isWritable: %d\n", current_share->ID, current_share->name, current_share->ownerID, numOfFrames, current_share->isWritable);
+//	printShare(current_share, numOfFrames);
 	return current_share->ID;
 
 }

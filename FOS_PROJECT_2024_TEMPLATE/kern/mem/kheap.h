@@ -51,7 +51,9 @@ void* kmalloc(unsigned int size);
 void kfree(void* virtual_address);
 void *krealloc(void *virtual_address, unsigned int new_size);
 
-//uint32 *findConsecutivePages(int numOfPages);
+uint32* findConsecutivePages(int numOfPages);
+uint32* findMoreConsecutivePages(uint32* va, int oldNumOfPages, int diffNumOfPages);
+void freeConsecutivePages(uint32* start_virtual_address, int numOfFreedPages);
 
 unsigned int kheap_virtual_address(unsigned int physical_address);
 unsigned int kheap_physical_address(unsigned int virtual_address);

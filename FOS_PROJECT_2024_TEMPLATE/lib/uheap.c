@@ -48,17 +48,15 @@ void* malloc(uint32 size) {
 // [3] FREE SPACE FROM USER HEAP:
 //=================================
 void free(void* virtual_address) {
-//	cprintf("va: %x\n", virtual_address);
+
 	if (virtual_address == NULL)
 		return;
 
-	if ((uint32) virtual_address >= myEnv->UhStart
-			&& (uint32) virtual_address < myEnv->UhLimit) {
+	if ((uint32) virtual_address >= myEnv->UhStart && (uint32) virtual_address < myEnv->UhLimit) {
 		free_block(virtual_address);
 		return;
 	}
-	if ((uint32) virtual_address < USER_HEAP_START
-			|| (uint32) virtual_address >= USER_HEAP_MAX)
+	if ((uint32) virtual_address < USER_HEAP_START || (uint32) virtual_address >= USER_HEAP_MAX)
 		return;
 
 	// Calculate index and retrieve size
@@ -70,7 +68,6 @@ void free(void* virtual_address) {
 	}
 
 	uint32 size = allocation_sizes[index];
-//	cprintf("size: %d\n", size);
 
 	// Check for zero-sized allocations
 	if (size == 0) {
@@ -79,7 +76,7 @@ void free(void* virtual_address) {
 
 	// Free from page allocator
 	sys_free_user_mem((uint32) virtual_address, size);
-//	cprintf("size: %d\n", size);
+
 	allocation_sizes[index] = 0;
 }
 
@@ -94,9 +91,8 @@ void* smalloc(char *sharedVarName, uint32 size, uint8 isWritable) {
 	//==============================================================
 	//TODO: [PROJECT'24.MS2 - #18] [4] SHARED MEMORY [USER SIDE] - smalloc()
 	// Write your code here, remove the panic and write your code
-	//	panic("smalloc() is not implemented yet...!!");
-
-	uint32* virtual_address = AllocateInPageAllocator(size);
+//	panic("smalloc() is not implemented yet...!!");
+	uint32* virtual_address = (uint32*)AllocateInPageAllocator(size);
 
 	int SharedObjectId = sys_createSharedObject(sharedVarName, size, isWritable,
 			(void*) virtual_address);
@@ -111,23 +107,21 @@ void* smalloc(char *sharedVarName, uint32 size, uint8 isWritable) {
 void* sget(int32 ownerEnvID, char *sharedVarName) {
 	//TODO: [PROJECT'24.MS2 - #20] [4] SHARED MEMORY [USER SIDE] - sget()
 	// Write your code here, remove the panic and write your code
-	//1-get size of shared varaible
-	uint32 start_va;
-	uint32 size = sys_getSizeOfSharedObject(ownerEnvID,sharedVarName);
+	//1- get size of shared variable
+	void* start_va;
+	uint32 size = sys_getSizeOfSharedObject(ownerEnvID, sharedVarName);
 	if(size == 0) return NULL;
-//	cprintf("Size of shared: %d\n", size);
-	start_va = (uint32) AllocateInPageAllocator(size);
-//	cprintf("start_va: %p\n", start_va);
-//	cprintf("start_va @: %p, deref: %d\n", start_va);
-	if((void *)start_va == NULL) return NULL;
 
-	uint32 id = sys_getSharedObject(ownerEnvID, sharedVarName, (void *) start_va);
-//	cprintf("Share used: ID = %d\n", id);
+	start_va = AllocateInPageAllocator(size);
+	if(start_va == NULL) return NULL;
+
+//	*((uint32 *)start_va) = 20;
+	uint32 id = sys_getSharedObject(ownerEnvID, sharedVarName, (uint32 *)start_va);
 
 	if(id == E_SHARED_MEM_NOT_EXISTS) return NULL;
 
-
-	return (void *)start_va;
+//	sys_bypassPageFault(0);
+	return start_va;
 }
 //==================================================================================//
 //============================== BONUS FUNCTIONS ===================================//
@@ -177,26 +171,7 @@ void *realloc(void *virtual_address, uint32 new_size) {
  * */
 
 void* AllocateInPageAllocator(uint32 size) {
-	uint32 virtual_address = myEnv->UhLimit + PAGE_SIZE;
-	uint32 numOfPages = ROUNDUP(size, PAGE_SIZE) / PAGE_SIZE, countPages = 0;
-
-//	cprintf("--------numOfPages: %d\t,\tSize: %d------------\n", numOfPages, size);
-	uint32 current = virtual_address, startAdd = virtual_address;
-	uint32* ptr_page_table = NULL;
-	while (countPages < numOfPages) {
-		if ((uint32) current > USER_HEAP_MAX) {
-			return NULL;
-		}
-		// check if marked or present.
-		if (sys_is_marked_page((uint32) current)) {
-			countPages = 0;
-			current += PAGE_SIZE;
-			virtual_address = current;
-			continue;
-		}
-		++countPages;
-		current += PAGE_SIZE;
-	}
+	uint32 virtual_address = (uint32)GetConsecutivePages(size);
 	sys_allocate_user_mem((uint32) virtual_address, size);
 
 	uint32 index = ((uint32) virtual_address - USER_HEAP_START) / PAGE_SIZE;
@@ -207,6 +182,38 @@ void* AllocateInPageAllocator(uint32 size) {
 	}
 	return (void*) virtual_address;
 }
+
+
+uint32* GetConsecutivePages(uint32 size) {
+	uint32 virtual_address = myEnv->UhLimit + PAGE_SIZE;
+	uint32 numOfPages = ROUNDUP(size, PAGE_SIZE) / PAGE_SIZE, countPages = 0;
+
+	uint32 current = virtual_address, startAdd = virtual_address;
+	uint32* ptr_page_table = NULL;
+	while (countPages < numOfPages) {
+		if ((uint32) current > USER_HEAP_MAX) {
+			return NULL;
+		}
+		// Check if marked or present.
+		if (sys_is_marked_page((uint32) current)) {
+			countPages = 0;
+			current += PAGE_SIZE;
+			virtual_address = current;
+			continue;
+		}
+		++countPages;
+		current += PAGE_SIZE;
+	}
+
+	uint32 index = ((uint32) virtual_address - USER_HEAP_START) / PAGE_SIZE;
+	uint32 totalSize = ROUNDUP(size, PAGE_SIZE);
+	allocation_sizes[index] = totalSize;
+	if ((virtual_address + totalSize) > USER_HEAP_MAX) {
+		return NULL;
+	}
+	return (uint32 *)virtual_address;
+}
+
 
 //==================================================================================//
 //========================== MODIFICATION FUNCTIONS ================================//

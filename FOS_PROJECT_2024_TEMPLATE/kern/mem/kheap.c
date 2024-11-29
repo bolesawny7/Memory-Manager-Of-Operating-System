@@ -58,6 +58,11 @@ int initialize_kheap_dynamic_allocator(uint32 daStart, uint32 initSizeToAllocate
 		ptr_current = (uint32 *)((char *)ptr_current + PAGE_SIZE);
 
 	}
+//	/* THIS IS NEW */
+//	int index = ((uint32)sBreak - KERNEL_HEAP_START)/PAGE_SIZE;
+//	uint32 totalSize = *sBreak;
+//	allocation_sizes[index] = totalSize;
+//	/* THIS IS NEW */
 //	cprintf("ptr_current: %p\n", ptr_current);
 //	cprintf("initialSize: %d\n", initSizeToAllocate);
     initialize_dynamic_allocator(daStart, initSizeToAllocate);
@@ -97,7 +102,6 @@ void* sbrk(int numOfPages) {
         }
 
         uint32 newBreak = oldSBreak + incrementSize;
-
         // hnallocate w nmap pages
         for (uint32 va = oldSBreak; va < newBreak; va += PAGE_SIZE) {
             struct FrameInfo* currentFrame = NULL;
@@ -109,12 +113,18 @@ void* sbrk(int numOfPages) {
             if (map_frame(ptr_page_directory, currentFrame, va, PERM_WRITEABLE) == E_NO_MEM) {
                 return (void*)-1;
             }
-			uint32 index = to_frame_number(currentFrame);
-			FramesToPagesK[index] = (uint32)va;
+            uint32 frameNumber = to_frame_number(currentFrame);
+			FramesToPagesK[frameNumber] = (uint32)va;
         }
 		// 3addel el end block el gdida 5aliha 0x1
 		uint32* blockFooter = (uint32*)((uint32)newBreak - sizeof(uint32));
 		*blockFooter = 0x1;
+
+//		/* THIS IS NEW */
+//		int index = ((uint32)oldSBreak - KERNEL_HEAP_START)/PAGE_SIZE;
+//		uint32 totalSize = numOfPages * PAGE_SIZE;
+//		allocation_sizes[index] = totalSize;
+//		/* THIS IS NEW */
 
 		// 7arak el segmant
 		sBreak = (uint32*)newBreak;
@@ -200,7 +210,8 @@ void* kmalloc(unsigned int size) {
 
         //record allocation size in the array
         uint32 index = ((uint32)virtual_address_to_be_returned - KERNEL_HEAP_START)/PAGE_SIZE;
-        uint32 totalSize = ROUNDUP(size, PAGE_SIZE);
+//        uint32 totalSize = ROUNDUP(size, PAGE_SIZE);
+        uint32 totalSize = size;
         allocation_sizes[index] = totalSize;
 
         return (void *)virtual_address_to_be_returned;
@@ -234,14 +245,14 @@ void kfree(void* virtual_address)
 	uint32 size = allocation_sizes[index];
 	if (size == 0)
 		return;
-	uint32 numOfPages = size / PAGE_SIZE;
+	int numOfPages = ROUNDUP(size, PAGE_SIZE) / PAGE_SIZE;
 
 	for (uint32 i = 0; i < numOfPages; i++) {
         uint32 *ptr_page_table = NULL;
         struct FrameInfo* frame = get_frame_info(ptr_page_directory,va,&ptr_page_table);
 		unmap_frame(ptr_page_directory, va);
-		if(frame->references == 0)
-			free_frame(frame);
+//		if(frame->references == 0)
+//			free_frame(frame);
 		FramesToPagesK[to_frame_number(frame)] = 0;
 		va += PAGE_SIZE;
 	}
@@ -307,7 +318,138 @@ void *krealloc(void *virtual_address, uint32 new_size)
 	//TODO: [PROJECT'24.MS2 - BONUS#1] [1] KERNEL HEAP - krealloc
 	// Write your code here, remove the panic and write your code
 //	return NULL;
-	panic("krealloc() is not implemented yet...!!");
-	return (void *)0;
+//	panic("krealloc() is not implemented yet...!!");
+
+	if(virtual_address == NULL){
+		cprintf("Virtual Address is NULL, Allocating in a new location..\n");
+		return kmalloc(new_size);
+	}
+	if(new_size == 0) {
+		cprintf("Size is equal 0.\n");
+		kfree(virtual_address);
+		return NULL;
+	}
+	uint32 pageNumber = ((uint32)virtual_address - KERNEL_HEAP_START) / PAGE_SIZE;
+
+	uint32 old_size = allocation_sizes[pageNumber];
+
+	cprintf("old size: %d, new size: %d\n", old_size, new_size);
+
+	if (old_size <= DYN_ALLOC_MAX_BLOCK_SIZE) {
+	// Old block was found in dynamic allocator.
+		if(new_size <= DYN_ALLOC_MAX_BLOCK_SIZE){
+			// New block was found in dynamic allocator.
+			cprintf("Old and New blocks in dynamic allocator.\n");
+			return realloc_block_FF(virtual_address, new_size);
+		}
+		// New block was found in page allocator.
+		void* new_allocate = kmalloc(new_size);
+		if(new_allocate){
+			cprintf("New allocation found in heap.\n");
+			cprintf("Old block in dynamic allocator, New block in page allocator.\n");
+			free_block(virtual_address);
+			return new_allocate;
+		}
+		return NULL;
+	}
+	// Old block was found in page allocator.
+	if(old_size > DYN_ALLOC_MAX_BLOCK_SIZE){
+		cprintf("Old block in page alloctor.\n");
+		// New block was found in dynamic allocator.
+		if(new_size <= DYN_ALLOC_MAX_BLOCK_SIZE){
+			cprintf("New block in dynamic alloctor.\n");
+			void* new_allocate = alloc_block_FF(new_size);
+			if(new_allocate){
+				cprintf("New allocation found in heap.\n");
+				cprintf("Old block in page allocator, New block in dynamic allocator.\n");
+				kfree(virtual_address);
+				return new_allocate;
+			}
+			return NULL;
+		}
+	}
+
+	// Old & new blocks was found in page allocator.
+
+	uint32 diff_size = new_size - old_size;
+	int oldNumOfPages = ROUNDUP(old_size, PAGE_SIZE) / PAGE_SIZE;
+	int diffNumOfPages = ROUNDUP(diff_size, PAGE_SIZE) / PAGE_SIZE;
+
+	if(diff_size == 0){
+		// No Change in size.
+		cprintf("Size is the same.\n");
+		return virtual_address;
+	}
+	else if(diff_size < 0){
+		// New size is smaller. Free the rest of the pages.
+		cprintf("New size is smaller than the old size.\n");
+		uint32* strt_address_to_free = (uint32*)((uint32)virtual_address + new_size);
+		freeConsecutivePages(strt_address_to_free, diffNumOfPages);
+		return virtual_address;
+	}
+
+	// Now check if we can add more consecutive pages without reallocating the whole block.
+	cprintf("Try adding more consecutive pages in the same address.\n");
+
+	uint32 *extended_virtual_address = findMoreConsecutivePages(virtual_address, oldNumOfPages, diffNumOfPages);
+	if(extended_virtual_address == NULL){
+		cprintf("Could't add more consecutive pages in the same address.\n");
+		// If not, then free the old blocks and allocate from the beginning. (using first fit)
+		void* new_allocate = kmalloc(new_size);
+		if(new_allocate){ // If we can allocate the new size in a new location, then free all old pages and return new location.
+			cprintf("New allocation found in heap.\n");
+			freeConsecutivePages(virtual_address, oldNumOfPages);
+			return new_allocate;
+		}
+		cprintf("Couldn't find space for the new size.\n");
+		return NULL;
+	}
+
+
+	// Return the same start address if we can add more consecutive pages without reallocating the whole block.
+	cprintf("Added more consecutive pages in the same address successfully.\n");
+	return virtual_address;
 }
 
+void freeConsecutivePages(uint32* start_virtual_address, int numOfFreedPages){
+	uint32 current_va = (uint32)start_virtual_address;
+	uint32 *ptr_page_table = NULL;
+	uint32 pageNumber = ((uint32)start_virtual_address - KERNEL_HEAP_START) / PAGE_SIZE;
+//	cprintf("Num Of Freed Pages: %d\n", numOfFreedPages);
+	for(int i = 0; i < numOfFreedPages; i++){
+		// Get the frame.
+		struct FrameInfo* frame = get_frame_info(ptr_page_directory, current_va, &ptr_page_table);
+		// Unmap it.
+		unmap_frame(ptr_page_directory, current_va);
+//		if(frame->references == 0)
+//			free_frame(frame); // Free Frame if references is 0.
+
+		// Remove the pages virtual addresses from FramesToPages array.
+//		cprintf("test Frame address: %p\n", frame);
+		FramesToPagesK[to_frame_number(frame)] = 0;
+		current_va += PAGE_SIZE;
+	}
+	allocation_sizes[pageNumber] = 0;
+}
+
+uint32 * findMoreConsecutivePages(uint32* va, int oldNumOfPages, int diffNumOfPages){
+	uint32 *virtual_address = (uint32 *)va;
+    int countOfPages = 0;
+    uint32 *current_va = (uint32*)((uint32)virtual_address + (oldNumOfPages * PAGE_SIZE));
+    uint32 *ptr_page_table = NULL;
+
+    while (countOfPages < diffNumOfPages) {
+        if (get_frame_info(ptr_page_directory, (uint32)current_va, &ptr_page_table) == 0 &&
+        		(uint32)current_va < KERNEL_HEAP_MAX) {
+            // va is in the range.
+            countOfPages++;
+        } else {
+        	/* Couldn't find more pages in the same start address */
+            return NULL;
+        }
+        if ((uint32)current_va >= KERNEL_HEAP_MAX)
+            return NULL; // insufficient memory.
+        current_va = (uint32 *)((uint32)current_va + PAGE_SIZE);
+    }
+    return virtual_address;
+}

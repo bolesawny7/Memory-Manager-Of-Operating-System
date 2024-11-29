@@ -9,6 +9,7 @@ _main(void)
 	//Initial test to ensure it works on "PLACEMENT" not "REPLACEMENT"
 #if USE_KHEAP
 	{
+//		cprintf("List size: %d, Env WS Max Size: %d\n", LIST_SIZE(&(myEnv->page_WS_list)), myEnv->page_WS_max_size);
 		if (LIST_SIZE(&(myEnv->page_WS_list)) >= myEnv->page_WS_max_size)
 			panic("Please increase the WS size");
 	}
@@ -22,6 +23,7 @@ _main(void)
 	uint32 *x,*y,*z, *expectedVA;
 	int freeFrames, diff, expected;
 	int32 parentenvID = sys_getparentenvid();
+	cprintf("parentenvID: %d\n", parentenvID);
 	//GET: z then y then x, opposite to creation order (x then y then z)
 	//So, addresses here will be different from the OWNER addresses
 	//sys_lock_cons();
@@ -55,7 +57,7 @@ _main(void)
 	sys_unlock_cons();
 	//sys_unlock_cons();
 
-//	cprintf("FROM SLAVE -> y@: %p, *y: %d\n", y, *y);
+	cprintf("FROM SLAVE -> y@: %p, *y: %d\n", y, *y);
 //	cprintf("dereference y: %d\n", *y);
 	if (*y != 20) panic("Get(): Shared Variable is not created or got correctly");
 
