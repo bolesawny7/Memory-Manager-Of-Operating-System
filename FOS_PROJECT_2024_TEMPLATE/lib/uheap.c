@@ -172,6 +172,8 @@ void *realloc(void *virtual_address, uint32 new_size) {
 
 void* AllocateInPageAllocator(uint32 size) {
 	uint32 virtual_address = (uint32)GetConsecutivePages(size);
+
+	if(!virtual_address) return NULL;
 	sys_allocate_user_mem((uint32) virtual_address, size);
 
 	uint32 index = ((uint32) virtual_address - USER_HEAP_START) / PAGE_SIZE;

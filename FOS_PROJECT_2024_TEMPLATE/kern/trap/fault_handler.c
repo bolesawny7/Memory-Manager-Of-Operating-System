@@ -145,6 +145,7 @@ void fault_handler(struct Trapframe *tf)
 	}
 	else
 	{
+		cprintf("userTrap: %d\n", userTrap);
 		if (userTrap)
 		{
 			/*============================================================================================*/
@@ -155,32 +156,31 @@ void fault_handler(struct Trapframe *tf)
 			if(fault_va >= USER_HEAP_START && fault_va < USER_HEAP_MAX){
 			uint32 permissions = pt_get_page_permissions(faulted_env->env_page_directory, fault_va);
 				if((permissions & PERM_MARKED) == 0){
-					cprintf("\nsabah2 %x\n", fault_va);
+					cprintf("Page fault at @va=%x, permission marked isn't assigned..\n", fault_va);
 					env_exit();
 				}
 			}
 
 			if(fault_va >= USTACKTOP){
-				cprintf("\nsabah1\n");
+				cprintf("Page @va=%x virtual address should be less than the user stack top..\n", fault_va);
 				env_exit();
 			}
 
 			uint32 permissions = pt_get_page_permissions(faulted_env->env_page_directory, fault_va);
 
 			if((permissions & PERM_WRITEABLE) == 0 && (permissions & PERM_PRESENT)){
-				cprintf("\nsabah %x\n",fault_va);
+				cprintf("Page @va=%x should be writable and not present..\n", fault_va);
 				env_exit();
 			}
 
 			/*============================================================================================*/
-		}else{
+		}
 
 		/*2022: Check if fault due to Access Rights */
 		int perms = pt_get_page_permissions(faulted_env->env_page_directory, fault_va);
 		if (perms & PERM_PRESENT)
 			panic("Page @va=%x is exist! page fault due to violation of ACCESS RIGHTS\n", fault_va) ;
 		/*============================================================================================*/
-		}
 
 		// we have normal page fault =============================================================
 		faulted_env->pageFaultsCounter ++ ;
@@ -258,12 +258,23 @@ void page_fault_handler(struct Env * faulted_env, uint32 fault_va)
 		map_frame(faulted_env->env_page_directory,FaultedPage, fault_va, PERM_USER| PERM_PRESENT| PERM_WRITEABLE );
 
 		int EnvPage= pf_read_env_page(faulted_env, (void*)fault_va);
-		if(EnvPage==E_PAGE_NOT_EXIST_IN_PF){
+		if(EnvPage == E_PAGE_NOT_EXIST_IN_PF){
+			cprintf(
+			    "fault_va: %p, USER_HEAP_START: %p, USER_HEAP_MAX: %p, USTACKTOP: %p, USTACKBOTTOM: %p\n",
+			    (void *)fault_va,
+			    (void *)USER_HEAP_START,
+			    (void *)USER_HEAP_MAX,
+			    (void *)USTACKTOP,
+			    (void *)USTACKBOTTOM
+			);
+			cprintf("Env page not found\n");
 			if (!(fault_va >= USER_HEAP_START && fault_va < USER_HEAP_MAX) && !(fault_va >= USTACKBOTTOM && fault_va < USTACKTOP)) {
+				cprintf("fault va not in any of these ranges\n");
 				unmap_frame(faulted_env->env_page_directory, fault_va);
 				env_exit();
-				}
+			}
 		}
+//		cprintf("Env page found");
 
 		struct WorkingSetElement* NewWorkingSetElement= env_page_ws_list_create_element(faulted_env, fault_va);
 		LIST_INSERT_TAIL(&(faulted_env->page_WS_list), NewWorkingSetElement);

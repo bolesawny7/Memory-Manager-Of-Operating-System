@@ -371,7 +371,8 @@ void *krealloc(void *virtual_address, uint32 new_size)
 
 	// Old & new blocks was found in page allocator.
 
-	uint32 diff_size = new_size - old_size;
+	int diff_size = new_size - old_size;
+	cprintf("difference in size: %d\n", diff_size);
 	int oldNumOfPages = ROUNDUP(old_size, PAGE_SIZE) / PAGE_SIZE;
 	int diffNumOfPages = ROUNDUP(diff_size, PAGE_SIZE) / PAGE_SIZE;
 
@@ -415,17 +416,13 @@ void freeConsecutivePages(uint32* start_virtual_address, int numOfFreedPages){
 	uint32 current_va = (uint32)start_virtual_address;
 	uint32 *ptr_page_table = NULL;
 	uint32 pageNumber = ((uint32)start_virtual_address - KERNEL_HEAP_START) / PAGE_SIZE;
-//	cprintf("Num Of Freed Pages: %d\n", numOfFreedPages);
 	for(int i = 0; i < numOfFreedPages; i++){
 		// Get the frame.
 		struct FrameInfo* frame = get_frame_info(ptr_page_directory, current_va, &ptr_page_table);
 		// Unmap it.
 		unmap_frame(ptr_page_directory, current_va);
-//		if(frame->references == 0)
-//			free_frame(frame); // Free Frame if references is 0.
 
 		// Remove the pages virtual addresses from FramesToPages array.
-//		cprintf("test Frame address: %p\n", frame);
 		FramesToPagesK[to_frame_number(frame)] = 0;
 		current_va += PAGE_SIZE;
 	}

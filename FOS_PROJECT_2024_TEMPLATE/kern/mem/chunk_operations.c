@@ -26,7 +26,7 @@ bool IsPageMarked(struct Env* myEnv, uint32 va) {
     }
 //    pt_set_page_permissions(myEnv->env_page_directory, va, PERM_MARKED|PERM_WRITEABLE, PERM_PRESENT);
     uint32 addr = pt_get_page_permissions(myEnv->env_page_directory,va);
-    bool isMarked = (((addr & PERM_MARKED) == PERM_MARKED) || ((addr & PERM_PRESENT) == PERM_PRESENT));
+    bool isMarked = ((addr & PERM_MARKED) == PERM_MARKED);
     return isMarked;
 }
 
