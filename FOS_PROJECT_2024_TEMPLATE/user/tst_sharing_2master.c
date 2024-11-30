@@ -68,18 +68,18 @@ _main(void)
 
 	int id1, id2, id3;
 	id1 = sys_create_env("shr2Slave1", (myEnv->page_WS_max_size),(myEnv->SecondListSize), (myEnv->percentage_of_WS_pages_to_be_removed));
-//	id2 = sys_create_env("shr2Slave1", (myEnv->page_WS_max_size), (myEnv->SecondListSize),(myEnv->percentage_of_WS_pages_to_be_removed));
-//	id3 = sys_create_env("shr2Slave1", (myEnv->page_WS_max_size), (myEnv->SecondListSize),(myEnv->percentage_of_WS_pages_to_be_removed));
+	id2 = sys_create_env("shr2Slave1", (myEnv->page_WS_max_size), (myEnv->SecondListSize),(myEnv->percentage_of_WS_pages_to_be_removed));
+	id3 = sys_create_env("shr2Slave1", (myEnv->page_WS_max_size), (myEnv->SecondListSize),(myEnv->percentage_of_WS_pages_to_be_removed));
 
 	//to check that the slave environments completed successfully
 	rsttst();
 
 	sys_run_env(id1);
-//	sys_run_env(id2);
-//	sys_run_env(id3);
+	sys_run_env(id2);
+	sys_run_env(id3);
 
 	//to ensure that the slave environments completed successfully
-	while (gettst()!=1) ;// panic("test failed");
+	while (gettst()!=3) ;// panic("test failed");
 
 
 	if (*z != 30)

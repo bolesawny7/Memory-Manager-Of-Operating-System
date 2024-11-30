@@ -93,11 +93,13 @@ void* smalloc(char *sharedVarName, uint32 size, uint8 isWritable) {
 	// Write your code here, remove the panic and write your code
 //	panic("smalloc() is not implemented yet...!!");
 	uint32* virtual_address = (uint32*)AllocateInPageAllocator(size);
-
+	if(!virtual_address) return NULL;
+	cprintf("Found virtual address @: %p\n", virtual_address);
 	int SharedObjectId = sys_createSharedObject(sharedVarName, size, isWritable,
 			(void*) virtual_address);
 	if (SharedObjectId == 0)
 		return NULL;
+	cprintf("Found shared object with ID: %p\n", SharedObjectId);
 	return (void*) virtual_address;
 }
 
@@ -114,6 +116,8 @@ void* sget(int32 ownerEnvID, char *sharedVarName) {
 
 	start_va = AllocateInPageAllocator(size);
 	if(start_va == NULL) return NULL;
+
+	cprintf("Found virtual address @: %p\n", start_va);
 
 //	*((uint32 *)start_va) = 20;
 	uint32 id = sys_getSharedObject(ownerEnvID, sharedVarName, (uint32 *)start_va);

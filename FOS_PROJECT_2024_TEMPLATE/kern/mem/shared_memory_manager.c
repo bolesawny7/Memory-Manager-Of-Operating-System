@@ -187,11 +187,17 @@ struct Share* get_share(int32 ownerID, char* name)
 	if(&(AllShares.shares_list).size == 0) return NULL;
 
 	struct Share* share_itr;
-
+	//aquire
+	acquire_spinlock(&(AllShares.shareslock));
 	LIST_FOREACH(share_itr, &(AllShares.shares_list)){
-		if(share_itr->ownerID == ownerID && strcmp(share_itr->name, name) == 0)
+		if(share_itr->ownerID == ownerID && strcmp(share_itr->name, name) == 0){
+			// release
+			release_spinlock(&(AllShares.shareslock));
 			return share_itr;
+		}
 	}
+	//release
+	release_spinlock(&(AllShares.shareslock));
 
 	return NULL;
 }
@@ -374,29 +380,31 @@ int createSharedObject(int32 ownerID, char* shareName, uint32 size, uint8 isWrit
 		if (Checking != 0) return 0;
 
 		createdSharedObject->framesStorage[i] = CreatingFrameForAllocation;
-		uint32* va = (uint32*)((uint32*) virtual_address + i * PAGE_SIZE);
+		uint32* va = (uint32*)((uint32) virtual_address + i * PAGE_SIZE);
 
 //		cprintf("%d# created Frame number: %d, deref: %d\n", i, to_frame_number(createdSharedObject->framesStorage[i]), *(uint32 *)va);
-		uint32 pageNumber = ((uint32) va - USER_HEAP_START) / PAGE_SIZE;
-		frames_info_collection[pageNumber] = CreatingFrameForAllocation;
+//		uint32 pageNumber = ((uint32) va - USER_HEAP_START) / PAGE_SIZE;
+//		frames_info_collection[pageNumber] = CreatingFrameForAllocation;
 
-		int perm = createdSharedObject->isWritable ? PERM_WRITEABLE : 0;
+//		int perm = createdSharedObject->isWritable ? PERM_WRITEABLE : 0;
 
-		int checkMapping = map_frame(myenv->env_page_directory, CreatingFrameForAllocation, (uint32) va, perm);
+		int checkMapping = map_frame(myenv->env_page_directory, CreatingFrameForAllocation, (uint32) va, PERM_WRITEABLE | PERM_USER | PERM_PRESENT);
 
 		if (checkMapping != 0){
 			cprintf("FREEING FRAME: %p\n", CreatingFrameForAllocation);
 			free_frame(CreatingFrameForAllocation);
 			return 0;
 		}
-		cprintf("Creating frame @: %p Virtual Address @: %p, DEREFERENCE FRAME: %d, DEREFERENCE VA: %d\n", CreatingFrameForAllocation, va, *CreatingFrameForAllocation, *va);
+//		cprintf("Creating frame @: %p Virtual Address @: %p, DEREFERENCE FRAME: %d, DEREFERENCE VA: %d\n", CreatingFrameForAllocation, va, *CreatingFrameForAllocation, *va);
 
-		pt_set_page_permissions(myenv->env_page_directory, (uint32) va, PERM_MARKED | perm, PERM_PRESENT);
+//		pt_set_page_permissions(myenv->env_page_directory, (uint32) va, PERM_MARKED | perm, PERM_PRESENT);
 	}
 
-	LIST_INSERT_TAIL(&(AllShares.shares_list), createdSharedObject);
+	acquire_spinlock(&(AllShares.shareslock));
+		LIST_INSERT_TAIL(&(AllShares.shares_list), createdSharedObject);
+	release_spinlock(&(AllShares.shareslock));
 
-//	cprintf("Share created: ID = %d, Name = %s, OwnerID = %d, numOfFrames: %d, isWritable: %d\n", createdSharedObject->ID, createdSharedObject->name, createdSharedObject->ownerID, numOfFrames, createdSharedObject->isWritable);
+	cprintf("Share created: ID = %d, Name = %s, OwnerID = %d, numOfFrames: %d, isWritable: %d\n", createdSharedObject->ID, createdSharedObject->name, createdSharedObject->ownerID, numOfFrames, createdSharedObject->isWritable);
 //	printShare(createdSharedObject, numOfFrames);
 	return createdSharedObject->ID;
 }
@@ -442,20 +450,21 @@ int getSharedObject(int32 ownerID, char* shareName, void* virtual_address)
 
 		int perm = current_share->isWritable ? PERM_WRITEABLE : 0;
 
-		if (map_frame(myenv->env_page_directory, frame, (uint32)va, perm) != 0) {
+		if (map_frame(myenv->env_page_directory, frame, (uint32)va, perm | PERM_USER | PERM_PRESENT) != 0) {
 			cprintf("FREEING FRAME: %p\n", frame);
 			free_frame(frame);
 			return E_SHARED_MEM_NOT_EXISTS;
 		}
+//		frame->references++;
 //		*(uint32 *)frame = *va;
-		cprintf("Fetching frame @: %p Virtual Address @: %p, DEREFERENCE FRAME: %d, DEREFERENCE VA: %d\n", frame, va, *frame, *va);
-		pt_set_page_permissions(myenv->env_page_directory, (uint32) va, PERM_MARKED | perm, PERM_PRESENT);
+//		cprintf("Fetching frame @: %p Virtual Address @: %p, DEREFERENCE FRAME: %d, DEREFERENCE VA: %d\n", frame, va, *frame, *va);
+//		pt_set_page_permissions(myenv->env_page_directory, (uint32) va, PERM_MARKED | perm, PERM_PRESENT);
 	}
 	current_share->references++;
 
-//	cprintf("Share used: ID = %d, Name = %s, OwnerID = %d, numOfFrames: %d, isWritable: %d\n", current_share->ID, current_share->name, current_share->ownerID, numOfFrames, current_share->isWritable);
+	cprintf("Share used: ID = %d, Name = %s, OwnerID = %d, numOfFrames: %d, isWritable: %d\n", current_share->ID, current_share->name, current_share->ownerID, numOfFrames, current_share->isWritable);
 //	printShare(current_share, numOfFrames);
-	return current_share->ID;
+	return (int)((uint32) virtual_address & 0x7FFFFFFF);
 
 }
 

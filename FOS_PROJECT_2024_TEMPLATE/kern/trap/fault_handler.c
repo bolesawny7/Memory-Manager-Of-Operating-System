@@ -145,7 +145,7 @@ void fault_handler(struct Trapframe *tf)
 	}
 	else
 	{
-		cprintf("userTrap: %d\n", userTrap);
+//		cprintf("userTrap: %d\n", userTrap);
 		if (userTrap)
 		{
 			/*============================================================================================*/
@@ -156,20 +156,20 @@ void fault_handler(struct Trapframe *tf)
 			if(fault_va >= USER_HEAP_START && fault_va < USER_HEAP_MAX){
 			uint32 permissions = pt_get_page_permissions(faulted_env->env_page_directory, fault_va);
 				if((permissions & PERM_MARKED) == 0){
-					cprintf("Page fault at @va=%x, permission marked isn't assigned..\n", fault_va);
+//					cprintf("Page fault at @va=%x, permission marked isn't assigned..\n", fault_va);
 					env_exit();
 				}
 			}
 
 			if(fault_va >= USTACKTOP){
-				cprintf("Page @va=%x virtual address should be less than the user stack top..\n", fault_va);
+//				cprintf("Page @va=%x virtual address should be less than the user stack top..\n", fault_va);
 				env_exit();
 			}
 
 			uint32 permissions = pt_get_page_permissions(faulted_env->env_page_directory, fault_va);
 
 			if((permissions & PERM_WRITEABLE) == 0 && (permissions & PERM_PRESENT)){
-				cprintf("Page @va=%x should be writable and not present..\n", fault_va);
+//				cprintf("Page @va=%x should be writable and not present..\n", fault_va);
 				env_exit();
 			}
 
@@ -259,17 +259,17 @@ void page_fault_handler(struct Env * faulted_env, uint32 fault_va)
 
 		int EnvPage= pf_read_env_page(faulted_env, (void*)fault_va);
 		if(EnvPage == E_PAGE_NOT_EXIST_IN_PF){
-			cprintf(
-			    "fault_va: %p, USER_HEAP_START: %p, USER_HEAP_MAX: %p, USTACKTOP: %p, USTACKBOTTOM: %p\n",
-			    (void *)fault_va,
-			    (void *)USER_HEAP_START,
-			    (void *)USER_HEAP_MAX,
-			    (void *)USTACKTOP,
-			    (void *)USTACKBOTTOM
-			);
-			cprintf("Env page not found\n");
+//			cprintf(
+//			    "fault_va: %p, USER_HEAP_START: %p, USER_HEAP_MAX: %p, USTACKTOP: %p, USTACKBOTTOM: %p\n",
+//			    (void *)fault_va,
+//			    (void *)USER_HEAP_START,
+//			    (void *)USER_HEAP_MAX,
+//			    (void *)USTACKTOP,
+//			    (void *)USTACKBOTTOM
+//			);
+//			cprintf("Env page not found\n");
 			if (!(fault_va >= USER_HEAP_START && fault_va < USER_HEAP_MAX) && !(fault_va >= USTACKBOTTOM && fault_va < USTACKTOP)) {
-				cprintf("fault va not in any of these ranges\n");
+//				cprintf("fault va not in any of these ranges\n");
 				unmap_frame(faulted_env->env_page_directory, fault_va);
 				env_exit();
 			}
