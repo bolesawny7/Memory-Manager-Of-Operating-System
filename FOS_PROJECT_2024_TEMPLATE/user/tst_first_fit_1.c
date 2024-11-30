@@ -259,7 +259,7 @@ void _main(void)
 		//usedDiskPages = sys_pf_calculate_allocated_pages();
 		ptr_allocations[9] = malloc((USER_HEAP_MAX - pagealloc_start - 18*Mega + 1));
 		if (ptr_allocations[9] != NULL) { is_correct = 0; cprintf("Malloc: Attempt to allocate large segment with no suitable fragment to fit on, should return NULL\n");}
-		cprintf("ptr_allocations[9]: %p\n", ptr_allocations[9]);
+
 	}
 	if (is_correct)
 	{

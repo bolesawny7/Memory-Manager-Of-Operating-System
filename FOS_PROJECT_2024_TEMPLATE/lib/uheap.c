@@ -94,12 +94,12 @@ void* smalloc(char *sharedVarName, uint32 size, uint8 isWritable) {
 //	panic("smalloc() is not implemented yet...!!");
 	uint32* virtual_address = (uint32*)AllocateInPageAllocator(size);
 	if(!virtual_address) return NULL;
-	cprintf("Found virtual address @: %p\n", virtual_address);
+
 	int SharedObjectId = sys_createSharedObject(sharedVarName, size, isWritable,
 			(void*) virtual_address);
 	if (SharedObjectId == 0)
 		return NULL;
-	cprintf("Found shared object with ID: %p\n", SharedObjectId);
+
 	return (void*) virtual_address;
 }
 
@@ -112,14 +112,12 @@ void* sget(int32 ownerEnvID, char *sharedVarName) {
 	//1- get size of shared variable
 	void* start_va;
 	uint32 size = sys_getSizeOfSharedObject(ownerEnvID, sharedVarName);
-	if(size == 0) return NULL;
+	if(size <= 0) return NULL;
 
 	start_va = AllocateInPageAllocator(size);
 	if(start_va == NULL) return NULL;
 
-	cprintf("Found virtual address @: %p\n", start_va);
 
-//	*((uint32 *)start_va) = 20;
 	uint32 id = sys_getSharedObject(ownerEnvID, sharedVarName, (uint32 *)start_va);
 
 	if(id == E_SHARED_MEM_NOT_EXISTS) return NULL;
@@ -183,7 +181,7 @@ void* AllocateInPageAllocator(uint32 size) {
 	uint32 index = ((uint32) virtual_address - USER_HEAP_START) / PAGE_SIZE;
 	uint32 totalSize = ROUNDUP(size, PAGE_SIZE);
 	allocation_sizes[index] = totalSize;
-	if ((virtual_address + totalSize) > USER_HEAP_MAX) {
+	if ((virtual_address + totalSize) >= USER_HEAP_MAX) {
 		return NULL;
 	}
 	return (void*) virtual_address;
@@ -197,7 +195,7 @@ uint32* GetConsecutivePages(uint32 size) {
 	uint32 current = virtual_address, startAdd = virtual_address;
 	uint32* ptr_page_table = NULL;
 	while (countPages < numOfPages) {
-		if ((uint32) current > USER_HEAP_MAX) {
+		if ((uint32) current >= USER_HEAP_MAX) {
 			return NULL;
 		}
 		// Check if marked or present.
@@ -214,7 +212,7 @@ uint32* GetConsecutivePages(uint32 size) {
 	uint32 index = ((uint32) virtual_address - USER_HEAP_START) / PAGE_SIZE;
 	uint32 totalSize = ROUNDUP(size, PAGE_SIZE);
 	allocation_sizes[index] = totalSize;
-	if ((virtual_address + totalSize) > USER_HEAP_MAX) {
+	if ((virtual_address + totalSize) >= USER_HEAP_MAX) {
 		return NULL;
 	}
 	return (uint32 *)virtual_address;
