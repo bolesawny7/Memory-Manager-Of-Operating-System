@@ -297,13 +297,13 @@ void free_block(void *va) {
 		//Your Code is Here...
 
 		if (va == NULL) {
-		        cprintf("Please specify a valid address.\n");
+//		        cprintf("Please specify a valid address.\n");
 		        return;
 		}
 
 		// Check if the block is already free.
 		if (is_free_block(va)) {
-			cprintf("The block at address %p is already free.\n", va);
+//			cprintf("The block at address %p is already free.\n", va);
 			return;
 		}
 
@@ -317,7 +317,7 @@ void free_block(void *va) {
 
 		// Add it to the head of the list.
 		if(LIST_SIZE(&freeBlocksList) == 0){
-			cprintf("LIST IS EMPTY..\n");
+//			cprintf("LIST IS EMPTY..\n");
 			LIST_INSERT_HEAD(&freeBlocksList, block);
 			return;
 		}
@@ -351,7 +351,7 @@ void free_block(void *va) {
 		if(previous_blk != NULL){
 //		cprintf("Size of block PREV: %d\n", total_size_after_coalesce);
 			if(is_free_block(previous_blk)){
-				cprintf("COALESCE WITH PREVIOUS BLOCK.\n");
+//				cprintf("COALESCE WITH PREVIOUS BLOCK.\n");
 //				cprintf("total size before coalesce: %d\n", total_size_after_coalesce);
 				total_size_after_coalesce += get_block_size(previous_blk);
 //				cprintf("total size after coalesce: %d\n", total_size_after_coalesce);
@@ -368,7 +368,7 @@ void free_block(void *va) {
 		if(next_blk != NULL){
 	//		cprintf("Size of block NEXT: %d\n", total_size_after_coalesce);
 			if(is_free_block(next_blk)){
-				cprintf("COALESCE WITH NEXT BLOCK.\n");
+//				cprintf("COALESCE WITH NEXT BLOCK.\n");
 				total_size_after_coalesce += get_block_size(next_blk);
 
 				LIST_REMOVE(&freeBlocksList, (struct BlockElement *)next_blk);
@@ -428,7 +428,7 @@ void free_block(void *va) {
 // [6] REALLOCATE BLOCK BY FIRST FIT:
 //=========================================
 void *realloc_block_FF(void *va, uint32 new_size) {
-	cprintf("YASTA FE HAGA HENAAA REALLOCCC\n");
+//	cprintf("YASTA FE HAGA HENAAA REALLOCCC\n");
 	// TODO: [PROJECT'24.MS1 - #08] [3] DYNAMIC ALLOCATOR - realloc_block_FF
 	// COMMENT THE FOLLOWING LINE BEFORE START CODING
 //	 panic("realloc_block_FF is not implemented yet");

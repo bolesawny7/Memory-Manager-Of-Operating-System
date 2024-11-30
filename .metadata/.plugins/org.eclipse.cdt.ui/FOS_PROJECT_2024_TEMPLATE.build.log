@@ -1,4 +1,4 @@
-17:51:23 **** Incremental Build of configuration Default for project FOS_PROJECT_2024_TEMPLATE ****
+17:22:31 **** Incremental Build of configuration Default for project FOS_PROJECT_2024_TEMPLATE ****
 make -j12 all 
 + as kern/entry.S
 + cc kern/init.c
@@ -73,7 +73,7 @@ make -j12 all
 + cc[USER] user/tst_free_1.c
 + cc[USER] user/MidTermEx_ProcessA.c
 + cc[USER] user/fos_factorial.c
-+ cc[USER] user/tst_sharing_5_slave.c
++ cc[USER] user/tst_free_3.c
 + cc[USER] user/arrayOperations_quicksort.c
 + cc[USER] user/tst_sharing_3.c
 + cc[USER] user/fos_fibonacci.c
@@ -91,10 +91,13 @@ make -j12 all
 + cc[USER] user/fos_data_on_stack.c
 + cc[USER] user/game.c
 + cc[USER] user/tst_sharing_2slave2.c
++ cc[USER] user/tst_sharing_5_slave.c
 + cc[USER] user/fos_helloWorld.c
 + cc[USER] user/mergesort_noleakage.c
++ cc[USER] user/tst_chan_all_master.c
 + cc[USER] user/tst_semaphore_1slave.c
-+ cc[USER] user/tst_free_3.c
++ cc[USER] user/tst_chan_one_master.c
++ cc[USER] user/mergesort_static.c
 + cc[USER] user/tst_semaphore_2master.c
 + cc[USER] user/tst_first_fit_1.c
 + cc[USER] user/tst_malloc_1.c
@@ -119,7 +122,9 @@ make -j12 all
 + cc[USER] user/matrix_operations.c
 + cc[USER] user/tst_sharing_5_master.c
 + cc[USER] user/tst_sharing_5_slaveB1.c
++ cc[USER] user/tst_chan_all_slave.c
 + cc[USER] user/tst_sharing_2master.c
++ cc[USER] user/tst_chan_one_slave.c
 + cc[USER] user/tst_placement_2.c
 + cc[USER] user/tst_free_1_slave2.c
 + cc[USER] user/quicksort_semaphore.c
@@ -142,7 +147,7 @@ make -j12 all
 + ld -m elf_i386 obj/user/tst_free_1
 + ld -m elf_i386 obj/user/MidTermEx_ProcessA
 + ld -m elf_i386 obj/user/fos_factorial
-+ ld -m elf_i386 obj/user/tst_sharing_5_slave
++ ld -m elf_i386 obj/user/tst_free_3
 + ld -m elf_i386 obj/user/arrayOperations_quicksort
 + ld -m elf_i386 obj/user/tst_sharing_3
 + ld -m elf_i386 obj/user/fos_fibonacci
@@ -160,10 +165,13 @@ make -j12 all
 + ld -m elf_i386 obj/user/fos_data_on_stack
 + ld -m elf_i386 obj/user/game
 + ld -m elf_i386 obj/user/tst_sharing_2slave2
++ ld -m elf_i386 obj/user/tst_sharing_5_slave
 + ld -m elf_i386 obj/user/fos_helloWorld
 + ld -m elf_i386 obj/user/mergesort_noleakage
++ ld -m elf_i386 obj/user/tst_chan_all_master
 + ld -m elf_i386 obj/user/tst_semaphore_1slave
-+ ld -m elf_i386 obj/user/tst_free_3
++ ld -m elf_i386 obj/user/tst_chan_one_master
++ ld -m elf_i386 obj/user/mergesort_static
 + ld -m elf_i386 obj/user/tst_semaphore_2master
 + ld -m elf_i386 obj/user/tst_first_fit_1
 + ld -m elf_i386 obj/user/tst_malloc_1
@@ -188,7 +196,9 @@ make -j12 all
 + ld -m elf_i386 obj/user/matrix_operations
 + ld -m elf_i386 obj/user/tst_sharing_5_master
 + ld -m elf_i386 obj/user/tst_sharing_5_slaveB1
++ ld -m elf_i386 obj/user/tst_chan_all_slave
 + ld -m elf_i386 obj/user/tst_sharing_2master
++ ld -m elf_i386 obj/user/tst_chan_one_slave
 + ld -m elf_i386 obj/user/tst_placement_2
 + ld -m elf_i386 obj/user/tst_free_1_slave2
 + ld -m elf_i386 obj/user/quicksort_semaphore
@@ -236,5 +246,5 @@ touch -m kern/tests/test_commands.c
 touch -m kern/tests/test_scheduler.c
 touch -m kern/tests/utilities.c
 
-17:51:34 Build Finished (took 10s.583ms)
+17:22:41 Build Finished (took 10s.529ms)
 

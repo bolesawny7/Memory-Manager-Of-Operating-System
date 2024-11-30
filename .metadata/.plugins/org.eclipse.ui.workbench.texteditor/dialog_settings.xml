@@ -13,13 +13,13 @@
 		<item value="true" key="wholeword"/>
 		<list key="findhistory">
 			<item value="cprintf"/>
+			<item value="framesStorage"/>
 			<item value="Header"/>
 			<item value="header"/>
 			<item value="wrong"/>
 			<item value="wrong header/footer"/>
 			<item value="wrong header/footer data"/>
 			<item value="wrong header/footer data."/>
-			<item value="uhLimit"/>
 		</list>
 		<list key="replacehistory">
 			<item value="cprintf(&quot;\n"/>
