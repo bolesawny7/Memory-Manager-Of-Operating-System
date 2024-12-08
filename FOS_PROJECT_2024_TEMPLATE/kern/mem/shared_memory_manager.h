@@ -57,6 +57,7 @@ int createSharedObject(int32 ownerID, char* shareName, uint32 size, uint8 isWrit
 int getSizeOfSharedObject(int32 ownerID, char* shareName);
 int getSharedObject(int32 ownerID, char* shareName, void* virtual_address);
 int freeSharedObject(int32 sharedObjectID, void *startVA);
+bool is_page_table_empty(uint32* page_table);
 
 void printShare(struct Share *share, int numOfFrames);
 

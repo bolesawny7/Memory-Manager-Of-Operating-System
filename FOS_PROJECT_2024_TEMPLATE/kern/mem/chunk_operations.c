@@ -163,7 +163,7 @@ void* sys_sbrk(int numOfPages)
 	if(numOfPages == 0) return (void*)env->UhSbrk;
 
 	if((env->UhSbrk + sizeOfIncrement) > env->UhLimit) return (void*)-1;
-//	cprintf("\n\n\n\n sabaho sbrk \n\n\n\n\n\n");
+	cprintf("\n\n\n\n sabaho sbrk \n\n\n\n\n\n");
 	env->UhSbrk += sizeOfIncrement;
 	uint32* PtrPageTable = NULL;
 	for (uint32 current_va = (uint32)OldSbrk; current_va < (uint32)env->UhSbrk; current_va += PAGE_SIZE) {
@@ -171,7 +171,7 @@ void* sys_sbrk(int numOfPages)
 		if (get_page_table(env->env_page_directory, current_va, &PtrPageTable) == TABLE_NOT_EXIST) {
 			PtrPageTable = create_page_table(env->env_page_directory, current_va);
 		}
-		pt_set_page_permissions(env->env_page_directory, (uint32)PtrPageTable, PERM_PRESENT | PERM_WRITEABLE, 0);
+//		pt_set_page_permissions(env->env_page_directory, (uint32)PtrPageTable, PERM_PRESENT | PERM_WRITEABLE, 0);
 		pt_set_page_permissions(env->env_page_directory, current_va, PERM_MARKED | PERM_WRITEABLE, PERM_PRESENT);
 	}
 
@@ -194,7 +194,7 @@ void allocate_user_mem(struct Env* e, uint32 virtual_address, uint32 size)
 	//TODO: [PROJECT'24.MS2 - #13] [3] USER HEAP [KERNEL SIDE] - allocate_user_mem()
 	// Write your code here, remove the panic and write your code
 	//panic("allocate_user_mem() is not implemented yet...!!");
-	uint32 start_va = ROUNDDOWN(virtual_address, PAGE_SIZE);
+	uint32 start_va = virtual_address;
 	uint32 end_va = ROUNDUP(virtual_address + size, PAGE_SIZE);
 	uint32* PtrPageTable = NULL;
 
@@ -204,7 +204,7 @@ void allocate_user_mem(struct Env* e, uint32 virtual_address, uint32 size)
 			PtrPageTable = create_page_table(e->env_page_directory, current_va);
 		}
 //		cprintf("current virtual address being allocated: %p, Page table start address: %p, env page directory: %p\n", current_va, PtrPageTable, e->env_page_directory);
-		pt_set_page_permissions(e->env_page_directory, (uint32)PtrPageTable, PERM_PRESENT | PERM_WRITEABLE, 0);
+//		pt_set_page_permissions(e->env_page_directory, (uint32)PtrPageTable, PERM_PRESENT | PERM_WRITEABLE, 0);
 		pt_set_page_permissions(e->env_page_directory, current_va, PERM_MARKED | PERM_WRITEABLE, PERM_PRESENT);
 //		pt_set_page_permissions(e->env_page_directory, current_va, PERM_WRITEABLE, PERM_PRESENT);
 //		PtrPageTable[PTX(current_va)] = PtrPageTable[PTX(current_va)] | PERM_MARKED;
@@ -227,8 +227,8 @@ void free_user_mem(struct Env* e, uint32 virtual_address, uint32 size)
 	// Write your code here, remove the panic and write your code
 	//panic("free_user_mem() is not implemented yet...!!");
 //	uint32 start_va = ROUNDDOWN(virtual_address, PAGE_SIZE);
-		uint32 start_va = ROUNDDOWN(virtual_address, PAGE_SIZE);
-	    uint32 end_va = ROUNDUP(virtual_address + size, PAGE_SIZE);
+		uint32 start_va = virtual_address;
+		uint32 end_va = ROUNDUP(virtual_address + size, PAGE_SIZE);
 	    uint32* PtrPageTable = NULL;
 
 	for (uint32 current_va = virtual_address; current_va < end_va; current_va += PAGE_SIZE) {
@@ -236,8 +236,10 @@ void free_user_mem(struct Env* e, uint32 virtual_address, uint32 size)
 		if (get_page_table(e->env_page_directory, current_va, &PtrPageTable) == TABLE_IN_MEMORY)
 			PtrPageTable[PTX(current_va)] &= ~PERM_MARKED;
 
-		//remove mn el page file
+		// remove mn el page file
 		pf_remove_env_page(e, current_va);
+		uint32 pageNumber = (current_va - USER_HEAP_START) / PAGE_SIZE;
+		FramesToPages[pageNumber] = 0;
 
 		//remove pages lw mwgooda fl ws
 		struct WorkingSetElement* element;

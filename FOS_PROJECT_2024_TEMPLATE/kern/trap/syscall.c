@@ -379,7 +379,6 @@ int sys_freeSharedObject(int32 sharedObjectID, void *startVA)
 {
 	return freeSharedObject(sharedObjectID, startVA);
 }
-
 /*********************************/
 /* USER ENVIRONMENT SYSTEM CALLS */
 /*********************************/

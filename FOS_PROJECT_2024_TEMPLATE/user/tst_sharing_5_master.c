@@ -64,7 +64,6 @@ _main(void)
 
 		freeFrames = sys_calculate_free_frames() ;
 
-		sfree(x);
 
 		cprintf("Master env removed x (1 page) \n");
 		diff = (sys_calculate_free_frames() - freeFrames);

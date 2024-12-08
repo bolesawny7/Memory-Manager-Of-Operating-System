@@ -94,12 +94,12 @@ void* smalloc(char *sharedVarName, uint32 size, uint8 isWritable) {
 //	panic("smalloc() is not implemented yet...!!");
 	uint32* virtual_address = (uint32*)AllocateInPageAllocator(size);
 	if(!virtual_address) return NULL;
-	cprintf("Found virtual address @: %p\n", virtual_address);
+//	cprintf("Found virtual address @: %p\n", virtual_address);
 	int SharedObjectId = sys_createSharedObject(sharedVarName, size, isWritable,
 			(void*) virtual_address);
 	if (SharedObjectId == 0)
 		return NULL;
-	cprintf("Found shared object with ID: %p\n", SharedObjectId);
+//	cprintf("Found shared object with ID: %p\n", SharedObjectId);
 	return (void*) virtual_address;
 }
 
@@ -115,9 +115,9 @@ void* sget(int32 ownerEnvID, char *sharedVarName) {
 	if(size == 0) return NULL;
 
 	start_va = AllocateInPageAllocator(size);
-	if(start_va == NULL) return NULL;
+	if(!start_va) return NULL;
 
-	cprintf("Found virtual address @: %p\n", start_va);
+//	cprintf("Found virtual address @: %p\n", start_va);
 
 //	*((uint32 *)start_va) = 20;
 	uint32 id = sys_getSharedObject(ownerEnvID, sharedVarName, (uint32 *)start_va);
@@ -145,7 +145,18 @@ void* sget(int32 ownerEnvID, char *sharedVarName) {
 void sfree(void* virtual_address) {
 	//TODO: [PROJECT'24.MS2 - BONUS#4] [4] SHARED MEMORY [USER SIDE] - sfree()
 	// Write your code here, remove the panic and write your code
-	panic("sfree() is not implemented yet...!!");
+//	panic("sfree() is not implemented yet...!!");
+	if (virtual_address == NULL) {
+		panic("NULL address\n");
+	}
+
+	// Call kernel function to free the shared memory
+	cprintf("Masked Bit: %d\n", (int32)virtual_address & 0x7FFFFFFF);
+	int xd = sys_freeSharedObject((int32)virtual_address & 0x7FFFFFFF, virtual_address);
+
+	if (xd != 0) {
+		panic("Failed in freeing shared object\n");
+	}
 }
 
 //=================================
@@ -176,16 +187,10 @@ void *realloc(void *virtual_address, uint32 new_size) {
 
 void* AllocateInPageAllocator(uint32 size) {
 	uint32 virtual_address = (uint32)GetConsecutivePages(size);
-
 	if(!virtual_address) return NULL;
+
 	sys_allocate_user_mem((uint32) virtual_address, size);
 
-	uint32 index = ((uint32) virtual_address - USER_HEAP_START) / PAGE_SIZE;
-	uint32 totalSize = ROUNDUP(size, PAGE_SIZE);
-	allocation_sizes[index] = totalSize;
-	if ((virtual_address + totalSize) > USER_HEAP_MAX) {
-		return NULL;
-	}
 	return (void*) virtual_address;
 }
 
@@ -194,8 +199,7 @@ uint32* GetConsecutivePages(uint32 size) {
 	uint32 virtual_address = myEnv->UhLimit + PAGE_SIZE;
 	uint32 numOfPages = ROUNDUP(size, PAGE_SIZE) / PAGE_SIZE, countPages = 0;
 
-	uint32 current = virtual_address, startAdd = virtual_address;
-	uint32* ptr_page_table = NULL;
+	uint32 current = virtual_address;
 	while (countPages < numOfPages) {
 		if ((uint32) current > USER_HEAP_MAX) {
 			return NULL;
@@ -212,9 +216,9 @@ uint32* GetConsecutivePages(uint32 size) {
 	}
 
 	uint32 index = ((uint32) virtual_address - USER_HEAP_START) / PAGE_SIZE;
-	uint32 totalSize = ROUNDUP(size, PAGE_SIZE);
+	uint32 totalSize = size;
 	allocation_sizes[index] = totalSize;
-	if ((virtual_address + totalSize) > USER_HEAP_MAX) {
+	if ((virtual_address + ROUNDUP(size, PAGE_SIZE)) > USER_HEAP_MAX) {
 		return NULL;
 	}
 	return (uint32 *)virtual_address;

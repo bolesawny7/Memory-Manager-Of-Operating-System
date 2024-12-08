@@ -57,7 +57,7 @@ _main(void)
 	sys_unlock_cons();
 	//sys_unlock_cons();
 
-	cprintf("FROM SLAVE -> y@: %p, *y: %d\n", y, *y);
+//	cprintf("FROM SLAVE -> y@: %p, *y: %d\n", y, *y);
 //	cprintf("dereference y: %d\n", *y);
 	if (*y != 20) panic("Get(): Shared Variable is not created or got correctly");
 

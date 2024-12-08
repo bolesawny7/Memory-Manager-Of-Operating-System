@@ -64,7 +64,7 @@ _main(void)
 //	w = sget(parentenvID,"y");
 
 //	cprintf("FROM MASTER -> w@: %p, *w: %d\n", w, *w);
-	cprintf("FROM MASTER -> y@: %p, *y: %d\n", y, *y);
+//	cprintf("FROM MASTER -> y@: %p, *y: %d\n", y, *y);
 
 	int id1, id2, id3;
 	id1 = sys_create_env("shr2Slave1", (myEnv->page_WS_max_size),(myEnv->SecondListSize), (myEnv->percentage_of_WS_pages_to_be_removed));

@@ -103,6 +103,7 @@ void* sbrk(int numOfPages) {
 
         uint32 newBreak = oldSBreak + incrementSize;
         // hnallocate w nmap pages
+        cprintf("\n\n\n\nSabaho\n\n\n\n\n");
         for (uint32 va = oldSBreak; va < newBreak; va += PAGE_SIZE) {
             struct FrameInfo* currentFrame = NULL;
 
@@ -300,6 +301,46 @@ unsigned int kheap_virtual_address(unsigned int physical_address)
 
 	return va | offset;
 }
+
+void freeConsecutivePages(uint32* start_virtual_address, int numOfFreedPages){
+	uint32 current_va = (uint32)start_virtual_address;
+	uint32 *ptr_page_table = NULL;
+	uint32 pageNumber = ((uint32)start_virtual_address - KERNEL_HEAP_START) / PAGE_SIZE;
+	for(int i = 0; i < numOfFreedPages; i++){
+		// Get the frame.
+		struct FrameInfo* frame = get_frame_info(ptr_page_directory, current_va, &ptr_page_table);
+		// Unmap it.
+		unmap_frame(ptr_page_directory, current_va);
+
+		// Remove the pages virtual addresses from FramesToPages array.
+		FramesToPagesK[to_frame_number(frame)] = 0;
+		current_va += PAGE_SIZE;
+	}
+	allocation_sizes[pageNumber] = 0;
+}
+
+uint32 * findMoreConsecutivePages(uint32* va, int oldNumOfPages, int diffNumOfPages){
+	uint32 *virtual_address = (uint32 *)va;
+    int countOfPages = 0;
+    uint32 *current_va = (uint32*)((uint32)virtual_address + (oldNumOfPages * PAGE_SIZE));
+    uint32 *ptr_page_table = NULL;
+
+    while (countOfPages < diffNumOfPages) {
+        if (get_frame_info(ptr_page_directory, (uint32)current_va, &ptr_page_table) == 0 &&
+        		(uint32)current_va < KERNEL_HEAP_MAX) {
+            // va is in the range.
+            countOfPages++;
+        } else {
+        	/* Couldn't find more pages in the same start address */
+            return NULL;
+        }
+        if ((uint32)current_va >= KERNEL_HEAP_MAX)
+            return NULL; // insufficient memory.
+        current_va = (uint32 *)((uint32)current_va + PAGE_SIZE);
+    }
+    return virtual_address;
+}
+
 //=================================================================================//
 //============================== BONUS FUNCTION ===================================//
 //=================================================================================//
@@ -410,43 +451,4 @@ void *krealloc(void *virtual_address, uint32 new_size)
 	// Return the same start address if we can add more consecutive pages without reallocating the whole block.
 	cprintf("Added more consecutive pages in the same address successfully.\n");
 	return virtual_address;
-}
-
-void freeConsecutivePages(uint32* start_virtual_address, int numOfFreedPages){
-	uint32 current_va = (uint32)start_virtual_address;
-	uint32 *ptr_page_table = NULL;
-	uint32 pageNumber = ((uint32)start_virtual_address - KERNEL_HEAP_START) / PAGE_SIZE;
-	for(int i = 0; i < numOfFreedPages; i++){
-		// Get the frame.
-		struct FrameInfo* frame = get_frame_info(ptr_page_directory, current_va, &ptr_page_table);
-		// Unmap it.
-		unmap_frame(ptr_page_directory, current_va);
-
-		// Remove the pages virtual addresses from FramesToPages array.
-		FramesToPagesK[to_frame_number(frame)] = 0;
-		current_va += PAGE_SIZE;
-	}
-	allocation_sizes[pageNumber] = 0;
-}
-
-uint32 * findMoreConsecutivePages(uint32* va, int oldNumOfPages, int diffNumOfPages){
-	uint32 *virtual_address = (uint32 *)va;
-    int countOfPages = 0;
-    uint32 *current_va = (uint32*)((uint32)virtual_address + (oldNumOfPages * PAGE_SIZE));
-    uint32 *ptr_page_table = NULL;
-
-    while (countOfPages < diffNumOfPages) {
-        if (get_frame_info(ptr_page_directory, (uint32)current_va, &ptr_page_table) == 0 &&
-        		(uint32)current_va < KERNEL_HEAP_MAX) {
-            // va is in the range.
-            countOfPages++;
-        } else {
-        	/* Couldn't find more pages in the same start address */
-            return NULL;
-        }
-        if ((uint32)current_va >= KERNEL_HEAP_MAX)
-            return NULL; // insufficient memory.
-        current_va = (uint32 *)((uint32)current_va + PAGE_SIZE);
-    }
-    return virtual_address;
 }

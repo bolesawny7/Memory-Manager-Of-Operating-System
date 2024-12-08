@@ -22,6 +22,21 @@ struct UserProgramInfo userPrograms[] = {
 		{ "fos_data_on_stack", "Created by FOS team, fos@nowhere.com", PTR_START_OF(fos_data_on_stack)},
 
 		{ "cnc", "Concurrent program test", PTR_START_OF(concurrent_start)},
+		/*TESTING 2024*/
+		//[1] LOCKS
+		{ "tst_chan_all", "Tests sleep & wakeup ALL on a channel", PTR_START_OF(tst_chan_all_master)},
+		{ "tstChanAllSlave", "Slave program of tst_chan_all", PTR_START_OF(tst_chan_all_slave)},
+		{ "tst_chan_one", "Tests sleep & wakeup ONE on a channel", PTR_START_OF(tst_chan_one_master)},
+		{ "tstChanOneSlave", "Slave program of tst_chan_one", PTR_START_OF(tst_chan_one_slave)},
+		{ "mergesort", "mergesort a fixed size array of 800000", PTR_START_OF(mergesort_static)},
+		{ "tst_protection", "Tests the protection of kernel shared DS (e.g. kernel heap)", PTR_START_OF(tst_protection)},
+		{ "protection_slave1", "Slave program of tst_protection", PTR_START_OF(tst_protection_slave1)},
+
+		//[2] REPLACEMENT
+		{ "tpr1", "Tests page replacement (allocation of Memory and PageFile)", PTR_START_OF(tst_page_replacement_alloc)},
+		{ "tpr2", "tests page replacement (handling new stack and modified pages)", PTR_START_OF(tst_page_replacement_stack)},
+		{ "tnclock1", "Tests page replacement (nth clock algorithm - NORMAL version)", PTR_START_OF(tst_page_replacement_nthclock_1)},
+		{ "tnclock2", "Tests page replacement (nth clock algorithm - MODIFIED version)", PTR_START_OF(tst_page_replacement_nthclock_2)},
 
 		/*TESTING 2023*/
 		//[1] READY MADE TESTS

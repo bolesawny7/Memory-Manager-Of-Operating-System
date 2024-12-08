@@ -296,7 +296,14 @@ void page_fault_handler(struct Env * faulted_env, uint32 fault_va)
 		//refer to the project presentation and documentation for details
 		//TODO: [PROJECT'24.MS3] [2] FAULT HANDLER II - Replacement
 		// Write your code here, remove the panic and write your code
-		panic("page_fault_handler() Replacement is not implemented yet...!!");
+//		panic("page_fault_handler() Replacement is not implemented yet...!!");
+//		pf_update_env_page();
+//		env_page_ws_print(ptr_env);
+
+//		Flush certain Virtual Address from Working Set
+//		env_page_ws_invalidate(ptr_env, va);
+
+
 	}
 }
 
