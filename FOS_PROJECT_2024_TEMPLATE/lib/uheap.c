@@ -112,13 +112,14 @@ void* sget(int32 ownerEnvID, char *sharedVarName) {
 	//1- get size of shared variable
 	void* start_va;
 	uint32 size = sys_getSizeOfSharedObject(ownerEnvID, sharedVarName);
-	if(size <= 0) return NULL;
+	if(size == 0) return NULL;
 
 	start_va = AllocateInPageAllocator(size);
 	if(!start_va) return NULL;
 
 //	cprintf("Found virtual address @: %p\n", start_va);
 
+//	*((uint32 *)start_va) = 20;
 	uint32 id = sys_getSharedObject(ownerEnvID, sharedVarName, (uint32 *)start_va);
 
 	if(id == E_SHARED_MEM_NOT_EXISTS) return NULL;
@@ -200,7 +201,7 @@ uint32* GetConsecutivePages(uint32 size) {
 
 	uint32 current = virtual_address;
 	while (countPages < numOfPages) {
-		if ((uint32) current >= USER_HEAP_MAX) {
+		if ((uint32) current > USER_HEAP_MAX) {
 			return NULL;
 		}
 		// Check if marked or present.

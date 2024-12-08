@@ -9,6 +9,7 @@ _main(void)
 	//Initial test to ensure it works on "PLACEMENT" not "REPLACEMENT"
 #if USE_KHEAP
 	{
+//		cprintf("List size: %d, Env WS Max Size: %d\n", LIST_SIZE(&(myEnv->page_WS_list)), myEnv->page_WS_max_size);
 		if (LIST_SIZE(&(myEnv->page_WS_list)) >= myEnv->page_WS_max_size)
 			panic("Please increase the WS size");
 	}
@@ -22,6 +23,7 @@ _main(void)
 	uint32 *x,*y,*z, *expectedVA;
 	int freeFrames, diff, expected;
 	int32 parentenvID = sys_getparentenvid();
+	cprintf("parentenvID: %d\n", parentenvID);
 	//GET: z then y then x, opposite to creation order (x then y then z)
 	//So, addresses here will be different from the OWNER addresses
 	//sys_lock_cons();
@@ -30,6 +32,9 @@ _main(void)
 		freeFrames = sys_calculate_free_frames() ;
 		z = sget(parentenvID,"z");
 		expectedVA = (uint32*)(pagealloc_start + 0 * PAGE_SIZE);
+
+//		cprintf("Our Va: %p,\tExperted VA: %p\n", z, expectedVA);
+
 		if (z != expectedVA) panic("Get(): Returned address is not correct. Expected = %x, Actual = %x\nMake sure that you align the allocation on 4KB boundary", expectedVA, z);
 		expected = 1 ; /*1table*/
 		diff = (freeFrames - sys_calculate_free_frames());
@@ -59,7 +64,7 @@ _main(void)
 	//sys_lock_cons();
 	sys_lock_cons();
 	{
-		freeFrames = sys_calculate_free_frames() ;
+		freeFrames = sys_calculate_free_frames();
 		x = sget(parentenvID,"x");
 		expectedVA = (uint32*)(pagealloc_start + 2 * PAGE_SIZE);
 		if (x != expectedVA) panic("Get(): Returned address is not correct. Expected = %x, Actual = %x\nMake sure that you align the allocation on 4KB boundary", expectedVA, x);
