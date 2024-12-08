@@ -243,7 +243,7 @@ int createSharedObject(int32 ownerID, char* shareName, uint32 size, uint8 isWrit
 		int checkMapping = map_frame(myenv->env_page_directory, CreatingFrameForAllocation, (uint32) va, PERM_WRITEABLE | PERM_USER | PERM_PRESENT);
 
 		if (checkMapping != 0){
-			cprintf("FREEING FRAME: %p\n", CreatingFrameForAllocation);
+//			cprintf("FREEING FRAME: %p\n", CreatingFrameForAllocation);
 			free_frame(CreatingFrameForAllocation);
 			return 0;
 		}
@@ -254,7 +254,7 @@ int createSharedObject(int32 ownerID, char* shareName, uint32 size, uint8 isWrit
 		LIST_INSERT_TAIL(&(AllShares.shares_list), createdSharedObject);
 	release_spinlock(&(AllShares.shareslock));
 
-	cprintf("Share created: ID = %d, Name = %s, OwnerID = %d, numOfFrames: %d, isWritable: %d\n", createdSharedObject->ID, createdSharedObject->name, createdSharedObject->ownerID, numOfFrames, createdSharedObject->isWritable);
+//	cprintf("Share created: ID = %d, Name = %s, OwnerID = %d, numOfFrames: %d, isWritable: %d\n", createdSharedObject->ID, createdSharedObject->name, createdSharedObject->ownerID, numOfFrames, createdSharedObject->isWritable);
 //	printShare(createdSharedObject, numOfFrames);
 	return createdSharedObject->ID;
 }

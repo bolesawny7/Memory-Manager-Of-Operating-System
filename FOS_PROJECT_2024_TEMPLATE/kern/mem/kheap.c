@@ -362,11 +362,11 @@ void *krealloc(void *virtual_address, uint32 new_size)
 //	panic("krealloc() is not implemented yet...!!");
 
 	if(virtual_address == NULL){
-		cprintf("Virtual Address is NULL, Allocating in a new location..\n");
+//		cprintf("Virtual Address is NULL, Allocating in a new location..\n");
 		return kmalloc(new_size);
 	}
 	if(new_size == 0) {
-		cprintf("Size is equal 0.\n");
+//		cprintf("Size is equal 0.\n");
 		kfree(virtual_address);
 		return NULL;
 	}
@@ -374,20 +374,20 @@ void *krealloc(void *virtual_address, uint32 new_size)
 
 	uint32 old_size = allocation_sizes[pageNumber];
 
-	cprintf("old size: %d, new size: %d\n", old_size, new_size);
+//	cprintf("old size: %d, new size: %d\n", old_size, new_size);
 
 	if (old_size <= DYN_ALLOC_MAX_BLOCK_SIZE) {
 	// Old block was found in dynamic allocator.
 		if(new_size <= DYN_ALLOC_MAX_BLOCK_SIZE){
 			// New block was found in dynamic allocator.
-			cprintf("Old and New blocks in dynamic allocator.\n");
+//			cprintf("Old and New blocks in dynamic allocator.\n");
 			return realloc_block_FF(virtual_address, new_size);
 		}
 		// New block was found in page allocator.
 		void* new_allocate = kmalloc(new_size);
 		if(new_allocate){
-			cprintf("New allocation found in heap.\n");
-			cprintf("Old block in dynamic allocator, New block in page allocator.\n");
+//			cprintf("New allocation found in heap.\n");
+//			cprintf("Old block in dynamic allocator, New block in page allocator.\n");
 			free_block(virtual_address);
 			return new_allocate;
 		}
@@ -395,14 +395,14 @@ void *krealloc(void *virtual_address, uint32 new_size)
 	}
 	// Old block was found in page allocator.
 	if(old_size > DYN_ALLOC_MAX_BLOCK_SIZE){
-		cprintf("Old block in page alloctor.\n");
+//		cprintf("Old block in page alloctor.\n");
 		// New block was found in dynamic allocator.
 		if(new_size <= DYN_ALLOC_MAX_BLOCK_SIZE){
-			cprintf("New block in dynamic alloctor.\n");
+//			cprintf("New block in dynamic alloctor.\n");
 			void* new_allocate = alloc_block_FF(new_size);
 			if(new_allocate){
-				cprintf("New allocation found in heap.\n");
-				cprintf("Old block in page allocator, New block in dynamic allocator.\n");
+//				cprintf("New allocation found in heap.\n");
+//				cprintf("Old block in page allocator, New block in dynamic allocator.\n");
 				kfree(virtual_address);
 				return new_allocate;
 			}
@@ -413,42 +413,42 @@ void *krealloc(void *virtual_address, uint32 new_size)
 	// Old & new blocks was found in page allocator.
 
 	int diff_size = new_size - old_size;
-	cprintf("difference in size: %d\n", diff_size);
+//	cprintf("difference in size: %d\n", diff_size);
 	int oldNumOfPages = ROUNDUP(old_size, PAGE_SIZE) / PAGE_SIZE;
 	int diffNumOfPages = ROUNDUP(diff_size, PAGE_SIZE) / PAGE_SIZE;
 
 	if(diff_size == 0){
 		// No Change in size.
-		cprintf("Size is the same.\n");
+//		cprintf("Size is the same.\n");
 		return virtual_address;
 	}
 	else if(diff_size < 0){
 		// New size is smaller. Free the rest of the pages.
-		cprintf("New size is smaller than the old size.\n");
+//		cprintf("New size is smaller than the old size.\n");
 		uint32* strt_address_to_free = (uint32*)((uint32)virtual_address + new_size);
 		freeConsecutivePages(strt_address_to_free, diffNumOfPages);
 		return virtual_address;
 	}
 
 	// Now check if we can add more consecutive pages without reallocating the whole block.
-	cprintf("Try adding more consecutive pages in the same address.\n");
+//	cprintf("Try adding more consecutive pages in the same address.\n");
 
 	uint32 *extended_virtual_address = findMoreConsecutivePages(virtual_address, oldNumOfPages, diffNumOfPages);
 	if(extended_virtual_address == NULL){
-		cprintf("Could't add more consecutive pages in the same address.\n");
+//		cprintf("Could't add more consecutive pages in the same address.\n");
 		// If not, then free the old blocks and allocate from the beginning. (using first fit)
 		void* new_allocate = kmalloc(new_size);
 		if(new_allocate){ // If we can allocate the new size in a new location, then free all old pages and return new location.
-			cprintf("New allocation found in heap.\n");
+//			cprintf("New allocation found in heap.\n");
 			freeConsecutivePages(virtual_address, oldNumOfPages);
 			return new_allocate;
 		}
-		cprintf("Couldn't find space for the new size.\n");
+//		cprintf("Couldn't find space for the new size.\n");
 		return NULL;
 	}
 
 
 	// Return the same start address if we can add more consecutive pages without reallocating the whole block.
-	cprintf("Added more consecutive pages in the same address successfully.\n");
+//	cprintf("Added more consecutive pages in the same address successfully.\n");
 	return virtual_address;
 }

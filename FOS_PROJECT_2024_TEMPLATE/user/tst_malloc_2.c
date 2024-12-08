@@ -65,7 +65,6 @@ void _main(void)
 		{
 			for (int j = 0; j < allocCntPerSize; ++j)
 			{
-
 				actualSize = allocSizes[i] - sizeOfMetaData;
 				va = startVAs[idx] = malloc(actualSize);
 				midVAs[idx] = va + actualSize/2 ;
@@ -99,7 +98,6 @@ void _main(void)
 					{
 						if (is_correct)
 						{
-//							cprintf("\n actual Size: %d\n allocSize: %d allocCntPerSize: %d\n", actualSize,allocSizes[i],j);
 							is_correct = 0;
 							cprintf("alloc_block_xx #1.%d: WRONG ALLOC\n", idx);
 						}
