@@ -103,7 +103,7 @@ void* sbrk(int numOfPages) {
 
         uint32 newBreak = oldSBreak + incrementSize;
         // hnallocate w nmap pages
-        cprintf("\n\n\n\nSabaho\n\n\n\n\n");
+//        cprintf("\n\n\n\nSabaho\n\n\n\n\n");
         for (uint32 va = oldSBreak; va < newBreak; va += PAGE_SIZE) {
             struct FrameInfo* currentFrame = NULL;
 

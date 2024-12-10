@@ -301,8 +301,73 @@ void page_fault_handler(struct Env * faulted_env, uint32 fault_va)
 //		env_page_ws_print(ptr_env);
 
 //		Flush certain Virtual Address from Working Set
-//		env_page_ws_invalidate(ptr_env, va);
+		int is_max_sweeps_negative = page_WS_max_sweeps < 0;
+		if(is_max_sweeps_negative)
+			page_WS_max_sweeps = -page_WS_max_sweeps;
 
+		// Start searching from the WS element after the last placed one
+		struct WS_List workingSetList = faulted_env->page_WS_list;
+
+		// Loop on this list by getting the first element and getting the next element each time
+		struct WorkingSetElement* WS_element_itr = LIST_FIRST(&workingSetList);
+
+//		PERM_USED
+		while(1) {
+
+			// NEGOTIABLE
+//			check use bit of fault_va if 0 then
+//			OR check use bit of working set virtual address if 0 then
+			int ws_va_perms = pt_get_page_permissions(faulted_env->env_page_directory, WS_element_itr->virtual_address);
+
+			// Check if page modified or not and increment max sweeps
+
+			int isModified = (ws_va_perms & PERM_MODIFIED);
+			int max_sweeps = !isModified ? page_WS_max_sweeps : page_WS_max_sweeps + 1;
+
+				// If use bit = 0 then
+				if(!(ws_va_perms & PERM_USED)) {
+//					first check if sweeps_counter = max sweeps then replace WS
+					if(WS_element_itr->sweeps_counter == max_sweeps) {
+						// if sweeps_counter = N (max_sweeps) update WS and return
+						/*
+						 * WARNING: This function adds the new element to the list
+						 * at the end and this might cause an issue.
+						 * Function should update ws fields and set page permissions to used.
+						 */
+						struct WorkingSetElement* new_ws_elm = env_page_ws_list_create_element(faulted_env, fault_va);
+//						env_page_ws_invalidate(faulted_env, fault_va);
+						// Update pointer.
+						new_ws_elm = WS_element_itr;
+
+						// Keep track of last working set element.
+						faulted_env->page_last_WS_element = new_ws_elm;
+
+
+						new_ws_elm->sweeps_counter = 0;
+						new_ws_elm->empty = 0;
+//						new_ws_elm->virtual_address = (uint32)fault_va;
+						return;
+					}
+					else {
+						WS_element_itr->sweeps_counter++;
+					}
+				}
+				else {
+				// If use bit = 1 then CLEAR IT
+					pt_set_page_permissions(faulted_env->env_page_directory, fault_va, 0, PERM_USED);
+					WS_element_itr->sweeps_counter = 0;
+				}
+
+				// Get next WS element.
+				if(LIST_NEXT(WS_element_itr))
+					WS_element_itr = LIST_NEXT(WS_element_itr);
+				else
+					WS_element_itr = LIST_FIRST(&workingSetList);
+
+//--------------------------------------------------------------------------
+//			faulted_env->page_WS_max_size;
+//			faulted_env->page_last_WS_element
+		}
 
 	}
 }

@@ -254,7 +254,7 @@ int createSharedObject(int32 ownerID, char* shareName, uint32 size, uint8 isWrit
 		LIST_INSERT_TAIL(&(AllShares.shares_list), createdSharedObject);
 	release_spinlock(&(AllShares.shareslock));
 
-	cprintf("Share created: ID = %d, Name = %s, OwnerID = %d, numOfFrames: %d, isWritable: %d\n", createdSharedObject->ID, createdSharedObject->name, createdSharedObject->ownerID, numOfFrames, createdSharedObject->isWritable);
+//	cprintf("Share created: ID = %d, Name = %s, OwnerID = %d, numOfFrames: %d, isWritable: %d\n", createdSharedObject->ID, createdSharedObject->name, createdSharedObject->ownerID, numOfFrames, createdSharedObject->isWritable);
 //	printShare(createdSharedObject, numOfFrames);
 	return createdSharedObject->ID;
 }
@@ -312,7 +312,7 @@ int getSharedObject(int32 ownerID, char* shareName, void* virtual_address)
 //it should free its framesStorage and the share object itself
 void free_share(struct Share* ptrShare)
 {
-	cprintf("Freeing Share..\n");
+//	cprintf("Freeing Share..\n");
 	//TODO: [PROJECT'24.MS2 - BONUS#4] [4] SHARED MEMORY [KERNEL SIDE] - free_share()
 	//COMMENT THE FOLLOWING LINE BEFORE START CODING
 //	panic("free_share is not implemented yet");
@@ -416,7 +416,7 @@ int freeSharedObject(int32 sharedObjectID, void *startVA)
 		va += PAGE_SIZE;
 
 	}
-	cprintf("After freeing frames: Free frames = %d\n", calculate_available_frames());
+//	cprintf("After freeing frames: Free frames = %d\n", calculate_available_frames());
 //	printShare(current_share, numOfFrames);
 
 
