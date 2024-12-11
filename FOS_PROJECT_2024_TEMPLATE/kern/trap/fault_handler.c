@@ -289,12 +289,13 @@ void page_fault_handler(struct Env * faulted_env, uint32 fault_va)
 		}
 
 		//refer to the project presentation and documentation for details
-	}
+	}/*
 	else
 	{
 		//cprintf("REPLACEMENT=========================WS Size = %d\n", wsSize );
 		//refer to the project presentation and documentation for details
 		//TODO: [PROJECT'24.MS3] [2] FAULT HANDLER II - Replacement
+//		if(isPageReplacmentAlgorithmNchanceCLOCK())
 		// Write your code here, remove the panic and write your code
 //		panic("page_fault_handler() Replacement is not implemented yet...!!");
 //		pf_update_env_page();
@@ -303,11 +304,10 @@ void page_fault_handler(struct Env * faulted_env, uint32 fault_va)
 //		Flush certain Virtual Address from Working Set
 		int is_max_sweeps_negative = page_WS_max_sweeps < 0;
 		if(is_max_sweeps_negative)
-			page_WS_max_sweeps = -page_WS_max_sweeps;
+			page_WS_max_sweeps = - page_WS_max_sweeps;
 
 		// Start searching from the WS element after the last placed one
 		struct WS_List workingSetList = faulted_env->page_WS_list;
-
 		// Loop on this list by getting the first element and getting the next element each time
 		struct WorkingSetElement* WS_element_itr = LIST_FIRST(&workingSetList);
 
@@ -329,23 +329,38 @@ void page_fault_handler(struct Env * faulted_env, uint32 fault_va)
 //					first check if sweeps_counter = max sweeps then replace WS
 					if(WS_element_itr->sweeps_counter == max_sweeps) {
 						// if sweeps_counter = N (max_sweeps) update WS and return
-						/*
+
 						 * WARNING: This function adds the new element to the list
 						 * at the end and this might cause an issue.
 						 * Function should update ws fields and set page permissions to used.
-						 */
+
 						struct WorkingSetElement* new_ws_elm = env_page_ws_list_create_element(faulted_env, fault_va);
-//						env_page_ws_invalidate(faulted_env, fault_va);
+
+//						env_page_ws_invalidate(faulted_env, WS_element_itr->virtual_address);
 						// Update pointer.
 						new_ws_elm = WS_element_itr;
 
+						uint32* ptr_page_table = NULL;
+//						struct FrameInfo* ptr_frame_info = get_frame_info(faulted_env->env_page_directory, ptr_page_table);
+						// Update page file if the
+//						if(isModified)
+//							pf_update_env_page(faulted_env, WS_element_itr->virtual_address, ptr_frame_info);
 						// Keep track of last working set element.
-						faulted_env->page_last_WS_element = new_ws_elm;
+						// Unmap the virtual address of WS
+						unmap_frame(faulted_env->env_page_directory, WS_element_itr->virtual_address);
 
+						struct FrameInfo* FaultedPage = NULL;
+						int ReturnedVal = allocate_frame(&FaultedPage);
+
+						if(ReturnedVal != 0)
+							panic("No Space!");
+
+						map_frame(faulted_env->env_page_directory,FaultedPage, fault_va, PERM_USER | PERM_USED | PERM_WRITEABLE );
+
+						faulted_env->page_last_WS_element = new_ws_elm;
 
 						new_ws_elm->sweeps_counter = 0;
 						new_ws_elm->empty = 0;
-//						new_ws_elm->virtual_address = (uint32)fault_va;
 						return;
 					}
 					else {
@@ -359,6 +374,7 @@ void page_fault_handler(struct Env * faulted_env, uint32 fault_va)
 				}
 
 				// Get next WS element.
+				// mmken nkaren bl last element
 				if(LIST_NEXT(WS_element_itr))
 					WS_element_itr = LIST_NEXT(WS_element_itr);
 				else
@@ -369,7 +385,7 @@ void page_fault_handler(struct Env * faulted_env, uint32 fault_va)
 //			faulted_env->page_last_WS_element
 		}
 
-	}
+	}*/
 }
 
 void __page_fault_handler_with_buffering(struct Env * curenv, uint32 fault_va)

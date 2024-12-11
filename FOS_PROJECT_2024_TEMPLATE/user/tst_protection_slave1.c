@@ -3,6 +3,7 @@
 void
 _main(void)
 {
+	cprintf("\noi8\n");
 	/*********************** NOTE ****************************
 	 * WE COMPARE THE DIFF IN FREE FRAMES BY "AT LEAST" RULE
 	 * INSTEAD OF "EQUAL" RULE SINCE IT'S POSSIBLE THAT SOME
@@ -21,8 +22,8 @@ _main(void)
 	panic("make sure to enable the kernel heap: USE_KHEAP=1");
 #endif
 	/*=================================================*/
-
 	{
+//	cprintf("\noi6\n");
 		char initname[10] = "x";
 		char name[10] ;
 #define NUM_OF_OBJS 5000
@@ -39,6 +40,8 @@ _main(void)
 		{
 			assert(*vars[s] == s);
 		}
+
+//		cprintf("\noi8\n");
 	}
 
 	inctst();
