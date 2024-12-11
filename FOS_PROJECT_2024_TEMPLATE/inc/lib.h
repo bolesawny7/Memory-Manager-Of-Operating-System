@@ -87,7 +87,9 @@ bool sys_is_marked_page(uint32 va);
 int 	sys_pf_calculate_allocated_pages(void);
 
 //Semaphores
-
+void* sys_InitandAcquireSpinLockSemaphore();
+void  sys_ReleaseSpinLockSemaphore(void* lk);
+struct Env* sys_QueueOperations(struct semaphore* sem, int value);
 
 //Sharing
 //2017

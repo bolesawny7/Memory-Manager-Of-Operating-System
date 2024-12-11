@@ -16,13 +16,7 @@ struct semaphore create_semaphore(char *semaphoreName, uint32 value)
 	strcpy(sem->name, semaphoreName);
 	sem->count = value;
 	sem->lock = 0;
-
-	if(&(sem->queue) != NULL)
-	{
-		LIST_INIT(&(sem->queue));
-	}
-//	init_queue(&semQueue);
-//	sem->queue = semQueue;
+	sys_QueueOperations(&newsem, 3);
 
 	newsem.semdata = sem;
 	return newsem;
@@ -47,29 +41,23 @@ void wait_semaphore(struct semaphore sem)
 	//COMMENT THE FOLLOWING LINE BEFORE START CODING
 	//panic("wait_semaphore is not implemented yet");
 	//Your Code is Here...
-//	struct spinlock *wait_lk;
-//	/* Don't use:
-//	 * get_cpu_proc()
-//	 * init_spinlock()
-//	 * acquire_spinlock()
-//	 * enqueue()
-//	 * release_spinlock()
-//	 */
-//    struct Env* currentProcess = get_cpu_proc();
-//
-//	char name[] = "lock_wait";
-//	init_spinlock(wait_lk, name);
-//	acquire_spinlock(wait_lk);
-////	int keyw = 1;
-////	do xchg(&keyw, &(sem.semdata->lock)) while (keyw != 0);
-//	sem.semdata->count--;
-//	if(sem.semdata->count < 0)
-//	{
-//		enqueue(sem.semdata->queue, currentProcess);
-//		currentProcess->env_status = ENV_BLOCKED;
-//		sem.semdata->lock = 0;
-//	}
-//	release_spinlock(wait_lk);
+	void* Lock= sys_InitandAcquireSpinLockSemaphore();
+	cprintf("Initialized and acquired\n");
+	sem.semdata->count--;
+	cprintf("count %d\n",	sem.semdata->count);
+	cprintf("before if\n");
+	if(sem.semdata->count < 0)
+	{
+		sys_QueueOperations(&sem,1);
+		cprintf("passed sys_queueOperations\n");
+		sem.semdata->lock = 0;
+		cprintf("setting lock to zero\n");
+
+
+	}
+//	cprintf("after if\n");
+
+	sys_ReleaseSpinLockSemaphore(Lock);
 }
 
 void signal_semaphore(struct semaphore sem)
@@ -78,6 +66,14 @@ void signal_semaphore(struct semaphore sem)
 	//COMMENT THE FOLLOWING LINE BEFORE START CODING
 	//panic("signal_semaphore is not implemented yet");
 	//Your Code is Here...
+
+		void* Lock= sys_InitandAcquireSpinLockSemaphore();
+		sem.semdata->count++;
+		if(sem.semdata->count <= 0)
+		{
+			sys_QueueOperations(&sem, 2);
+		}
+		sys_ReleaseSpinLockSemaphore(Lock);
 }
 
 int semaphore_count(struct semaphore sem)

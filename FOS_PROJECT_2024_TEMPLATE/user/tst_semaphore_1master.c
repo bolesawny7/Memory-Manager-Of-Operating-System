@@ -9,7 +9,7 @@ _main(void)
 
 	struct semaphore cs1 = create_semaphore("cs1", 1);
 	struct semaphore depend1 = create_semaphore("depend1", 0);
-
+	cprintf("BODA\n");
 	int id1, id2, id3;
 	id1 = sys_create_env("sem1Slave", (myEnv->page_WS_max_size),(myEnv->SecondListSize), (myEnv->percentage_of_WS_pages_to_be_removed));
 	id2 = sys_create_env("sem1Slave", (myEnv->page_WS_max_size), (myEnv->SecondListSize),(myEnv->percentage_of_WS_pages_to_be_removed));
@@ -19,9 +19,14 @@ _main(void)
 	sys_run_env(id2);
 	sys_run_env(id3);
 
+	cprintf("JULIA\n");
 	wait_semaphore(depend1);
+	cprintf("Firstwait\n");
 	wait_semaphore(depend1);
+	cprintf("Secondwait\n");
 	wait_semaphore(depend1);
+	cprintf("Thirdwait\n");
+
 
 	int sem1val = semaphore_count(cs1);
 	int sem2val = semaphore_count(depend1);

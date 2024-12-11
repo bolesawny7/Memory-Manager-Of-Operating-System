@@ -56,7 +56,9 @@ enum
 	SYS_freeUserMem,
 	SYS_sbrk,
 	SYS_isMarkedPage,
-
+	SYS_InitandAcquireSpinLockSemaphore,
+	SYS_ReleaseSpinLockSemaphore,
+	SYS_QueueOperations,
 
 };
 
