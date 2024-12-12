@@ -56,6 +56,7 @@ enum
 	SYS_freeUserMem,
 	SYS_sbrk,
 	SYS_isMarkedPage,
+	SYS_env_set_priority,
 
 
 };

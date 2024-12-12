@@ -15,7 +15,7 @@ _main(void)
 	panic("make sure to enable the kernel heap: USE_KHEAP=1");
 #endif
 	/*=================================================*/
-//	cprintf("\noi4\n");
+
 	uint32 pagealloc_start = USER_HEAP_START + DYN_ALLOC_MAX_SIZE + PAGE_SIZE; //UHS + 32MB + 4KB
 	uint32 *x, *y, *z ;
 	int freeFrames, diff, expected;

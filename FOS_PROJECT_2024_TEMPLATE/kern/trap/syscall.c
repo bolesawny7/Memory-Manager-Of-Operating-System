@@ -352,10 +352,18 @@ void sys_set_uheap_strategy(uint32 heapStrategy)
 }
 
 /*******************************/
+/* SCHEDULERS SYSTEM CALLS */
+/*******************************/
+//[PROJECT'24.MS3]
+void sys_env_set_priority(uint32 envId, int priority)
+{
+	return env_set_priority(envId, priority);
+}
+
+/*******************************/
 /* SEMAPHORES SYSTEM CALLS */
 /*******************************/
 //[PROJECT'24.MS3] ADD SUITABLE CODE HERE
-
 
 /*******************************/
 /* SHARED MEMORY SYSTEM CALLS */
@@ -677,6 +685,10 @@ uint32 syscall(uint32 syscallno, uint32 a1, uint32 a2, uint32 a3, uint32 a4, uin
 		return 0;
 	case SYS_isMarkedPage:
 		return sys_is_marked_page(a1);
+	case SYS_env_set_priority:
+		sys_env_set_priority((int32)a1 , (int)a2);
+		return 0;
+		break;
 	case SYS_sbrk:
 		return (uint32)sys_sbrk(a1);
 	case SYS_allocateUserMem:

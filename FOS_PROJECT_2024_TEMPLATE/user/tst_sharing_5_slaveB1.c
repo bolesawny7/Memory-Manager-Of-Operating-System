@@ -1,11 +1,11 @@
 // Test the free of shared variables
 #include <inc/lib.h>
 
-//extern volatile bool printStats;
+extern volatile bool printStats;
 void
 _main(void)
 {
-//	printStats = 0;
+	printStats = 0;
 
 	/*=================================================*/
 	//Initial test to ensure it works on "PLACEMENT" not "REPLACEMENT"
@@ -18,7 +18,7 @@ _main(void)
 	panic("make sure to enable the kernel heap: USE_KHEAP=1");
 #endif
 	/*=================================================*/
-//	cprintf("\noi3\n");
+
 	uint32 pagealloc_start = USER_HEAP_START + DYN_ALLOC_MAX_SIZE + PAGE_SIZE; //UHS + 32MB + 4KB
 	uint32 *x, *y, *z ;
 	int freeFrames, diff, expected;

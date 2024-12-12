@@ -302,6 +302,12 @@ bool sys_is_marked_page(uint32 va)
 	return syscall(SYS_isMarkedPage, va, 0, 0, 0, 0);
 }
 
+void sys_env_set_priority(uint32 envId, int priority)
+{
+    syscall(SYS_env_set_priority, envId, priority, 0, 0, 0);
+    return;
+}
+
 //TODO: [PROJECT'24.MS1 - #02] [2] SYSTEM CALLS - Implement these system calls
 void* sys_sbrk(int increment)
 {
