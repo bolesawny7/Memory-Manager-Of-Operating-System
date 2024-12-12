@@ -57,6 +57,9 @@ enum
 	SYS_sbrk,
 	SYS_isMarkedPage,
 	SYS_env_set_priority,
+	SYS_InitandAcquireSpinLockSemaphore,
+	SYS_ReleaseSpinLockSemaphore,
+	SYS_QueueOperations,
 
 
 };

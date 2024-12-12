@@ -268,6 +268,18 @@ void sys_set_uheap_strategy(uint32 heapStrategy)
 	return ;
 }
 
+// 2024
+void* sys_InitandAcquireSpinLockSemaphore() {
+	return (void *) syscall(SYS_InitandAcquireSpinLockSemaphore, 0, 0, 0, 0, 0);
+}
+void sys_ReleaseSpinLockSemaphore(void* lk) {
+	syscall(SYS_ReleaseSpinLockSemaphore, (uint32)lk, 0, 0, 0, 0);
+	return;
+}
+void sys_QueueOperations(struct semaphore* sem, int value) {
+	return (void) syscall(SYS_QueueOperations, (uint32)sem, value, 0, 0, 0);
+}
+
 //2020
 int sys_check_LRU_lists(uint32* active_list_content, uint32* second_list_content, int actual_active_list_size, int actual_second_list_size)
 {

@@ -28,7 +28,7 @@ inline struct WorkingSetElement* env_page_ws_list_create_element(struct Env* e, 
 	//env_page_ws_print(e);
     if (LIST_SIZE(&(e->page_WS_list)) > e->page_WS_max_size) panic("No space in the working set (exceeded max size)");
 
-	e->page_last_WS_element = LIST_LAST(&(e->page_WS_list));
+//	e->page_last_WS_element = LIST_LAST(&(e->page_WS_list));
 	return created_element;
 }
 

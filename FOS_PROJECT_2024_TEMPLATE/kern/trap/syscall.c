@@ -5,6 +5,7 @@
 #include <inc/string.h>
 #include <inc/assert.h>
 #include <inc/semaphore.h>
+#include <kern/mem/kheap.h>
 
 #include <kern/proc/user_environment.h>
 #include "trap.h"
@@ -363,7 +364,61 @@ void sys_env_set_priority(uint32 envId, int priority)
 /*******************************/
 /* SEMAPHORES SYSTEM CALLS */
 /*******************************/
-//[PROJECT'24.MS3] ADD SUITABLE CODE HERE
+//[PROJECT'24.MS3] TODO: ADD SUITABLE CODE HERE
+void* sys_InitandAcquireSpinLockSemaphore() {
+	struct spinlock* SemaphoreLock = (struct spinlock*) kmalloc(
+			sizeof(struct spinlock));
+	if (SemaphoreLock == NULL) {
+		panic("Failed to allocate memory for spinlock");
+		return NULL;
+	}
+	char name[] = "SemaphoreLock";
+	init_spinlock(SemaphoreLock, name);
+
+	acquire_spinlock(SemaphoreLock);
+	popcli();
+	return SemaphoreLock;
+}
+
+void sys_ReleaseSpinLockSemaphore(struct spinlock* SemaphoreLock) {
+	pushcli();
+	release_spinlock(SemaphoreLock);
+	return;
+}
+
+void sys_QueueOperations(struct semaphore* sem, int value) {
+	if (!cur_env) {
+		return;
+	}
+	struct Env* Dequeued= NULL;
+	switch (value) {
+	case 1:
+		//wait
+		cprintf("inside case 1 \n");
+		sleep((struct Channel*)(&(sem->semdata->queue)), (struct spinlock*)(&(sem->semdata->lock)));
+//		enqueue(&(sem->semdata->queue), cur_env);
+//		cprintf("enqueued into blocked list! \n");
+//		cur_env->env_status = ENV_BLOCKED;
+//		cprintf("blocked!\n");
+
+		break;
+
+	case 2:
+		//signal
+		cprintf("in case2 \n");
+		Dequeued = dequeue(&(sem->semdata->queue));
+		sched_insert_ready0(Dequeued);
+		cprintf("inserted into ready! \n");
+		break;
+
+	case 3:
+		init_queue(&sem->semdata->queue);
+		break;
+
+	default:
+		panic("NOT ACCEPTED! FOR QUEUING OPERATIONS");
+	}
+}
 
 /*******************************/
 /* SHARED MEMORY SYSTEM CALLS */
@@ -521,6 +576,15 @@ uint32 syscall(uint32 syscallno, uint32 a1, uint32 a2, uint32 a3, uint32 a4, uin
 	//TODO: [PROJECT'24.MS1 - #02] [2] SYSTEM CALLS - Add suitable code here
 
 	//======================================================================
+	case SYS_InitandAcquireSpinLockSemaphore:
+		return (uint32) sys_InitandAcquireSpinLockSemaphore();
+		break;
+	case SYS_ReleaseSpinLockSemaphore:
+		sys_ReleaseSpinLockSemaphore((struct spinlock *) a1);
+		return 0;
+	case SYS_QueueOperations:
+		sys_QueueOperations((struct semaphore *) a1, a2);
+		return 0;
 	case SYS_cputs:
 		sys_cputs((const char*)a1,a2,(uint8)a3);
 		return 0;
