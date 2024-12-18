@@ -344,17 +344,20 @@ void page_fault_handler(struct Env * faulted_env, uint32 fault_va)
 						if (r == E_NO_PAGE_FILE_SPACE)
 							panic("no space for this page");
 					}
-
+//					uint32 numOfFramesBefore = sys_calculate_free_frames();
 					unmap_frame(faulted_env->env_page_directory, WS_element_itr->virtual_address);
 
+//					uint32 numOfFramesAfter = sys_calculate_free_frames();
 					WS_element_itr->sweeps_counter = 0;
 					WS_element_itr->virtual_address = fault_va;
 
 					struct FrameInfo* FaultedPage = NULL;
-					int ReturnedVal = allocate_frame(&FaultedPage);
+//					if(numOfFramesBefore != numOfFramesAfter){
+						int ReturnedVal = allocate_frame(&FaultedPage);
+						if(ReturnedVal != 0)
+							panic("No Space!");
+//					}
 
-					if(ReturnedVal != 0)
-						panic("No Space!");
 
 					map_frame(faulted_env->env_page_directory,FaultedPage, fault_va, PERM_USER | PERM_WRITEABLE );
 

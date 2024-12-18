@@ -3,7 +3,6 @@
 void
 _main(void)
 {
-	cprintf("\noi8\n");
 	/*********************** NOTE ****************************
 	 * WE COMPARE THE DIFF IN FREE FRAMES BY "AT LEAST" RULE
 	 * INSTEAD OF "EQUAL" RULE SINCE IT'S POSSIBLE THAT SOME
@@ -23,7 +22,6 @@ _main(void)
 #endif
 	/*=================================================*/
 	{
-//	cprintf("\noi6\n");
 		char initname[10] = "x";
 		char name[10] ;
 #define NUM_OF_OBJS 5000
@@ -36,12 +34,15 @@ _main(void)
 			vars[s] = smalloc(name, PAGE_SIZE, 1);
 			*vars[s] = s;
 		}
+//		cprintf("ASSERTION: should be all 1\n");
 		for (int s = 0; s < NUM_OF_OBJS; ++s)
 		{
+//			if(*vars[s] != s){
+//				cprintf("ASSERT: actual: %d expected: %d\n", *vars[s], s);
+//			}
 			assert(*vars[s] == s);
 		}
 
-//		cprintf("\noi8\n");
 	}
 
 	inctst();

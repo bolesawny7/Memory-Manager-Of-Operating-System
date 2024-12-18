@@ -12,6 +12,7 @@ uint32 allocation_sizes[USER_HEAP_ARRAY_SIZE];
 //=============================================
 /*2023*/
 void* sbrk(int increment) {
+//	cprintf("SBRK: increment = %d\n", increment);
 	return (void*) sys_sbrk(increment);
 }
 
@@ -94,12 +95,14 @@ void* smalloc(char *sharedVarName, uint32 size, uint8 isWritable) {
 //	panic("smalloc() is not implemented yet...!!");
 	uint32* virtual_address = (uint32*)AllocateInPageAllocator(size);
 	if(!virtual_address) return NULL;
-//	cprintf("Found virtual address @: %p\n", virtual_address);
+
 	int SharedObjectId = sys_createSharedObject(sharedVarName, size, isWritable,
 			(void*) virtual_address);
+
+//	cprintf("SMALLOC: Created shared object, ID = %d\n", SharedObjectId);
+
 	if (SharedObjectId == 0)
 		return NULL;
-//	cprintf("Found shared object with ID: %p\n", SharedObjectId);
 	return (void*) virtual_address;
 }
 
@@ -117,14 +120,12 @@ void* sget(int32 ownerEnvID, char *sharedVarName) {
 	start_va = AllocateInPageAllocator(size);
 	if(!start_va) return NULL;
 
-//	cprintf("Found virtual address @: %p\n", start_va);
-
-//	*((uint32 *)start_va) = 20;
-	uint32 id = sys_getSharedObject(ownerEnvID, sharedVarName, (uint32 *)start_va);
+	int id = sys_getSharedObject(ownerEnvID, sharedVarName, (uint32 *)start_va);
 
 	if(id == E_SHARED_MEM_NOT_EXISTS) return NULL;
 
-//	sys_bypassPageFault(0);
+//	cprintf("SGET: Shared object found, ID = %d\n", id);
+
 	return start_va;
 }
 //==================================================================================//

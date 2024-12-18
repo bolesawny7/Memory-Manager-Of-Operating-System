@@ -269,13 +269,6 @@ void sys_set_uheap_strategy(uint32 heapStrategy)
 }
 
 // 2024
-void* sys_InitandAcquireSpinLockSemaphore() {
-	return (void *) syscall(SYS_InitandAcquireSpinLockSemaphore, 0, 0, 0, 0, 0);
-}
-void sys_ReleaseSpinLockSemaphore(void* lk) {
-	syscall(SYS_ReleaseSpinLockSemaphore, (uint32)lk, 0, 0, 0, 0);
-	return;
-}
 void sys_QueueOperations(struct semaphore* sem, int value) {
 	return (void) syscall(SYS_QueueOperations, (uint32)sem, value, 0, 0, 0);
 }

@@ -91,8 +91,6 @@ int 	sys_pf_calculate_allocated_pages(void);
 void 	sys_env_set_priority(uint32 envId, int priority);
 
 //Semaphores
-void* sys_InitandAcquireSpinLockSemaphore();
-void  sys_ReleaseSpinLockSemaphore(void* lk);
 void sys_QueueOperations(struct semaphore* sem, int value);
 
 

@@ -41,21 +41,18 @@ void wait_semaphore(struct semaphore sem)
 	//COMMENT THE FOLLOWING LINE BEFORE START CODING
 	//panic("wait_semaphore is not implemented yet");
 	//Your Code is Here...
-	void* Lock= sys_InitandAcquireSpinLockSemaphore();
-	cprintf("Initialized done!");
+	while(xchg(&sem.semdata->lock, 1) != 0) ;
+//	cprintf("Initialized done!");
 	sem.semdata->count--;
 	if(sem.semdata->count < 0)
 	{
-		cprintf("Inside if!\n");
+//		cprintf("Inside if!\n");
 		sys_QueueOperations(&sem,1);
-		cprintf("after the sys_queueOperations case 1!\n");
-		sem.semdata->lock = 0;
-		cprintf("after sem.semdata->lock = 0\n");
+//		cprintf("after the sys_queueOperations case 1!\n");
 
 	}
+	sem.semdata->lock = 0;
 	cprintf("after if\n");
-	sys_ReleaseSpinLockSemaphore(Lock);
-	cprintf("After release");
 	//done wait!
 
 }
@@ -69,15 +66,15 @@ void signal_semaphore(struct semaphore sem)
 	//panic("signal_semaphore is not implemented yet");
 	//Your Code is Here...
 
-		void* Lock= sys_InitandAcquireSpinLockSemaphore();
-		cprintf("Initialized and acquired Signal \n");
+		while(xchg(&sem.semdata->lock, 1) != 0) ;
+//		cprintf("Initialized and acquired Signal \n");
 		sem.semdata->count++;
 		if(sem.semdata->count <= 0)
 		{
-			cprintf("inside if of signal");
+//			cprintf("inside if of signal");
 			sys_QueueOperations(&sem, 2);
 		}
-		sys_ReleaseSpinLockSemaphore(Lock);
+		sem.semdata->lock = 0 ;
 
 }
 
