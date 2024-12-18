@@ -236,7 +236,8 @@ void sys_set_uheap_strategy(uint32 heapStrategy) {
 
 // 2024
 void sys_QueueOperations(struct semaphore* sem, int value) {
-	return (void) syscall(SYS_QueueOperations, (uint32)sem, value, 0, 0, 0);
+	syscall(SYS_QueueOperations, (uint32)sem, value, 0, 0, 0);
+	return;
 }
 
 //2020
@@ -273,9 +274,6 @@ bool sys_is_marked_page(uint32 va) {
 //	panic("not implemented yet");
 //	cprintf("1 lib\n");
 	return syscall(SYS_isMarkedPage, va, 0, 0, 0, 0);
-}
-struct Env* sys_QueueOperations(struct semaphore* sem, int value) {
-	return (struct Env *) syscall(SYS_QueueOperations, (uint32)sem, value, 0, 0, 0);
 }
 
 void sys_env_set_priority(uint32 envId, int priority)
