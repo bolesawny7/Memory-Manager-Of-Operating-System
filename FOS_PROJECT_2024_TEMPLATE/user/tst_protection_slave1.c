@@ -21,7 +21,6 @@ _main(void)
 	panic("make sure to enable the kernel heap: USE_KHEAP=1");
 #endif
 	/*=================================================*/
-
 	{
 		char initname[10] = "x";
 		char name[10] ;
@@ -35,10 +34,15 @@ _main(void)
 			vars[s] = smalloc(name, PAGE_SIZE, 1);
 			*vars[s] = s;
 		}
+//		cprintf("ASSERTION: should be all 1\n");
 		for (int s = 0; s < NUM_OF_OBJS; ++s)
 		{
+//			if(*vars[s] != s){
+//				cprintf("ASSERT: actual: %d expected: %d\n", *vars[s], s);
+//			}
 			assert(*vars[s] == s);
 		}
+
 	}
 
 	inctst();

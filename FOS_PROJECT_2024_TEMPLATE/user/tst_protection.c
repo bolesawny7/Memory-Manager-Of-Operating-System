@@ -21,7 +21,7 @@ _main(void)
 	panic("make sure to enable the kernel heap: USE_KHEAP=1");
 #endif
 	/*=================================================*/
-
+//	cprintf("\noi5\n");
 	int numOfSlaves = 3;
 	rsttst();
 	//[1] Run programs that allocate many shared variables

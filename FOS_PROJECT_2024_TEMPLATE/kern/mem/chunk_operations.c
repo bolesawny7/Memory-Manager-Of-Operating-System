@@ -163,7 +163,7 @@ void* sys_sbrk(int numOfPages)
 	if(numOfPages == 0) return (void*)env->UhSbrk;
 
 	if((env->UhSbrk + sizeOfIncrement) > env->UhLimit) return (void*)-1;
-	cprintf("\n\n\n\n sabaho sbrk \n\n\n\n\n\n");
+//	cprintf("\n\n\n\n sabaho sbrk \n\n\n\n\n\n");
 	env->UhSbrk += sizeOfIncrement;
 	uint32* PtrPageTable = NULL;
 	for (uint32 current_va = (uint32)OldSbrk; current_va < (uint32)env->UhSbrk; current_va += PAGE_SIZE) {

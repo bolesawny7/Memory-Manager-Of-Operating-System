@@ -292,18 +292,107 @@ void page_fault_handler(struct Env * faulted_env, uint32 fault_va)
 	}
 	else
 	{
-		//cprintf("REPLACEMENT=========================WS Size = %d\n", wsSize );
+		cprintf("REPLACEMENT=========================WS Size = %d\n", wsSize );
 		//refer to the project presentation and documentation for details
 		//TODO: [PROJECT'24.MS3] [2] FAULT HANDLER II - Replacement
+//		if(isPageReplacmentAlgorithmNchanceCLOCK())
 		// Write your code here, remove the panic and write your code
 //		panic("page_fault_handler() Replacement is not implemented yet...!!");
 //		pf_update_env_page();
-//		env_page_ws_print(ptr_env);
-
+		cprintf("\n\n");
+		env_page_ws_print(faulted_env);
 //		Flush certain Virtual Address from Working Set
-//		env_page_ws_invalidate(ptr_env, va);
+		int old_max_sweeps = page_WS_max_sweeps;
+		int is_max_sweeps_negative = old_max_sweeps < 0;
+		if(is_max_sweeps_negative)
+			old_max_sweeps = - old_max_sweeps;
+
+		// Start searching from the WS element after the last placed one
+		struct WS_List* workingSetList = &faulted_env->page_WS_list;
+		// Loop on this list by getting the first element and getting the next element each time
+		struct WorkingSetElement* WS_element_itr = faulted_env->page_last_WS_element;
+
+//		PERM_USED
+		while(1) {
+
+//			check use bit of working set virtual address if 0 then
+			int ws_va_perms = pt_get_page_permissions(faulted_env->env_page_directory, WS_element_itr->virtual_address);
+
+			// Check if page modified or not and increment max sweeps
+
+			int isModified = (ws_va_perms & PERM_MODIFIED);
+			int max_sweeps;
+
+			if(!is_max_sweeps_negative){
+				// N +ve or 0
+				max_sweeps = old_max_sweeps;
+			}
+			else{
+				// N -ve
+				max_sweeps = !isModified ? old_max_sweeps : old_max_sweeps + 1;
+			}
+
+			// If use bit = 0 then
+			if(!(ws_va_perms & PERM_USED)) {
+	//					first check if sweeps_counter = max sweeps then replace WS
+				if(WS_element_itr->sweeps_counter == max_sweeps) {
+					// if sweeps_counter = N (max_sweeps) update WS and return
+					uint32 *table = NULL;
+					struct FrameInfo *frame = get_frame_info(faulted_env->env_page_directory, WS_element_itr->virtual_address, &table);
+					if(isModified){
+						int r = pf_update_env_page(faulted_env, WS_element_itr->virtual_address, frame);
+						if (r == E_NO_PAGE_FILE_SPACE)
+							panic("no space for this page");
+					}
+//					uint32 numOfFramesBefore = sys_calculate_free_frames();
+					unmap_frame(faulted_env->env_page_directory, WS_element_itr->virtual_address);
+
+//					uint32 numOfFramesAfter = sys_calculate_free_frames();
+					WS_element_itr->sweeps_counter = 0;
+					WS_element_itr->virtual_address = fault_va;
+
+					struct FrameInfo* FaultedPage = NULL;
+//					if(numOfFramesBefore != numOfFramesAfter){
+						int ReturnedVal = allocate_frame(&FaultedPage);
+						if(ReturnedVal != 0)
+							panic("No Space!");
+//					}
 
 
+					map_frame(faulted_env->env_page_directory,FaultedPage, fault_va, PERM_USER | PERM_WRITEABLE );
+
+					int EnvPage = pf_read_env_page(faulted_env, (void*)fault_va);
+					if(EnvPage != 0){
+						if (!(fault_va >= USER_HEAP_START && fault_va < USER_HEAP_MAX) && !(fault_va >= USTACKBOTTOM && fault_va < USTACKTOP)) {
+							env_exit();
+						}
+					}
+
+
+					faulted_env->page_last_WS_element = WS_element_itr == LIST_LAST(workingSetList) ? LIST_FIRST(workingSetList) : LIST_NEXT(WS_element_itr);
+					cprintf("\n\n");
+					env_page_ws_print(faulted_env);
+					cprintf("end\n");
+					return;
+				}
+				else {
+					WS_element_itr->sweeps_counter++;
+				}
+			}
+			else {
+			// If use bit = 1 then CLEAR IT
+				pt_set_page_permissions(faulted_env->env_page_directory, WS_element_itr->virtual_address, 0, PERM_USED);
+
+				WS_element_itr->sweeps_counter = 0;
+			}
+
+			// Get next WS element.
+			// mmken nkaren bl last element
+			if(LIST_NEXT(WS_element_itr))
+				WS_element_itr = LIST_NEXT(WS_element_itr);
+			else
+				WS_element_itr = LIST_FIRST(workingSetList);
+		}
 	}
 }
 
