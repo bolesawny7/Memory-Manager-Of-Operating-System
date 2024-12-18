@@ -345,7 +345,7 @@ void sys_QueueOperations(struct semaphore* sem, int value) {
 		cprintf("in case2 \n");
 		acquire_spinlock(&ProcessQueues.qlock);
 		Dequeued = dequeue(&(sem->semdata->queue));
-		sched_insert_ready0(Dequeued);
+		sched_insert_ready(Dequeued);
 		release_spinlock(&ProcessQueues.qlock);
 		cprintf("inserted into ready! \n");
 		break;

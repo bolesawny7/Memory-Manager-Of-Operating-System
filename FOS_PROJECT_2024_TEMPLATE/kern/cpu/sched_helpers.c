@@ -705,7 +705,7 @@ void env_set_priority(int envID, int priority)
 	//TODO: [PROJECT'24.MS3 - #06] [3] PRIORITY RR Scheduler - env_set_priority
 
 	//Get the process of the given ID
-	struct Env* proc ;
+	struct Env* proc;
 	envid2env(envID, &proc, 0);
 	/*
 	 * set el priority

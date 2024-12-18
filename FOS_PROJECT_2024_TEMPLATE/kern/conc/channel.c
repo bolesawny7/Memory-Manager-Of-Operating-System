@@ -67,7 +67,7 @@ void wakeup_one(struct Channel *chan)
 	acquire_spinlock(&ProcessQueues.qlock);
 	if(queue_size(&(chan->queue))!=0){
 	struct Env* DequeuedProcess= dequeue(&(chan->queue));
-	sched_insert_ready0(DequeuedProcess);
+	sched_insert_ready(DequeuedProcess);
 	}
 	release_spinlock(&ProcessQueues.qlock);
 	}
@@ -89,7 +89,7 @@ void wakeup_all(struct Channel *chan)
 		acquire_spinlock(&ProcessQueues.qlock);
 		while(queue_size(&(chan->queue))!=0){
 			struct Env* DequeuedProcess= dequeue(&(chan->queue));
-			sched_insert_ready0(DequeuedProcess);
+			sched_insert_ready(DequeuedProcess);
 			}
 		release_spinlock(&ProcessQueues.qlock);
 

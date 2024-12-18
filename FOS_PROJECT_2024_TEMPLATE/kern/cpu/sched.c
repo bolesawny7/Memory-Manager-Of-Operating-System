@@ -153,7 +153,6 @@ fos_scheduler(void)
 		}
 		release_spinlock(&ProcessQueues.qlock);  //release lock: to protect ready & blocked Qs in multi-CPU
 		//cprintf("\n[FOS_SCHEDULER] release: lock status after = %d\n", qlock.locked);
-
 	} while (is_any_blocked > 0);
 
 	/*2015*///No more envs... curenv doesn't exist any more! return back to command prompt
@@ -253,7 +252,7 @@ void sched_init_PRIRR(uint8 numOfPriorities, uint8 quantum, uint32 starvThresh)
 
 
 	//3dd el ready Qs
-	num_of_ready_queues = numOfPriorities ;
+	num_of_ready_queues = numOfPriorities;
 
 #if USE_KHEAP
 	sched_delete_ready_queues();
@@ -382,18 +381,21 @@ struct Env* fos_scheduler_PRIRR()
 	struct Env* nextproc = NULL;
 
 	if(currentproc!= NULL){
+//		cprintf("ENV status of current process: %d\n", currentproc->env_status); // Should be 1
 		sched_insert_ready(currentproc);
 	}
 
 	for (uint8 i = 0; i < num_of_ready_queues; i++)
-	    {
-	        if (queue_size(&ProcessQueues.env_ready_queues[i]) > 0)
-	        {
-	        	nextproc =dequeue(&ProcessQueues.env_ready_queues[i]);
-	            kclock_set_quantum(quantums[0]);
-	            return nextproc;
-	        }
-	    }
+	{
+		int sizeOfCurReadyQueue = queue_size(&ProcessQueues.env_ready_queues[i]);
+//		cprintf("Size of current queue: %d\n", sizeOfCurReadyQueue);
+		if (sizeOfCurReadyQueue > 0)
+		{
+			nextproc = dequeue(&ProcessQueues.env_ready_queues[i]);
+			kclock_set_quantum(quantums[0]);
+			return nextproc;
+		}
+	}
 	return NULL;
 }
 
@@ -423,11 +425,26 @@ void clock_interrupt_handler(struct Trapframe* tf)
 			uint32 Qsize = queue_size(queue);
 			for(int j = 0 ; j < Qsize ; j++)
 			{
+				/*
+				 * Potential error here:
+				 *      why dequeuing and enqueuing?
+				 *		by doing so, the position of the env in queue is being changed and this
+				 *		makes undefined behavior in running the envs.
+				 *
+				 * We just want to check the time of each environment in the ready queues
+				 * (except first queue) if it passes the starvThreshold then we dequeue it
+				 * and promote it (make it ready again) in a higher priority. (priority--)
+				 *
+				 * TotalTicks - env->arrivalTime equals starvThreshold
+				 */
 				struct Env* env = dequeue(queue);
 				uint32 totalTicks = timer_ticks();
 				if(totalTicks - env->arrivalTime >= starvThreshold)
 				{
-					env->priority--;
+//					if (env->priority > 0) {
+					    env->priority--;
+//					}
+					env->arrivalTime = totalTicks;
 					acquire_spinlock(&ProcessQueues.qlock);
 					sched_insert_ready(env);
 					release_spinlock(&ProcessQueues.qlock);

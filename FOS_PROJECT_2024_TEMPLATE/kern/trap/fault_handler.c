@@ -292,15 +292,15 @@ void page_fault_handler(struct Env * faulted_env, uint32 fault_va)
 	}
 	else
 	{
-		cprintf("REPLACEMENT=========================WS Size = %d\n", wsSize );
+//		cprintf("REPLACEMENT=========================WS Size = %d\n", wsSize );
 		//refer to the project presentation and documentation for details
 		//TODO: [PROJECT'24.MS3] [2] FAULT HANDLER II - Replacement
 //		if(isPageReplacmentAlgorithmNchanceCLOCK())
 		// Write your code here, remove the panic and write your code
 //		panic("page_fault_handler() Replacement is not implemented yet...!!");
 //		pf_update_env_page();
-		cprintf("\n\n");
-		env_page_ws_print(faulted_env);
+//		cprintf("\n\n");
+//		env_page_ws_print(faulted_env);
 //		Flush certain Virtual Address from Working Set
 		int old_max_sweeps = page_WS_max_sweeps;
 		int is_max_sweeps_negative = old_max_sweeps < 0;
@@ -370,9 +370,9 @@ void page_fault_handler(struct Env * faulted_env, uint32 fault_va)
 
 
 					faulted_env->page_last_WS_element = WS_element_itr == LIST_LAST(workingSetList) ? LIST_FIRST(workingSetList) : LIST_NEXT(WS_element_itr);
-					cprintf("\n\n");
-					env_page_ws_print(faulted_env);
-					cprintf("end\n");
+//					cprintf("\n\n");
+//					env_page_ws_print(faulted_env);
+//					cprintf("end\n");
 					return;
 				}
 				else {
