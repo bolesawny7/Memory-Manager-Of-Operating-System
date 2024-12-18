@@ -59,7 +59,6 @@ enum
 	SYS_env_set_priority,
 	SYS_QueueOperations,
 
-
 };
 
 #endif /* !FOS_INC_SYSCALL_H */

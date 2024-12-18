@@ -93,7 +93,6 @@ void 	sys_env_set_priority(uint32 envId, int priority);
 //Semaphores
 void sys_QueueOperations(struct semaphore* sem, int value);
 
-
 //Sharing
 //2017
 int 	sys_createSharedObject(char* shareName, uint32 size, uint8 isWritable, void* virtual_address);
