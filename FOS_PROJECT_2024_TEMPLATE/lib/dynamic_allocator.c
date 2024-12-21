@@ -212,10 +212,10 @@ void *alloc_block_FF(uint32 size)
 				set_block_data((void *) remaining_blk, remaining_blk_size, 0);
 //				cprintf("\n no internal frag 3 \n");
 				LIST_INSERT_AFTER(&freeBlocksList, blk, remaining_blk);
+//				cprintf("\n after insert after \n");
 				LIST_REMOVE(&freeBlocksList, blk);
-
 			}
-//			cprintf("\n %x \n",blk);
+//			cprintf("\n blk ptr: %x \n",blk);
 			return (void *) blk;
 		}
 	}
@@ -317,7 +317,7 @@ void free_block(void *va) {
 
 		// Add it to the head of the list.
 		if(LIST_SIZE(&freeBlocksList) == 0){
-			cprintf("LIST IS EMPTY..\n");
+//			cprintf("LIST IS EMPTY..\n");
 			LIST_INSERT_HEAD(&freeBlocksList, block);
 			return;
 		}
@@ -368,7 +368,7 @@ void free_block(void *va) {
 		if(next_blk != NULL){
 	//		cprintf("Size of block NEXT: %d\n", total_size_after_coalesce);
 			if(is_free_block(next_blk)){
-				cprintf("COALESCE WITH NEXT BLOCK.\n");
+//				cprintf("COALESCE WITH NEXT BLOCK.\n");
 				total_size_after_coalesce += get_block_size(next_blk);
 
 				LIST_REMOVE(&freeBlocksList, (struct BlockElement *)next_blk);
@@ -428,7 +428,7 @@ void free_block(void *va) {
 // [6] REALLOCATE BLOCK BY FIRST FIT:
 //=========================================
 void *realloc_block_FF(void *va, uint32 new_size) {
-	cprintf("YASTA FE HAGA HENAAA REALLOCCC\n");
+//	cprintf("YASTA FE HAGA HENAAA REALLOCCC\n");
 	// TODO: [PROJECT'24.MS1 - #08] [3] DYNAMIC ALLOCATOR - realloc_block_FF
 	// COMMENT THE FOLLOWING LINE BEFORE START CODING
 //	 panic("realloc_block_FF is not implemented yet");

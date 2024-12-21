@@ -211,7 +211,6 @@ void sched_remove_new(struct Env* env)
 	if(!holding_spinlock(&ProcessQueues.qlock))
 		panic("sched: q.lock is not held by this CPU while it's expected to be.");
 	/*********************************************************************/
-
 	assert(env != NULL && env->env_status == ENV_NEW);
 	{
 		LIST_REMOVE(&ProcessQueues.env_new_queue, env) ;
@@ -543,8 +542,11 @@ void sched_run_all()
 		ptr_env = dequeue(&ProcessQueues.env_new_queue);
 		sched_insert_ready(ptr_env);
 	}
-
 	release_spinlock(&(ProcessQueues.qlock)); 	//CS on Qs
+
+	/* This is for testing: DELETE LATER */
+	sched_print_all();
+
 	/*2015*///if scheduler not run yet, then invoke it!
 	if (mycpu()->scheduler_status == SCH_STOPPED)
 		fos_scheduler();
@@ -707,16 +709,18 @@ void env_set_priority(int envID, int priority)
 	//Get the process of the given ID
 	struct Env* proc;
 	envid2env(envID, &proc, 0);
+	cprintf("status: %d\n", proc->env_status);
 	/*
 	 * set el priority
 	 * check if the process is ready
 	 * if ready : update its location to the right Q
 	 */
-	proc->priority = priority;
+	assert(proc != NULL);
 	if(proc->env_status == ENV_READY){
 		//update el location
 		acquire_spinlock(&ProcessQueues.qlock);
 		sched_remove_ready(proc);
+		proc->priority = priority;
 		release_spinlock(&ProcessQueues.qlock);
 
 
@@ -724,7 +728,11 @@ void env_set_priority(int envID, int priority)
 		sched_insert_ready(proc);
 		release_spinlock(&ProcessQueues.qlock);
 	}
-
+//	acquire_spinlock(&ProcessQueues.qlock);
+	proc->priority = priority;
+//	sched_remove_new(proc);
+//	sched_insert_ready(proc);
+//	release_spinlock(&ProcessQueues.qlock);
 	//Your code is here
 	//Comment the following line
 	//panic("Not implemented yet");

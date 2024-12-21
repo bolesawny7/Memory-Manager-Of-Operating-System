@@ -16,9 +16,9 @@ struct semaphore create_semaphore(char *semaphoreName, uint32 value)
 	strcpy(sem->name, semaphoreName);
 	sem->count = value;
 	sem->lock = 0;
+	newsem.semdata = sem;
 	sys_QueueOperations(&newsem, 3);
 
-	newsem.semdata = sem;
 	return newsem;
 }
 struct semaphore get_semaphore(int32 ownerEnvID, char* semaphoreName)
@@ -52,7 +52,7 @@ void wait_semaphore(struct semaphore sem)
 
 	}
 	sem.semdata->lock = 0;
-	cprintf("after if\n");
+//	cprintf("after if\n");
 	//done wait!
 
 }

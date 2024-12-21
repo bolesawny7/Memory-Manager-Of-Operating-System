@@ -31,11 +31,14 @@ void* malloc(uint32 size) {
 
 	if (sys_isUHeapPlacementStrategyFIRSTFIT()) {
 		if (size <= DYN_ALLOC_MAX_BLOCK_SIZE) {
-//			cprintf("size: %d \n", size);
-			return (void*) alloc_block_FF(size);
+			cprintf("size: %d \n", size);
+			uint32* vir = alloc_block_FF(size);
+			cprintf("vir: %p\n", vir);
+			return (void *)vir;
 		}
-
+		cprintf("before allocate in page allocator\n");
 		uint32* virtual_address = AllocateInPageAllocator(size);
+		cprintf("after allocate in page allocator, va = %p\n", virtual_address);
 
 		return (void*) virtual_address;
 	} else if (sys_isUHeapPlacementStrategyBESTFIT()) {

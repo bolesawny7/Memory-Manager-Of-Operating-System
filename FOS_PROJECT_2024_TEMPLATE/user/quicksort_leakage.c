@@ -50,14 +50,16 @@ void _main(void)
 		sys_unlock_cons();
 		//sys_unlock_cons();
 
+//		cprintf("before malloc\n");
 		Elements = malloc(sizeof(int) * NumOfElements) ;
+//		cprintf("after malloc\n");
 
 		int  i ;
 		switch (Chose)
 		{
 		case 'a':
 			InitializeAscending(Elements, NumOfElements);
-			break ;
+			break;
 		case 'b':
 			InitializeDescending(Elements, NumOfElements);
 			break ;
@@ -69,7 +71,7 @@ void _main(void)
 		}
 
 		QuickSort(Elements, NumOfElements);
-
+//		cprintf("after quick sort\n");
 		//sys_lock_cons();
 		sys_lock_cons();
 		{
@@ -180,7 +182,7 @@ void InitializeAscending(int *Elements, int NumOfElements)
 	int i ;
 	for (i = 0 ; i < NumOfElements ; i++)
 	{
-		(Elements)[i] = i ;
+		(Elements)[i] = i;
 	}
 
 }

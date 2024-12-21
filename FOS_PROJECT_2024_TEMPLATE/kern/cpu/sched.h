@@ -61,7 +61,7 @@ struct
 #define PRI_MIN 0
 #define PRI_MAX 63
 int64 ticks;
-int64 timer_ticks() ;
+int64 timer_ticks();
 /********* for BSD Priority Scheduler *************/
 
 void sched_init_RR(uint8 quantum);

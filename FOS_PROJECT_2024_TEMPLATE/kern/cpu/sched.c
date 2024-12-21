@@ -422,35 +422,25 @@ void clock_interrupt_handler(struct Trapframe* tf)
 		for(int i = num_of_ready_queues-1 ; i > 0 ; i--)
 		{
 			struct Env_Queue* queue = &ProcessQueues.env_ready_queues[i];
-			uint32 Qsize = queue_size(queue);
-			for(int j = 0 ; j < Qsize ; j++)
+			struct Env* curProcess = NULL;
+			LIST_FOREACH(curProcess, (queue))
 			{
-				/*
-				 * Potential error here:
-				 *      why dequeuing and enqueuing?
-				 *		by doing so, the position of the env in queue is being changed and this
-				 *		makes undefined behavior in running the envs.
-				 *
-				 * We just want to check the time of each environment in the ready queues
-				 * (except first queue) if it passes the starvThreshold then we dequeue it
-				 * and promote it (make it ready again) in a higher priority. (priority--)
-				 *
-				 * TotalTicks - env->arrivalTime equals starvThreshold
-				 */
-				struct Env* env = dequeue(queue);
-				uint32 totalTicks = timer_ticks();
-				if(totalTicks - env->arrivalTime >= starvThreshold)
-				{
-//					if (env->priority > 0) {
-					    env->priority--;
-//					}
-					env->arrivalTime = totalTicks;
-					acquire_spinlock(&ProcessQueues.qlock);
-					sched_insert_ready(env);
-					release_spinlock(&ProcessQueues.qlock);
-				}else
-				{
-					enqueue(queue , env);
+				if (curProcess->priority > 0) {
+//					cprintf("cur process threshold: %d\n", ticks - curProcess->arrivalTime);
+//					cprintf("Starvation Threshold: %d\n", starvThreshold);
+					if(ticks - curProcess->arrivalTime >= starvThreshold)
+					{
+						acquire_spinlock(&ProcessQueues.qlock);
+						sched_remove_ready(curProcess);
+						release_spinlock(&ProcessQueues.qlock);
+
+						acquire_spinlock(&ProcessQueues.qlock);
+						curProcess->priority--;
+//						ticks = 0;
+						sched_insert_ready(curProcess);
+//						curProcess->arrivalTime = 0; // gdedddd
+						release_spinlock(&ProcessQueues.qlock);
+					}
 				}
 			}
 		}

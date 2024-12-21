@@ -324,30 +324,34 @@ void sys_set_uheap_strategy(uint32 heapStrategy) {
 
 
 void sys_QueueOperations(struct semaphore* sem, int value) {
-	if (!cur_env) {
-		return;
-	}
+//	if (!cur_env) {
+//		return;
+//	}
 	struct Env* Dequeued= NULL;
 	switch (value) {
 	case 1:
 		//wait
-		cprintf("inside case 1 \n");
+//		cprintf("inside case 1 \n");
 		acquire_spinlock(&(ProcessQueues.qlock));
-		cur_env ->env_status = ENV_BLOCKED;
 		sem->semdata->lock = 0;
+		cur_env ->env_status = ENV_BLOCKED;
+//		cprintf("before enqueue \n");
 		enqueue(&(sem->semdata->queue),cur_env);
+//		cprintf("after enqueue \n");
 		sched();
+//		cprintf("after sched \n");
 		release_spinlock(&ProcessQueues.qlock);
+//		cprintf("after release \n");
 		break;
 
 	case 2:
 		//signal
-		cprintf("in case2 \n");
+//		cprintf("in case2 \n");
 		acquire_spinlock(&ProcessQueues.qlock);
 		Dequeued = dequeue(&(sem->semdata->queue));
 		sched_insert_ready(Dequeued);
 		release_spinlock(&ProcessQueues.qlock);
-		cprintf("inserted into ready! \n");
+//		cprintf("inserted into ready! \n");
 		break;
 	case 3:
 		init_queue(&sem->semdata->queue);

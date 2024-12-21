@@ -25,6 +25,7 @@ inline struct WorkingSetElement* env_page_ws_list_create_element(struct Env* e, 
 	int SizeWorkingSetElement = sizeof(struct WorkingSetElement);
     struct WorkingSetElement* created_element = (struct WorkingSetElement*)kmalloc(SizeWorkingSetElement);
 	created_element->virtual_address=virtual_address;
+	created_element->sweeps_counter=0;
 	//env_page_ws_print(e);
     if (LIST_SIZE(&(e->page_WS_list)) > e->page_WS_max_size) panic("No space in the working set (exceeded max size)");
 
